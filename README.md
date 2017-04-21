@@ -1,6 +1,6 @@
 # Repositorio Proyecto Gestor de Torneos de Fútbol
 ##Integrantes:
 
-###Esteban Miño
+### Esteban Miño
 
-###Cristian Carreño
+### Cristian Carreño
