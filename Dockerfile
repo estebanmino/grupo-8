@@ -10,7 +10,7 @@ RUN tar -C /usr/local --strip-components 1 -xJf node-v6.10.0-linux-x64.tar.xz
 RUN gem uninstall -i /usr/local/lib/ruby/gems/2.4.0 bundler rake
 RUN gem install bundler --version '1.13.7' -N
 
-ENV APP_HOME /LaLigaMC
+ENV APP_HOME /grupo-8
 
 RUN mkdir $APP_HOME
 WORKDIR $APP_HOME
