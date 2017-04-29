@@ -18,9 +18,9 @@
 
 class Team < ApplicationRecord
   validates :name, presence: true, uniqueness: true
-  validates :points, numericality: true
-  validates :won, numericality: true
-  validates :lost, numericality: true
+  validates :points, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :won, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :lost, :numericality => { :greater_than_or_equal_to => 0 }
 
   has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
