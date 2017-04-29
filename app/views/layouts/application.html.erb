@@ -9,28 +9,10 @@
   </head>
 
   <body>
-    <header>
-
-      <div>
-        <section id="top-bar">
 
 
-        <section/>
+    <%= render "layouts/header" %>
 
-      <div/>
-     <nav id="main-menu">
-       <%= link_to 'Home', matches_path %>
-       <%= link_to 'Divisiones', divisions_path %>
-       <%= link_to 'Fechas', matches_path %>
-       <%= link_to 'Tabla', matches_path %>
-       <%= link_to 'Equipos', teams_path %>
-       <%= link_to 'Goleadores', matches_path %>
-       <%= link_to 'Galería', pictures_path %>
-
-     </nav>
-
-
-   </header>
     <%= yield %>
     <footer>
       <hr>

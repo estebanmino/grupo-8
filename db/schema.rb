@@ -15,9 +15,19 @@ ActiveRecord::Schema.define(version: 20170429185119) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "comments", force: :cascade do |t|
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.integer  "post_id"
+    t.index ["post_id"], name: "index_comments_on_post_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
+  end
+
   create_table "divisions", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
+    t.string   "name",        null: false
+    t.text     "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
@@ -36,8 +46,8 @@ ActiveRecord::Schema.define(version: 20170429185119) do
   end
 
   create_table "pictures", force: :cascade do |t|
-    t.date     "date"
-    t.text     "comment"
+    t.date     "date",               null: false
+    t.text     "comment",            null: false
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
     t.string   "image_file_name"
@@ -48,8 +58,17 @@ ActiveRecord::Schema.define(version: 20170429185119) do
     t.index ["match_id"], name: "index_pictures_on_match_id", using: :btree
   end
 
-  create_table "teams", force: :cascade do |t|
+  create_table "posts", force: :cascade do |t|
     t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.index ["user_id"], name: "index_posts_on_user_id", using: :btree
+  end
+
+  create_table "teams", force: :cascade do |t|
+    t.string   "name",              null: false
     t.integer  "points"
     t.integer  "won"
     t.integer  "lost"
@@ -63,9 +82,9 @@ ActiveRecord::Schema.define(version: 20170429185119) do
   end
 
   create_table "tournaments", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
-    t.string   "season"
+    t.string   "name",        null: false
+    t.string   "description", null: false
+    t.string   "season",      null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "division_id"
@@ -74,17 +93,22 @@ ActiveRecord::Schema.define(version: 20170429185119) do
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
+    t.string   "last_name"
     t.string   "email"
     t.string   "password"
     t.string   "position"
+    t.boolean  "is_admin"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
   end
 
+  add_foreign_key "comments", "posts"
+  add_foreign_key "comments", "users"
   add_foreign_key "matches", "teams", column: "home_team_id"
   add_foreign_key "matches", "teams", column: "visit_team_id"
   add_foreign_key "matches", "tournaments"
   add_foreign_key "pictures", "matches"
+  add_foreign_key "posts", "users"
   add_foreign_key "tournaments", "divisions"
 end

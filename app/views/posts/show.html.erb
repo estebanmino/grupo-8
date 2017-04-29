@@ -1,0 +1,53 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @post.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @post.description %>
+</p>
+
+<% if (logged_in? && post_belongs_to_user(@post)) || is_admin_logged_in?  %>
+  <td><%= link_to 'Editar', edit_post_path(@post) %></td>
+  <td><%= link_to 'Eliminar', @post, method: :delete, data: { confirm: '¿Estás segur@?' } %></td>
+<% end %>
+
+
+<h3>Comentarios</h3>
+<% if @post && @post.comments %>
+  <table>
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Contenido</th>
+        <th>Usuario</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @post.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.id %></td>
+        <td><%= comment.content %></td>
+        <td><%= comment.user.name %></td>
+        <% if (logged_in? && (comment_belongs_to_user(comment) || post_belongs_to_user(@post))) || is_admin_logged_in?  %>
+          <td><%= link_to 'Editar', edit_comment_path(comment) %></td>
+          <td><%= link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás segur@?' } %></td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if logged_in? %>
+  <%= form_for :comment, url: "/comments", method: "post" do |f| %>
+    <%= f.text_area :content %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.hidden_field :post_id, value: @post.id %>
+    <%= f.submit "Comentar" %>
+  <% end %>
+<% end %>

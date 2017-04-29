@@ -1,0 +1,22 @@
+<header>
+  <ul>
+    <li><%= link_to 'Home', matches_path %></li>
+    <li><%= link_to 'Divisiones', divisions_path %></li>
+    <li><%= link_to 'Fechas', matches_path %></li>
+    <li><%= link_to 'Tabla', matches_path %></li>
+    <li><%= link_to 'Equipos', teams_path %></li>
+    <li><%= link_to 'Goleadores', matches_path %></li>
+    <li><%= link_to 'Galería', pictures_path %></li>
+    <li><%= link_to "Home", root_path %></li>
+    <li><%= link_to "Foro", posts_path %></li>
+
+    <% if !logged_in? %>
+      <li class="right"><%= link_to "Sign Up", signup_path %></li>
+      <li class="right"><%= link_to "Log In", login_path %></li>
+    <% else %>
+      <li class="right"><%= link_to "Log out", logout_path, method: :delete %></li>
+      <li class="right"><%= link_to 'Mi perfil', current_user %></li>
+    <% end %>
+  </ul>
+
+</header>
