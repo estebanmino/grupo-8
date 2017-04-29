@@ -110,6 +110,7 @@ ActiveRecord::Schema.define(version: 20170429223019) do
     t.string   "password"
     t.string   "position"
     t.boolean  "is_admin"
+    t.boolean  "is_captain"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"

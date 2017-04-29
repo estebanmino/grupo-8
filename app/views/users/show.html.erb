@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 
+<% if current_user.is_captain? %>
+  <h3>
+    <strong>Capitán</strong>
+  </h3>
+<% end %>
+
 <p>
   <strong>Nombre:</strong>
   <%= @user.name %>
