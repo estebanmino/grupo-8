@@ -12,16 +12,16 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    <%= f.label :name, "Nombre del Post" %>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+    <%= f.label :description, "Contenido" %>
+    <%= f.text_area :description %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Postear" %>
   </div>
 <% end %>

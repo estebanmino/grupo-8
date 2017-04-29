@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1>Foro</h1>
 
 <table>
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Description</th>
+      <th>Post</th>
+      <th>Descripción</th>
       <th>Usuario</th>
       <th colspan="3"></th>
     </tr>
@@ -18,11 +18,13 @@
         <td><%= post.name %></td>
         <td><%= post.description %></td>
         <td><%= post.user.name %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Leer', post %></td>
+        <% if (logged_in? && post_belongs_to_user(post)) || is_admin_logged_in?  %>
+          <td><%= link_to 'Editar', edit_post_path(post) %></td>
+          <td><%= link_to 'Eliminar', post, method: :delete, data: { confirm: '¿Estás segur@?' } %></td>
+        <% end %>
       </tr>
-    <% end %>
+      <% end %>
   </tbody>
 </table>
 

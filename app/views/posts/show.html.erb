@@ -10,8 +10,11 @@
   <%= @post.description %>
 </p>
 
-<%= link_to 'Editar', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<% if (logged_in? && post_belongs_to_user(@post)) || is_admin_logged_in?  %>
+  <td><%= link_to 'Editar', edit_post_path(@post) %></td>
+  <td><%= link_to 'Eliminar', @post, method: :delete, data: { confirm: '¿Estás segur@?' } %></td>
+<% end %>
+
 
 <h3>Comentarios</h3>
 <% if @post && @post.comments %>
@@ -30,6 +33,10 @@
         <td><%= comment.id %></td>
         <td><%= comment.content %></td>
         <td><%= comment.user.name %></td>
+        <% if (logged_in? && (comment_belongs_to_user(comment) || post_belongs_to_user(@post))) || is_admin_logged_in?  %>
+          <td><%= link_to 'Editar', edit_comment_path(comment) %></td>
+          <td><%= link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás segur@?' } %></td>
+        <% end %>
       </tr>
       <% end %>
     </tbody>

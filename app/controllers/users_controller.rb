@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         log_in @user
-        format.html { redirect_to @user, notice: 'Te damos la bienvenida a LaLiga.' }
+        format.html { redirect_to home_path, notice: 'Te damos la bienvenida a LaLiga.' }
         # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -71,6 +71,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :position, :password, :password_confirmation)
+      params.require(:user).permit(:name, :last_name, :email, :position, :password, :password_confirmation)
     end
 end
