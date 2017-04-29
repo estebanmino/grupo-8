@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  resources :comments
+  get 'comment/content'
+
+  resources :posts
   get 'sessions/new'
 
   resources :users
