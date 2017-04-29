@@ -1,3 +1,16 @@
+# == Schema Information
+#
+# Table name: tournaments
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :string
+#  season      :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  division_id :integer
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
