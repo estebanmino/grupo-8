@@ -24,4 +24,7 @@ class Team < ApplicationRecord
 
   has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
+
+  has_many :visit_matches, :class_name => 'Match', :foreign_key => 'visit_team_id'
+  has_many :home_matches, :class_name => 'Match', :foreign_key => 'home_team_id'
 end

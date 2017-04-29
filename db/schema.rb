@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170429024832) do
+ActiveRecord::Schema.define(version: 20170429185119) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,8 +25,14 @@ ActiveRecord::Schema.define(version: 20170429024832) do
   create_table "matches", force: :cascade do |t|
     t.date     "date"
     t.time     "time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "visit_team_id"
+    t.integer  "home_team_id"
+    t.integer  "tournament_id"
+    t.index ["home_team_id"], name: "index_matches_on_home_team_id", using: :btree
+    t.index ["tournament_id"], name: "index_matches_on_tournament_id", using: :btree
+    t.index ["visit_team_id"], name: "index_matches_on_visit_team_id", using: :btree
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -38,6 +44,8 @@ ActiveRecord::Schema.define(version: 20170429024832) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "match_id"
+    t.index ["match_id"], name: "index_pictures_on_match_id", using: :btree
   end
 
   create_table "teams", force: :cascade do |t|
@@ -74,5 +82,9 @@ ActiveRecord::Schema.define(version: 20170429024832) do
     t.string   "password_digest"
   end
 
+  add_foreign_key "matches", "teams", column: "home_team_id"
+  add_foreign_key "matches", "teams", column: "visit_team_id"
+  add_foreign_key "matches", "tournaments"
+  add_foreign_key "pictures", "matches"
   add_foreign_key "tournaments", "divisions"
 end

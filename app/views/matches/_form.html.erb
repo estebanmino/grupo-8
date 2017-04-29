@@ -12,6 +12,21 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :home_team_id %>
+    <%= f.number_field :home_team_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :visit_team_id %>
+    <%= f.number_field :visit_team_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tournament_id %>
+    <%= f.number_field :tournament_id %>
+  </div>
+
+  <div class="field">
     <%= f.label :date %>
     <%= f.date_select :date %>
   </div>

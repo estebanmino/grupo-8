@@ -1,5 +1,24 @@
 <p id="notice"><%= notice %></p>
 
+<h1>Partido:</h1>
+
+<p>
+  <strong>Visitante:</strong>
+  <%= Team.find(@match.visit_team_id).name %>
+
+</p>
+
+<p>
+  <strong>Torneo:</strong>
+  <%= Tournament.find(@match.tournament_id).name %>
+
+</p>
+
+<p>
+  <strong>Local:</strong>
+  <%= Team.find(@match.home_team_id).name %>
+</p>
+
 <p>
   <strong>Date:</strong>
   <%= @match.date %>

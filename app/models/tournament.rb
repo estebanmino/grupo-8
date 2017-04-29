@@ -16,5 +16,6 @@ class Tournament < ApplicationRecord
   validates :description, presence: true
   validates :season, presence: true
 
+  has_many :matches
   belongs_to :division
 end
