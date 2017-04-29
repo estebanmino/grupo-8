@@ -17,5 +17,8 @@ class Match < ApplicationRecord
   belongs_to :tournament
   has_many :pictures
 
+  has_many :performances
+  has_many :users, through: :performances
+
 
 end

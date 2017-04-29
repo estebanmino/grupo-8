@@ -1,13 +1,12 @@
 <header>
   <ul>
-    <li><%= link_to 'Home', matches_path %></li>
+    <li><%= link_to "Home", root_path %></li>
     <li><%= link_to 'Divisiones', divisions_path %></li>
     <li><%= link_to 'Fechas', matches_path %></li>
     <li><%= link_to 'Tabla', matches_path %></li>
     <li><%= link_to 'Equipos', teams_path %></li>
     <li><%= link_to 'Goleadores', matches_path %></li>
     <li><%= link_to 'Galería', pictures_path %></li>
-    <li><%= link_to "Home", root_path %></li>
     <li><%= link_to "Foro", posts_path %></li>
 
     <% if !logged_in? %>
