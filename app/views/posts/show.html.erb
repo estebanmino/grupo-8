@@ -10,13 +10,16 @@
   <%= @post.description %>
 </p>
 
+<%= link_to 'Editar', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
+
 <h3>Comentarios</h3>
 <% if @post && @post.comments %>
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Description</th>
+        <th>Id</th>
+        <th>Contenido</th>
         <th>Usuario</th>
         <th colspan="3"></th>
       </tr>
@@ -24,6 +27,7 @@
     <tbody>
     <% @post.comments.each do |comment| %>
       <tr>
+        <td><%= comment.id %></td>
         <td><%= comment.content %></td>
         <td><%= comment.user.name %></td>
       </tr>
@@ -32,6 +36,9 @@
   </table>
 <% end %>
 
-<%= link_to 'Crear comentario', new_comment_path(@post) %> |
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<%= form_for :comment, url: "/comments", method: "post" do |f| %>
+  <%= f.text_area :content %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :post_id, value: @post.id %>
+  <%= f.submit "Comentar" %>
+<% end %>

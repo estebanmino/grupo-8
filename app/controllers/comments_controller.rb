@@ -24,13 +24,12 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    # @comment = Comment.new(comment_params)
+    @comment = Comment.new(comment_params)
     #@post = Post.find(params[:id])
-    @comment = @post.comments.new(comment_params)
+    #@comment = @post.comments.new(comment_params)
 
     respond_to do |format|
       if @comment.save
-        @comment.user_id = current_user.id
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
