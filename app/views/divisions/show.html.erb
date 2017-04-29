@@ -10,5 +10,8 @@
   <%= @division.description %>
 </p>
 
+
+<!-- /divisions/:division_id/tournaments/ -->
+<%= link_to 'Tournaments', division_tournaments_path(@division) %> |
 <%= link_to 'Edit', edit_division_path(@division) %> |
 <%= link_to 'Back', divisions_path %>
