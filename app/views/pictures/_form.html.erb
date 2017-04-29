@@ -18,12 +18,12 @@
 
   <div class="field">
     <%= f.label :comment %>
-    <%= f.text_area :comment %>
+    <%= f.text_area :comment, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :image %>
-    <%= f.file_field :image %>
+    <%= f.file_field :image, required: true %>
   </div>
 
   <div class="actions">
