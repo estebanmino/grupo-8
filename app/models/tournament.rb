@@ -3,9 +3,9 @@
 # Table name: tournaments
 #
 #  id          :integer          not null, primary key
-#  name        :string
-#  description :string
-#  season      :string
+#  name        :string           not null
+#  description :string           not null
+#  season      :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  division_id :integer
@@ -17,5 +17,6 @@ class Tournament < ApplicationRecord
   validates :season, presence: true
 
   has_many :matches
+  has_many :users
   belongs_to :division
 end

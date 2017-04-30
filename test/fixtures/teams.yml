@@ -3,7 +3,7 @@
 # Table name: teams
 #
 #  id                :integer          not null, primary key
-#  name              :string
+#  name              :string           not null
 #  points            :integer
 #  won               :integer
 #  lost              :integer

@@ -3,8 +3,8 @@
 # Table name: divisions
 #
 #  id          :integer          not null, primary key
-#  name        :string
-#  description :text
+#  name        :string           not null
+#  description :text             not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #
@@ -14,5 +14,6 @@ class Division < ApplicationRecord
   validates :description, presence: true
 
   has_many :tournaments
+  has_many :users
 
 end

@@ -3,7 +3,7 @@
 # Table name: teams
 #
 #  id                :integer          not null, primary key
-#  name              :string
+#  name              :string           not null
 #  points            :integer
 #  won               :integer
 #  lost              :integer
@@ -27,4 +27,6 @@ class Team < ApplicationRecord
 
   has_many :visit_matches, :class_name => 'Match', :foreign_key => 'visit_team_id'
   has_many :home_matches, :class_name => 'Match', :foreign_key => 'home_team_id'
+
+  has_many :users
 end
