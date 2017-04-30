@@ -18,7 +18,7 @@
 
   <div class="field">
     <%= f.label :match_id %>
-    <%= f.number_field :match_id, required: true  %>
+    <%= f.select :match_id, options_for_select(Match.all.map{ |c| [c.id, c.id] })  %>
   </div>
 
   <div class="field">

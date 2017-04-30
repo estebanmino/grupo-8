@@ -41,6 +41,21 @@
     <%= f.text_field :position %>
   </div>
 
+  <div class="field">
+    <%= f.label :team_id, "Equipo del jugador" %>
+    <%= f.select :team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :tournament_id, "Torneo que juega" %>
+    <%= f.select :tournament_id, options_for_select(Tournament.all.map{ |c| [c.name, c.id] })  %>
+  </div>
+
+  <div class="field">
+    <%= f.label :division_id, "División del jugador" %>
+    <%= f.select :division_id, options_for_select(Division.all.map{ |c| [c.name, c.id] })  %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Enviar" %>
   </div>
