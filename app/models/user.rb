@@ -13,6 +13,9 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  password_digest :string
+#  team_id         :integer
+#  tournament_id   :integer
+#  division_id     :integer
 #
 
 class User < ApplicationRecord

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430135555) do
+ActiveRecord::Schema.define(version: 20170430161351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,6 +91,15 @@ ActiveRecord::Schema.define(version: 20170430135555) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "division_id"
+    t.index ["division_id"], name: "index_teams_on_division_id", using: :btree
+  end
+
+  create_table "teams_tournaments", id: false, force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "tournament_id"
+    t.index ["team_id"], name: "index_teams_tournaments_on_team_id", using: :btree
+    t.index ["tournament_id"], name: "index_teams_tournaments_on_tournament_id", using: :btree
   end
 
   create_table "tournaments", force: :cascade do |t|
@@ -131,6 +140,7 @@ ActiveRecord::Schema.define(version: 20170430135555) do
   add_foreign_key "performances", "users"
   add_foreign_key "pictures", "matches"
   add_foreign_key "posts", "users"
+  add_foreign_key "teams", "divisions"
   add_foreign_key "tournaments", "divisions"
   add_foreign_key "users", "divisions"
   add_foreign_key "users", "teams"

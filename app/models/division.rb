@@ -15,5 +15,6 @@ class Division < ApplicationRecord
 
   has_many :tournaments
   has_many :users
+  has_many :teams
 
 end
