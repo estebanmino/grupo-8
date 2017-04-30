@@ -17,13 +17,16 @@
         <td><%= division.name %></td>
         <td><%= division.description %></td>
         <td><%= link_to 'Show', division %></td>
-        <td><%= link_to 'Edit', edit_division_path(division) %></td>
-        <td><%= link_to 'Destroy', division, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if is_admin_logged_in? %>
+          <td><%= link_to 'Edit', edit_division_path(division) %></td>
+          <td><%= link_to 'Destroy', division, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>
 </table>
 
 <br>
-
-<%= link_to 'New Division', new_division_path %>
+<% if is_admin_logged_in? %>
+  <%= link_to 'New Division', new_division_path %>
+<% end %>

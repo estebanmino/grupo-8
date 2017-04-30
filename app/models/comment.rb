@@ -12,6 +12,10 @@
 
 class Comment < ApplicationRecord
 
+  validates :content, presence: true, allow_blank: false
+  validates :user_id, presence: true, allow_blank: false
+  validates :post_id, presence: true, allow_blank: false
+
   belongs_to :user
   belongs_to :post
 

@@ -7,7 +7,11 @@
     <tr>
       <th>Fecha</th>
       <th>Hora</th>
-      
+      <th>Local</th>
+      <th>Goles Local</th>
+      <th>Goles Visitante</th>
+      <th>Visitante</th>
+
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,9 +22,15 @@
 
         <td><%= match.date %></td>
         <td><%= match.time %></td>
+        <td><%= Team.find_by_id(match.home_team_id).name %></td>
+        <td><%= match.local_goals %></td>
+        <td><%= match.visitor_goals %></td>
+        <td><%= Team.find_by_id(match.visit_team_id).name %></td>
         <td><%= link_to 'Show', match %></td>
-        <td><%= link_to 'Edit', edit_match_path(match) %></td>
-        <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if is_admin_logged_in? %>
+          <td><%= link_to 'Edit', edit_match_path(match) %></td>
+          <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end  %>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +38,6 @@
 
 <br>
 
-<%= link_to 'New Match', new_match_path %>
+<% if is_admin_logged_in? %>
+  <%= link_to 'New Match', new_match_path %>
+<% end %>

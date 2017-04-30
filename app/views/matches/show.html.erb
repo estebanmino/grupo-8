@@ -9,6 +9,12 @@
 </p>
 
 <p>
+  <strong>Goles visita:</strong>
+  <%=  @match.visitor_goals %>
+
+</p>
+
+<p>
   <strong>Torneo:</strong>
   <%= Tournament.find(@match.tournament_id).name %>
 
@@ -17,6 +23,12 @@
 <p>
   <strong>Local:</strong>
   <%= Team.find(@match.home_team_id).name %>
+</p>
+
+<p>
+  <strong>Goles local:</strong>
+  <%=  @match.local_goals %>
+
 </p>
 
 <p>
@@ -29,5 +41,14 @@
   <%= @match.time %>
 </p>
 
-<%= link_to 'Edit', edit_match_path(@match) %> |
+<p><strong>Jugado:</strong></p>
+<% if  @match.played  %>
+    <p>Si</p>
+  <% else %>
+    <p>No</p>
+  <% end %>
+
+<% if is_admin_logged_in? %>
+  <%= link_to 'Edit', edit_match_path(@match) %> |
+<% end %>
 <%= link_to 'Back', matches_path %>

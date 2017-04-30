@@ -35,6 +35,9 @@ ActiveRecord::Schema.define(version: 20170430161351) do
   create_table "matches", force: :cascade do |t|
     t.date     "date"
     t.time     "time"
+    t.integer  "visitor_goals"
+    t.integer  "local_goals"
+    t.boolean  "played"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "visit_team_id"
