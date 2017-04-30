@@ -27,4 +27,11 @@ class Team < ApplicationRecord
 
   has_many :visit_matches, :class_name => 'Match', :foreign_key => 'visit_team_id'
   has_many :home_matches, :class_name => 'Match', :foreign_key => 'home_team_id'
+
+  belongs_to :division
+
+  has_many :inscriptions
+  has_many :tournaments, through: :inscriptions
+
+  has_many :users
 end

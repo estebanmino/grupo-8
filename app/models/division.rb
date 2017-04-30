@@ -14,5 +14,6 @@ class Division < ApplicationRecord
   validates :description, presence: true
 
   has_many :tournaments
+  has_many :teams
 
 end

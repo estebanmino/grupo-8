@@ -10,6 +10,12 @@
   <%= @division.description %>
 </p>
 
+<p><strong>Equipos:</strong></p>
+
+<% @division.teams.each do |team| %>
+<p><%= team.name %></p>
+<% end %>
+
 
 <!-- /divisions/:division_id/tournaments/ -->
 <%= link_to 'Tournaments', division_tournaments_path(@division) %> |

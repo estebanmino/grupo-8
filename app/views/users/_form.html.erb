@@ -28,17 +28,22 @@
 
   <div class="field">
     <%= f.label :password, "Contraseña" %>
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation, "Confirma tu contraseña" %>
-    <%= f.text_field :password_confirmation %>
+    <%= f.password_field :password_confirmation %>
   </div>
 
   <div class="field">
     <%= f.label :position, "Posición" %>
     <%= f.text_field :position %>
+  </div>
+
+  <div class="field">
+    <%= f.label :team_id, "Equipo" %>
+    <%= f.select :team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
   </div>
 
   <div class="actions">

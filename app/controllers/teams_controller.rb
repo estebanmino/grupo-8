@@ -1,6 +1,10 @@
 class TeamsController < ApplicationController
-  before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :set_team, only: [:show, :edit, :update, :destroy, :add_to_tournament]
 
+
+  def add_to_tournament
+    @team.tournaments.create(tournament: Tournament.find_by_id(:tournament_id))
+  end
   # GET /teams
   # GET /teams.json
   def index
@@ -69,6 +73,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :points, :won, :lost, :tie, :logo)
+      params.require(:team).permit(:name, :points, :won, :lost, :tie, :logo, :division_id)
     end
 end

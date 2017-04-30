@@ -41,6 +41,11 @@
     <%= f.number_field :tie %>
   </div>
 
+  <div class="field">
+  <%= f.label :division_id %>
+  <%= f.select :division_id, options_for_select(Division.all.map{ |c| [c.name, c.id] })  %>
+</div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

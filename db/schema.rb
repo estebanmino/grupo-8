@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170429223019) do
+ActiveRecord::Schema.define(version: 20170430214708) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,11 @@ ActiveRecord::Schema.define(version: 20170429223019) do
     t.text     "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+  end
+
+  create_table "inscriptions", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "matches", force: :cascade do |t|
@@ -91,6 +96,8 @@ ActiveRecord::Schema.define(version: 20170429223019) do
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
+    t.integer  "division_id"
+    t.index ["division_id"], name: "index_teams_on_division_id", using: :btree
   end
 
   create_table "tournaments", force: :cascade do |t|
@@ -114,6 +121,8 @@ ActiveRecord::Schema.define(version: 20170429223019) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
+    t.integer  "team_id"
+    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
   add_foreign_key "comments", "posts"
@@ -125,5 +134,7 @@ ActiveRecord::Schema.define(version: 20170429223019) do
   add_foreign_key "performances", "users"
   add_foreign_key "pictures", "matches"
   add_foreign_key "posts", "users"
+  add_foreign_key "teams", "divisions"
   add_foreign_key "tournaments", "divisions"
+  add_foreign_key "users", "teams"
 end

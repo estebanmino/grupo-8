@@ -18,4 +18,9 @@ class Tournament < ApplicationRecord
 
   has_many :matches
   belongs_to :division
+
+  has_many :inscriptions
+  has_many :teams, through: :inscriptions
+
+
 end

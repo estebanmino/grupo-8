@@ -1,6 +1,11 @@
 class TournamentsController < ApplicationController
 
 
+
+  def add_team
+    @tournament.teams.create(team: Team.find_by_id(:id))
+  end
+
   # GET /divisions/:division_id/tournaments
   # GET /divisions/:division_id/tournaments.xml
   def index

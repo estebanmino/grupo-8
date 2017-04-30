@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% if current_user.is_captain? %>
+<% if logged_in? && current_user.is_captain? %>
   <h3>
     <strong>Capitán</strong>
   </h3>
@@ -24,6 +24,11 @@
 <p>
   <strong>Posición:</strong>
   <%= @user.position %>
+</p>
+
+<p>
+  <strong>Equipo:</strong>
+  <%= @user.team.name %>
 </p>
 
 <%= link_to 'Editar', edit_user_path(@user) %>

@@ -23,4 +23,5 @@ Rails.application.routes.draw do
 
   get 'comments/:id', to: 'comments#update', as: 'comment_update'
 
+  post 'add_team/:id', to: 'tournaments#add_team', as: 'add_team'
 end

@@ -13,12 +13,13 @@
 
   <div class="field">
     <%= f.label :home_team_id %>
-    <%= f.number_field :home_team_id, required: true  %>
+    <%= f.select :home_team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
   </div>
 
   <div class="field">
     <%= f.label :visit_team_id %>
-    <%= f.number_field :visit_team_id, required: true  %>
+    <%= f.select :visit_team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
+
   </div>
 
   <div class="field">
