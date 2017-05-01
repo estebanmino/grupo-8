@@ -27,9 +27,9 @@
   <%= @team.tie %>
 </p>
 
-<p>Jugadores</p>
+<p><strong>Jugadores:</strong></p>
 <% @team.users.each do |user| %>
-  <p><%= user.name %> <%= user.last_name %></p>
+  <p> - <%= user.name %> <%= user.last_name %></p>
 <% end %>
 
 <% if is_admin_logged_in? %>
