@@ -23,6 +23,7 @@ class Match < ApplicationRecord
   validates :local_goals, :numericality => { :greater_than_or_equal_to => 0 }
   validates :played, inclusion: { in: [ true, false ] }
 
+
   belongs_to :visit_team, :class_name => 'Team', foreign_key: "visit_team_id"
   belongs_to :home_team, :class_name => 'Team', foreign_key: "home_team_id"
   belongs_to :tournament
@@ -30,6 +31,7 @@ class Match < ApplicationRecord
 
   has_many :performances
   has_many :users, through: :performances
+
 
 
 end
