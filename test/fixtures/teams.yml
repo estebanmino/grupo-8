@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: teams
+#
+#  id                :integer          not null, primary key
+#  name              :string           not null
+#  points            :integer
+#  won               :integer
+#  lost              :integer
+#  tie               :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  logo_file_name    :string
+#  logo_content_type :string
+#  logo_file_size    :integer
+#  logo_updated_at   :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  points: 1
+  won: 1
+  lost: 1
+  tie: 1
+
+two:
+  name: MyString
+  points: 1
+  won: 1
+  lost: 1
+  tie: 1

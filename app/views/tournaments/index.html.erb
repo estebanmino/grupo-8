@@ -1,0 +1,36 @@
+<h1>Listing tournaments</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Season</th>
+    <th>Division</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tournaments.each do |tournament| %>
+  <tr>
+    <td><%= tournament.name %></td>
+    <td><%= tournament.description %></td>
+    <td><%= tournament.season %></td>
+
+    <!-- /divisions/:division_id/tournaments/:id -->
+    <td><%= link_to 'Show', [tournament.division, tournament] %></td>
+    <!-- /divisions/:division_id/tournaments/:id/edit -->
+    <% if is_admin_logged_in? %>
+      <td><%= link_to 'Edit', edit_division_tournament_path(tournament.division, tournament)%></td>
+      <!-- /divisions/:division_id/tournaments/:id -->
+      <td><%= link_to 'Destroy', [tournament.division, tournament], :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if is_admin_logged_in? %>
+  <%= link_to 'Crear torneo', new_division_tournament_path %> <!-- /divisions/:division_id/tournaments/new -->
+<% end %>

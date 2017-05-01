@@ -1,0 +1,33 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  last_name       :string
+#  email           :string
+#  password        :string
+#  position        :string
+#  is_admin        :boolean
+#  is_captain      :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
+#  team_id         :integer
+#  tournament_id   :integer
+#  division_id     :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  email: MyString
+  password: MyString
+  position: MyString
+
+two:
+  name: MyString
+  email: MyString
+  password: MyString
+  position: MyString

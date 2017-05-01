@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<%= image_tag @team.logo.url(:medium) %>
+
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
+
+<p>
+  <strong>Points:</strong>
+  <%= @team.points %>
+</p>
+
+<p>
+  <strong>Won:</strong>
+  <%= @team.won %>
+</p>
+
+<p>
+  <strong>Lost:</strong>
+  <%= @team.lost %>
+</p>
+
+<p>
+  <strong>Tie:</strong>
+  <%= @team.tie %>
+</p>
+
+<% if is_admin_logged_in? %>
+  <%= link_to 'Edit', edit_team_path(@team) %> |
+<% end %>
+<%= link_to 'Back', teams_path %>
