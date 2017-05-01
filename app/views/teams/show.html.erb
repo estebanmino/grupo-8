@@ -29,7 +29,7 @@
 
 <p>Jugadores</p>
 <% @team.users.each do |user| %>
-  <p><%= user.name %>
+  <p><%= user.name %> <%= user.last_name %></p>
 <% end %>
 
 <% if is_admin_logged_in? %>
