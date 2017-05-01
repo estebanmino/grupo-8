@@ -27,6 +27,11 @@
   <%= @team.tie %>
 </p>
 
+<p>Jugadores</p>
+<% @team.users.each do |user| %>
+  <p><%= user.name %>
+<% end %>
+
 <% if is_admin_logged_in? %>
   <%= link_to 'Edit', edit_team_path(@team) %> |
 <% end %>
