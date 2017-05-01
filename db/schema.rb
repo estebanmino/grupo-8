@@ -127,11 +127,7 @@ ActiveRecord::Schema.define(version: 20170430161351) do
     t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.integer  "team_id"
-    t.integer  "tournament_id"
-    t.integer  "division_id"
-    t.index ["division_id"], name: "index_users_on_division_id", using: :btree
     t.index ["team_id"], name: "index_users_on_team_id", using: :btree
-    t.index ["tournament_id"], name: "index_users_on_tournament_id", using: :btree
   end
 
   add_foreign_key "comments", "posts"
@@ -145,7 +141,5 @@ ActiveRecord::Schema.define(version: 20170430161351) do
   add_foreign_key "posts", "users"
   add_foreign_key "teams", "divisions"
   add_foreign_key "tournaments", "divisions"
-  add_foreign_key "users", "divisions"
   add_foreign_key "users", "teams"
-  add_foreign_key "users", "tournaments"
 end
