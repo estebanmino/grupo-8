@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<% if current_user.is_captain? %>
+<% if logged_in? && current_user.is_captain? %>
   <h3>
     <strong>Capitán</strong>
   </h3>
