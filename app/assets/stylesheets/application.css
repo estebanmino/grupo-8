@@ -13,3 +13,10 @@
  *= require_tree .
  *= require_self
  */
+
+ .new-button, .edit-button {
+  border-color: #818488;
+  color: #818488;
+  font: Sans-serif;
+  margin-left: 10px;
+ }

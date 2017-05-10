@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   root 'statics#home'
 
   get '/home', to: 'statics#home'
+  get '/table', to: 'statics#table', as: 'table'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'

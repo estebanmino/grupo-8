@@ -51,7 +51,7 @@ divs = Division.all
 for i in divs
   for j in i.tournaments
     8.times do
-      Team.create(
+      team = Team.create(
         name: "#{Faker::Name.unique.last_name} FC",
         points: 0,
         won: 0,
@@ -61,8 +61,8 @@ for i in divs
 
 
       )
-      team = Team.last
-      j.teams << team
+
+
       team.tournaments << j
 
     end

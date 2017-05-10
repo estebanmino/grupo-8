@@ -1,20 +1,63 @@
-div.imagen {
+div.gallery {
     margin: 5px;
     border: 1px solid #ccc;
     float: left;
-    width: 180px;
+    width: 288px;
+
+
 }
 
-div.imagen:hover {
+div.gallery_show img{
+
+    display: block;
+    margin: 0 auto;
+    padding: 50px;
+
+
+}
+div.gallery_show p{
+    text-align: center;
+
+}
+
+div.show_image {
+    text-align: center;
+
+}
+
+
+div.gallery:hover {
     border: 1px solid #777;
 }
 
-div.imagen img {
+a.foto img {
     width: 100%;
-    height: auto;
+    height: 162px;
 }
 
-div.desc {
-    padding: 15px;
+div.image_desc {
+
     text-align: center;
+}
+
+div.galeria {
+
+    margin-left: 50px;
+
+}
+
+td.gallery_td{
+
+  font: sans-serif;
+}
+
+.final_gallery{
+  margin-left: 50px;
+
+  padding-bottom:  200px;
+
+
+
+
+
 }
