@@ -43,6 +43,25 @@ class TournamentsController < ApplicationController
     end
   end
 
+  def fixture
+    
+
+  end
+
+  def new_fixture
+
+    p "HOLA MUNDO"
+    p division = Division.find(params[:division_id])
+    p @tournament = division.tournaments.find(params[:id])
+    p "HOLA MUNDO"
+
+    p params[:q]
+    redirect_to home_path
+  end
+
+
+
+
   # GET /divisions/:division_id/tournaments/:id/edit
   def edit
 

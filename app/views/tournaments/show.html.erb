@@ -46,6 +46,7 @@
 <% if is_admin_logged_in? %>
   <!-- /divisions/:division_id/tournaments/:id/edit -->
   <%= link_to 'Edit', edit_division_tournament_path(@tournament.division, @tournament) %> |
+  <%= link_to 'Crear Fixture', division_fixture_path(@tournament.division, @tournament) %> |
 <% end %>
 <!-- /divisions/:division_id/tournaments/ -->
 <%= link_to 'Back', division_tournaments_path(@tournament.division) %>

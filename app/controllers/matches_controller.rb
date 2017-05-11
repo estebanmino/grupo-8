@@ -17,6 +17,9 @@ class MatchesController < ApplicationController
     @match = Match.new
   end
 
+
+
+
   # GET /matches/1/edit
   def edit
   end
@@ -72,4 +75,6 @@ class MatchesController < ApplicationController
       params.require(:match).permit(:date, :time, :home_team_id, :visit_team_id, :tournament_id,
                                     :visitor_goals, :local_goals, :played)
     end
+
+    
 end
