@@ -1,5 +1,8 @@
 class MatchesController < ApplicationController
+  include Secured
+
   before_action :set_match, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
 
   # GET /matches
   # GET /matches.json
@@ -76,5 +79,5 @@ class MatchesController < ApplicationController
                                     :visitor_goals, :local_goals, :played)
     end
 
-    
+
 end

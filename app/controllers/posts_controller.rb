@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :belongs_to__current_user?, only: %i[update create destroy] 
 
   # GET /posts
   # GET /posts.json
@@ -71,5 +72,9 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:name, :description, :user_id)
+    end
+
+    def belongs_to__current_user?
+      redirect_to(root_path, notice: 'No autorizado!') unless @post.user == current_user
     end
 end

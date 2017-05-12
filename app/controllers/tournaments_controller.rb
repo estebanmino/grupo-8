@@ -1,5 +1,7 @@
 class TournamentsController < ApplicationController
+  include Secured
 
+  before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
 
   # GET /divisions/:division_id/tournaments
   # GET /divisions/:division_id/tournaments.xml
@@ -54,7 +56,7 @@ class TournamentsController < ApplicationController
     p division = Division.find(params[:division_id])
     p @tournament = division.tournaments.find(params[:id])
 
-  
+
 
 
 
