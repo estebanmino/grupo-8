@@ -44,7 +44,7 @@ class TournamentsController < ApplicationController
   end
 
   def fixture
-    
+
 
   end
 
@@ -53,6 +53,11 @@ class TournamentsController < ApplicationController
     p "HOLA MUNDO"
     p division = Division.find(params[:division_id])
     p @tournament = division.tournaments.find(params[:id])
+
+  
+
+
+
     p "HOLA MUNDO"
 
     p params[:q]
