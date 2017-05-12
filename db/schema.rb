@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20170430161351) do
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.text     "content"
+    t.text     "content",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
@@ -74,8 +74,8 @@ ActiveRecord::Schema.define(version: 20170430161351) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "name"
-    t.string   "description"
+    t.string   "name",        null: false
+    t.string   "description", null: false
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
@@ -116,15 +116,14 @@ ActiveRecord::Schema.define(version: 20170430161351) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "last_name"
-    t.string   "email"
-    t.string   "password"
-    t.string   "position"
-    t.boolean  "is_admin"
-    t.boolean  "is_captain"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.string   "name",                            null: false
+    t.string   "last_name",                       null: false
+    t.string   "email",                           null: false
+    t.string   "position",                        null: false
+    t.boolean  "is_admin",        default: false, null: false
+    t.boolean  "is_captain",      default: false, null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "password_digest"
     t.integer  "team_id"
     t.index ["team_id"], name: "index_users_on_team_id", using: :btree
