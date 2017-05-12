@@ -3,9 +3,9 @@
 # Table name: tournaments
 #
 #  id          :integer          not null, primary key
-#  name        :string
-#  description :string
-#  season      :string
+#  name        :string           not null
+#  description :string           not null
+#  season      :string           not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  division_id :integer
@@ -19,8 +19,6 @@ class Tournament < ApplicationRecord
   has_many :matches
   belongs_to :division
 
-  has_many :inscriptions
-  has_many :teams, through: :inscriptions
-
+  has_and_belongs_to_many :teams
 
 end

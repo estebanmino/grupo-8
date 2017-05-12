@@ -1,16 +1,47 @@
-/* Header */
+html{
+  height: 100%;
+
+
+
+}
+main{
+ margin-top: 0;
+
+
+}
+
+ body {
+   padding-bottom: 6rem;
+   min-height: 100%;
+  position: relative;
+  margin: 0;
+
+  font-family: sans-serif;
+
+
+}
+
+#upbar {
+  padding-top: 20px;
+
+
+}
+
 
 ul {
+
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
-    background-color: #333;
+    background-color: #C80A00;
 }
 
 li {
+
+
     float: left;
-    border-right: 1px solid #bbb;
+
 }
 
 li.right  {
@@ -18,24 +49,37 @@ li.right  {
 }
 
 li a {
+
+    text-decoration-color: white;
     display: block;
-    color: white;
+    color: white !important;
     text-align: center;
-    padding: 14px 16px;
+    padding: 20px 16px;
     text-decoration: none;
+    font-family: sans-serif !important;
+    font-size: 16px !important;
+    font-weight: bold;
 }
 
 /* Change the link color to #111 (black) on hover */
 li a:hover {
-    background-color: #111;
+    background-color: #990000;
 }
 
 /* --- */
 
 footer {
-  width: 90%;
+  color:#818183;
+  background-color: #2b3036;
+  width: 100%;
+  padding:20px;
+
+
+
+
   text-align: center;
   position: absolute;
+
   bottom: 0;
-  left: 5%;
+
 }

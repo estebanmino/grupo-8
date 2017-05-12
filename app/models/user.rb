@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id              :integer          not null, primary key
+#  name            :string
+#  last_name       :string
+#  email           :string
+#  password        :string
+#  position        :string
+#  is_admin        :boolean
+#  is_captain      :boolean
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#  password_digest :string
+#  team_id         :integer
+#  tournament_id   :integer
+#  division_id     :integer
+#
+
 class User < ApplicationRecord
 
   before_save { self.email = email.downcase }
@@ -15,8 +35,11 @@ class User < ApplicationRecord
 
   has_many :posts
 
+
   has_many :performances
   has_many :matches, through: :performances
+  belongs_to :team
+
   belongs_to :team
 
 

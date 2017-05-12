@@ -9,6 +9,7 @@
 #  updated_at    :datetime         not null
 #  visit_team_id :integer
 #  home_team_id  :integer
+#  tournament_id :integer
 #
 
 require 'test_helper'

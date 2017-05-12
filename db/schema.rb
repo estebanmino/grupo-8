@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170430214708) do
+
+ActiveRecord::Schema.define(version: 20170430161351) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,6 +42,9 @@ ActiveRecord::Schema.define(version: 20170430214708) do
   create_table "matches", force: :cascade do |t|
     t.date     "date"
     t.time     "time"
+    t.integer  "visitor_goals"
+    t.integer  "local_goals"
+    t.boolean  "played"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
     t.integer  "visit_team_id"
@@ -98,6 +103,15 @@ ActiveRecord::Schema.define(version: 20170430214708) do
     t.datetime "logo_updated_at"
     t.integer  "division_id"
     t.index ["division_id"], name: "index_teams_on_division_id", using: :btree
+
+  end
+
+  create_table "teams_tournaments", id: false, force: :cascade do |t|
+    t.integer "team_id"
+    t.integer "tournament_id"
+    t.index ["team_id"], name: "index_teams_tournaments_on_team_id", using: :btree
+    t.index ["tournament_id"], name: "index_teams_tournaments_on_tournament_id", using: :btree
+
   end
 
   create_table "tournaments", force: :cascade do |t|

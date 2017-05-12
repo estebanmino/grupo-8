@@ -20,13 +20,17 @@
     <!-- /divisions/:division_id/tournaments/:id -->
     <td><%= link_to 'Show', [tournament.division, tournament] %></td>
     <!-- /divisions/:division_id/tournaments/:id/edit -->
-    <td><%= link_to 'Edit', edit_division_tournament_path(tournament.division, tournament)%></td>
-    <!-- /divisions/:division_id/tournaments/:id -->
-    <td><%= link_to 'Destroy', [tournament.division, tournament], :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if is_admin_logged_in? %>
+      <td><%= link_to 'Edit', edit_division_tournament_path(tournament.division, tournament)%></td>
+      <!-- /divisions/:division_id/tournaments/:id -->
+      <td><%= link_to 'Destroy', [tournament.division, tournament], :confirm => 'Are you sure?', :method => :delete %></td>
+    <% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Tournament', new_division_tournament_path %> <!-- /divisions/:division_id/tournaments/new -->
+<% if is_admin_logged_in? %>
+  <%= link_to 'Crear torneo', new_division_tournament_path %> <!-- /divisions/:division_id/tournaments/new -->
+<% end %>

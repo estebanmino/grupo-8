@@ -1,12 +1,12 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
+  <strong>Nombre:</strong>
   <%= @division.name %>
 </p>
 
 <p>
-  <strong>Description:</strong>
+  <strong>Descripción:</strong>
   <%= @division.description %>
 </p>
 
@@ -17,7 +17,14 @@
 <% end %>
 
 
+<p><strong>Equipos:</strong></p>
+<% @division.teams.each do |team| %>
+  <p><%= team.name %></p>
+<% end %>
+
 <!-- /divisions/:division_id/tournaments/ -->
-<%= link_to 'Tournaments', division_tournaments_path(@division) %> |
-<%= link_to 'Edit', edit_division_path(@division) %> |
-<%= link_to 'Back', divisions_path %>
+<%= link_to 'Torneos', division_tournaments_path(@division) %> |
+<% if is_admin_logged_in? %>
+  <%= link_to 'Editar', edit_division_path(@division) %> |
+<% end %>
+<%= link_to 'Atrás', divisions_path %>

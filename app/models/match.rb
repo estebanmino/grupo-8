@@ -9,9 +9,21 @@
 #  updated_at    :datetime         not null
 #  visit_team_id :integer
 #  home_team_id  :integer
+#  tournament_id :integer
 #
 
 class Match < ApplicationRecord
+
+  validates :date, presence: true, allow_blank: false
+  validates :time, presence: true, allow_blank: false
+  validates :visit_team, presence: true, allow_blank: false
+  validates :home_team, presence: true, allow_blank: false
+  validates :tournament_id, presence: true, allow_blank: false
+  validates :visitor_goals, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :local_goals, :numericality => { :greater_than_or_equal_to => 0 }
+  validates :played, inclusion: { in: [ true, false ] }
+
+
   belongs_to :visit_team, :class_name => 'Team', foreign_key: "visit_team_id"
   belongs_to :home_team, :class_name => 'Team', foreign_key: "home_team_id"
   belongs_to :tournament
@@ -19,6 +31,7 @@ class Match < ApplicationRecord
 
   has_many :performances
   has_many :users, through: :performances
+
 
 
 end
