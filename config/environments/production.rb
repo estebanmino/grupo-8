@@ -90,8 +90,8 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.smtp_settings = {
-    :user_name => 'apikey',
-    :password => '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',
+    :user_name => ENV['SENDGRID_USER'],
+    :password =>ENV['SENDGRID_PASSWORD'],
     :domain => 'laliga.herokuapp.com',
     :address => 'smtp.sendgrid.net',
     :port => 587,

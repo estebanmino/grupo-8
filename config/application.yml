@@ -6,5 +6,5 @@ test:
 production:
   SMTP_USER: "estebanfml@gmail.com"
   SMTP_PASSWORD: "pepapanchadanka"
-  MAILGUN_SMTP_LOGIN: "postmaster@appde7c400a4ce44991b6ef23b3ff26a923.mailgun.org"
-  MAILGUN_SMTP_PASSWORD: "234268d8149fc4136a43127173175d14"
+  SENDGRID_PASSWORD:  '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'
+  SENDGRID_USER:  'apikey'
