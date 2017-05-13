@@ -8,10 +8,11 @@ module TournamentsHelper
       sec_group = (0...teams.length).select {|x| x % 2 != 0}
       p first_group
       p sec_group
+      ind1 = 0
       for j in 0...4 # hago 4 fechas
         n = 0
         date = dates[j]
-        ind1 = 0
+
 
         for i in 0...4 # 4 partidos por fecha
           home = teams[first_group[i]]
@@ -20,6 +21,7 @@ module TournamentsHelper
           time = times[i]
           p i
           p time
+          p (i + ind1) % 4
 
 
           a = Match.new(:date => date, :time => time, :visitor_goals => 0,
@@ -31,7 +33,7 @@ module TournamentsHelper
 
 
       end
-  
+
     homes = [0,1,5,7]
     visits = [2,3,4,6]
     date = dates[4]

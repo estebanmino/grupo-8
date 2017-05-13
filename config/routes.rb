@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   get '/home', to: 'statics#home'
   get '/table', to: 'statics#table', as: 'table'
+  get '/scorers', to: 'statics#scorers', as: 'scorers'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'

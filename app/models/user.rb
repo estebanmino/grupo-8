@@ -41,5 +41,7 @@ class User < ApplicationRecord
 
   belongs_to :team
 
-
+  def full_name
+    "#{name} #{last_name}"
+  end
 end

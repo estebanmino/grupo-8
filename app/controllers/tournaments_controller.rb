@@ -5,9 +5,9 @@ class TournamentsController < ApplicationController
   # GET /divisions/:division_id/tournaments.xml
   def index
     #1st you retrieve the division thanks to params[:division_id]
-    division = Division.find(params[:division_id])
+    @division = Division.find(params[:division_id])
     #2nd you get all the tournaments of this division
-    @tournaments = division.tournaments
+    @tournaments = @division.tournaments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -58,12 +58,7 @@ class TournamentsController < ApplicationController
     p "LOS TEAMS"
     p teams
 
-    # p "HOLA MUNDO"
-    # p teams
-    # p params[:time1]
 
-
-    #p params[:date1]["Fecha1(1i)"]
     date1 = params[:date1]["Fecha1(1i)"]+"-"+params[:date1]["Fecha1(2i)"].rjust(2, '0')+
     "-"+params[:date1]["Fecha1(3i)"].rjust(2, '0')
 
@@ -101,24 +96,9 @@ class TournamentsController < ApplicationController
 
     times = [time1,time2,time3,time4]
     dates = [date1,date2,date3,date4,date5,date6,date7]
-    # p times
-    # p dates
-    # p "HOLA MUNDO"
-    # p division
-    # p @tournament
 
-
-    # a = Match.new(:date => date, :time => time, :visitor_goals => 0,
-    # :local_goals => 0, :played => false, :visit_team_id => 12, :home_team_id => 11,
-    # :tournament_id => 1)
-    #
-    # a.save
-    #
     create_fix(teams, division, @tournament, dates, times)
 
-    # p "HOLA MUNDO"
-    #
-    # p params[:q]
     redirect_to home_path
   end
 
