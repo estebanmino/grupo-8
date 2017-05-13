@@ -36,15 +36,19 @@
 <% if captain != nil %>
   <p><strong>Capitán:</strong></p>
   <p> - <%= captain.full_name %>
-<% else %>
+<% elsif is_admin_logged_in? %>
 <p> Invitar a capitán: </p>
   <%= render 'invitation', team: @team, is_captain: true %>
 <% end %>
 
-<p> Invitar jugadores: </p>
-<%= render 'invitation', team: @team, is_captain: false %>
-
-<% if is_admin_logged_in? %>
-  <%= link_to 'Edit', edit_team_path(@team) %> |
+<% if current_user_is_captain_of(@team) %>
+  <p> Invitar jugadores: </p>
+  <%= render 'invitation', team: @team, is_captain: false %>
 <% end %>
-<%= link_to 'Back', teams_path %>
+
+<p>
+<% if is_admin_logged_in? %>
+  <%= link_to 'Editar', edit_team_path(@team) %> |
+<% end %>
+<%= link_to 'Atrás', teams_path %>
+</p>

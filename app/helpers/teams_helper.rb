@@ -8,4 +8,10 @@ module TeamsHelper
     end
     nil
   end
+
+  def current_user_is_captain_of(team)
+    if current_user
+      current_user.is_captain? && (current_user.team.id == team.id)
+    end
+  end
 end

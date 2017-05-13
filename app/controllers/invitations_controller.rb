@@ -1,4 +1,5 @@
 class InvitationsController < ApplicationController
+  before_action :is_current_user?, only: %i[create]
 
 
 
@@ -23,6 +24,12 @@ class InvitationsController < ApplicationController
    def new_user_registration(token)
      "http://localhost:3000/signup?invitation_token=#{token}"
    end
+
+   def is_current_user?
+     redirect_to(root_path, notice: 'No autorizado a agregar jugadores!') unless (
+                (current_user.team.id == Integer(invitation_params[:team_id]) && current_user.is_captain?) || is_admin_logged_in? )
+   end
+
 end
 
 #http://localhost:3000/signup?invitation_token=7f3603fe4f9cef8cde1572eb3a04d52b0485743e
