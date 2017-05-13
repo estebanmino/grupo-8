@@ -45,7 +45,7 @@
 
 <% if logged_in? %>
   <%= form_for :comment, url: "/comments", method: "post" do |f| %>
-    <%= f.text_area :content %>
+    <%= f.text_area :content, required: true %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :post_id, value: @post.id %>
     <%= f.submit "Comentar" %>
