@@ -22,7 +22,12 @@ class InvitationsController < ApplicationController
     end
 
    def new_user_registration(token)
-     "http://localhost:3000/signup?invitation_token=#{token}"
+     if Rails.env == 'development'
+       return "http://localhost:3000/signup?invitation_token=#{token}"
+     elsif Rails.env == 'production'
+       return "http://laliga.herokuapp.com/signup?invitation_token=#{token}"
+     end
+
    end
 
    def is_current_user?

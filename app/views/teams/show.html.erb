@@ -41,7 +41,7 @@
   <%= render 'invitation', team: @team, is_captain: true %>
 <% end %>
 
-<% if current_user_is_captain_of(@team) %>
+<% if current_user_is_captain_of(@team) || is_admin_logged_in? %>
   <p> Invitar jugadores: </p>
   <%= render 'invitation', team: @team, is_captain: false %>
 <% end %>
