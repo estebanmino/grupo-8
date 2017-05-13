@@ -76,5 +76,5 @@ class MatchesController < ApplicationController
                                     :visitor_goals, :local_goals, :played)
     end
 
-    
+
 end
