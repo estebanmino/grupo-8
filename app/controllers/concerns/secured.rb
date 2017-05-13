@@ -15,4 +15,10 @@ module Secured
   def is_admin_logged_in?
     redirect_to(root_path, notice: 'No autorizado!') unless (current_user && current_user.is_admin?)
   end
+
+  def was_invited?
+    redirect_to(root_path,
+    notice: 'Debe ser invitado por el capitán de su equipo!') unless (Invitation.find_by_token(params[:invitation_token]))
+
+  end
 end

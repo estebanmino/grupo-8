@@ -28,11 +28,13 @@ class Team < ApplicationRecord
   has_many :visit_matches, :class_name => 'Match', :foreign_key => 'visit_team_id'
   has_many :home_matches, :class_name => 'Match', :foreign_key => 'home_team_id'
 
-  has_many :users
   belongs_to :division
   has_and_belongs_to_many :tournaments
 
+  #has_many :users
+  has_many :memberships
+  has_many :users, through: :memberships
 
-
+  has_many :invitations
 
 end

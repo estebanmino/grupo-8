@@ -1,0 +1,8 @@
+development:
+  SMTP_USER: "estebanfml@gmail.com"
+  SMTP_PASSWORD: "pepapanchadanka"
+test:
+
+production:
+  SMTP_USER: "estebanfml@gmail.com"
+  SMTP_PASSWORD: "pepapanchadanka"

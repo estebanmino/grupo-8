@@ -12,10 +12,15 @@ Rails.application.routes.draw do
   resources :comments
   resources :posts
   resources :users
+
+  resources :invitations
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+
 
   root 'statics#home'
 
+  post '/invitations/create', to: 'invitations#create'
   get '/home', to: 'statics#home'
   get '/table', to: 'statics#table', as: 'table'
 

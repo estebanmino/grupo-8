@@ -26,4 +26,9 @@
   <%= @user.position %>
 </p>
 
+<p>
+  <strong>Equipo:</strong>
+  <%= @user.teams.first.name %>
+</p>
+
 <%= link_to 'Editar', edit_user_path(@user) %>

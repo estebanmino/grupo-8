@@ -58,82 +58,69 @@ for i in divs
         lost: 0,
         tie: 0,
         division_id: i.id
-
-
       )
-
-
       team.tournaments << j
-
     end
-
   end
-
-
 end
 
 teams = Team.all
 posiciones = ["medio", "defensa", "delantero"]
 
-for i in teams
+for team in teams
   cap = true
   7.times do
 
-    User.create(
-    name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: Faker::Internet.unique.email,
-    position: posiciones.sample,
-    password: Faker::Internet.password,
-    is_admin: false,
-    team_id: i.id,
-
-    is_captain: cap
-
-
-
-  )
-  cap = false
+    user = User.create(
+      name: Faker::Name.first_name,
+      last_name: Faker::Name.last_name,
+      email: Faker::Internet.unique.email,
+      position: posiciones.sample,
+      password: Faker::Internet.password,
+      is_admin: false,
+      #team_id: i.id,
+      is_captain: cap
+    )
+    Membership.create(:team_id => team.id, :user_id => user.id)
+    cap = false
 
   end
-
-
 end
 
-User.create(
+user = User.create(
 name: "Cristian",
 last_name: "Carreño",
 email: "cristian@gmail.com",
 position: "medio",
 password: "123456",
 is_admin: true,
-team_id: 1,
+#team_id: 1,
 is_captain: true)
+Membership.create(:team_id => 1, :user_id => user.id)
 
 
-User.create(
+user = User.create(
 name: "Esteban",
 last_name: "Miño",
-email: "esteban@gmail.com",
+email: "efmino@uc.cl",
 position: "atacante",
 password: "123456",
 is_admin: true,
-team_id: 2,
+#team_id: 2,
 is_captain: true)
+Membership.create(:team_id => 1, :user_id => user.id)
 
-User.create(
+
+user = User.create(
 name: "Felipe",
 last_name: "Pezoa",
 email: "felipe@gmail.com",
 position: "medio",
 password: "123456",
 is_admin: true,
-team_id: 1,
+#team_id: 1,
 is_captain: true)
-
-
-
-
+Membership.create(:team_id => 1, :user_id => user.id)
 
 user_ids = User.pluck(:id)
 

@@ -41,11 +41,9 @@
     <%= f.text_field :position %>
   </div>
 
-  <div class="field">
-    <%= f.label :team_id, "Equipo del jugador" %>
-    <%= f.select :team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
-  </div>
-
+  <% if @token != nil %>
+    <%= hidden_field_tag :invitation_token, @token %>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Enviar" %>
