@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :performances
   resources :teams
   resources :divisions do
     resources :tournaments
