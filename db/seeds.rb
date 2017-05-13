@@ -71,56 +71,52 @@ for team in teams
   cap = true
   7.times do
 
-    user = User.create(
+    User.create(
       name: Faker::Name.first_name,
       last_name: Faker::Name.last_name,
       email: Faker::Internet.unique.email,
       position: posiciones.sample,
       password: Faker::Internet.password,
       is_admin: false,
-      #team_id: i.id,
+      team_id: team.id,
       is_captain: cap
     )
-    Membership.create(:team_id => team.id, :user_id => user.id)
     cap = false
 
   end
 end
 
-user = User.create(
+User.create(
 name: "Cristian",
 last_name: "Carreño",
 email: "cristian@gmail.com",
 position: "medio",
 password: "123456",
 is_admin: true,
-#team_id: 1,
+team_id: Team.first.id,
 is_captain: true)
-Membership.create(:team_id => 1, :user_id => user.id)
 
 
-user = User.create(
+User.create(
 name: "Esteban",
 last_name: "Miño",
 email: "efmino@uc.cl",
 position: "atacante",
 password: "123456",
 is_admin: true,
-#team_id: 2,
+team_id: Team.first.id,
 is_captain: true)
-Membership.create(:team_id => 1, :user_id => user.id)
 
 
-user = User.create(
+User.create(
 name: "Felipe",
 last_name: "Pezoa",
 email: "felipe@gmail.com",
 position: "medio",
 password: "123456",
 is_admin: true,
-#team_id: 1,
+team_id: Team.first.id,
 is_captain: true)
-Membership.create(:team_id => 1, :user_id => user.id)
 
 user_ids = User.pluck(:id)
 

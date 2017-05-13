@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20170513001624) do
     t.integer  "team_id"
     t.integer  "sender_id"
     t.string   "token"
+    t.boolean  "is_captain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -55,15 +56,6 @@ ActiveRecord::Schema.define(version: 20170513001624) do
     t.index ["home_team_id"], name: "index_matches_on_home_team_id", using: :btree
     t.index ["tournament_id"], name: "index_matches_on_tournament_id", using: :btree
     t.index ["visit_team_id"], name: "index_matches_on_visit_team_id", using: :btree
-  end
-
-  create_table "memberships", force: :cascade do |t|
-    t.integer  "team_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["team_id"], name: "index_memberships_on_team_id", using: :btree
-    t.index ["user_id"], name: "index_memberships_on_user_id", using: :btree
   end
 
   create_table "performances", force: :cascade do |t|
@@ -143,6 +135,8 @@ ActiveRecord::Schema.define(version: 20170513001624) do
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
     t.string   "password_digest"
+    t.integer  "team_id"
+    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
   add_foreign_key "comments", "posts"
@@ -156,4 +150,5 @@ ActiveRecord::Schema.define(version: 20170513001624) do
   add_foreign_key "posts", "users"
   add_foreign_key "teams", "divisions"
   add_foreign_key "tournaments", "divisions"
+  add_foreign_key "users", "teams"
 end

@@ -31,9 +31,7 @@ class Team < ApplicationRecord
   belongs_to :division
   has_and_belongs_to_many :tournaments
 
-  #has_many :users
-  has_many :memberships
-  has_many :users, through: :memberships
+  has_many :users
 
   has_many :invitations
 

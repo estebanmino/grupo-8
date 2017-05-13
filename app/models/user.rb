@@ -38,9 +38,7 @@ class User < ApplicationRecord
   has_many :performances
   has_many :matches, through: :performances
 
-  #belongs_to :team
-  has_many :memberships
-  has_many :teams, through: :memberships
+  belongs_to :team
 
   #has_many :invitations, :class_name => "Invitation", :foreign_key => 'recipient_id'
   has_many :sent_invites, :class_name => "Invitation", :foreign_key => 'sender_id'

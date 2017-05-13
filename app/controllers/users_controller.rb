@@ -34,9 +34,9 @@ class UsersController < ApplicationController
     token = params[:invitation_token]
     invitation = Invitation.find_by_token(token)
     @user.is_captain = invitation.is_captain
+    @user.team_id = invitation.team_id
     respond_to do |format|
       if @user.save
-        Membership.create(:team_id => invitation.team_id, :user_id => @user.id)
         log_in @user
         format.html { redirect_to home_path, notice: 'Te damos la bienvenida a LaLiga.' }
           # format.json { render :show, status: :created, location: @user }
