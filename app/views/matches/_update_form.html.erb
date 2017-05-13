@@ -1,0 +1,65 @@
+<%= form_for(match) do |f| %>
+  <% if match.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(match.errors.count, "error") %> prohibited this match from being saved:</h2>
+
+      <ul>
+      <% match.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tournament_id, "Torneo" %>
+    <% f.text_field :tournament_id,  value:match.tournament_id, :readonly => true %>
+    <%= match.tournament.name %>
+  </div>
+
+  <div class="field">
+    <%= f.label :date, "Fecha" %>
+    <%= f.date_select :date %>
+  </div>
+
+  <div class="field">
+    <%= f.label :time, "Hora" %>
+    <%= f.time_select :time %>
+  </div>
+
+  <div class="field">
+    <%= f.label :played, "Jugado" %>
+    <%= f.select :played, options_for_select([["Si", true], ["No", false]] )  %>
+  </div>
+
+  <% for team in [['Equipo Local', match.home_team],['Equipo Visitante', match.visit_team]] %>
+    <h2><%= team[0]%>: </h2>
+    <ul>
+      <li>
+        <% f.text_field :home_team_id,  value:match.home_team_id, :readonly => true %>
+        <%= team[1].name %>
+        <%= f.label :local_goals, "Goles " %>
+        <%= f.select :local_goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map{ |c| [c, c] })  %>
+      </li>
+      <hr>
+      <% team[1].users.each do |user| %>
+        <li>
+          <% @performance =Performance.new %>
+          <p><%= user.full_name %>
+            <% if !user.matches.find_by_id(match.id) %>
+              <%= render 'performances/form', performance: @performance, user: user, match: match%></p>
+            <% else %>
+              <p>Creada performance</p>
+            <% end %>
+        </li>
+      <% end %>
+    </ul>
+
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit "Enviar" %>
+  </div>
+
+
+<% end %>

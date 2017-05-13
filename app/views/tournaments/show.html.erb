@@ -39,8 +39,14 @@
     <td><strong>V/S</strong></td>
     <td><%= Team.find_by_id(match.visit_team_id).name %></td>
 
-    <td><%= match.local_goals %></td>
-    <td><%= match.visitor_goals %></td>
+    <% if match.played %>
+      <td><%= match.local_goals %></td>
+      <td><%= match.visitor_goals %></td>
+    <% else %>
+      <td> - </td>
+      <td> - </td>
+      <td><%= link_to"Ingresar resultado", edit_match_path(match) %></td>
+    <% end %>
   </tr>
   <% end %>
   </tbody>

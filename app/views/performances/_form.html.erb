@@ -1,4 +1,4 @@
-<%= form_for(performance) do |f| %>
+<%= form_for @performance, :url => '/performances/create' do |f| %>
   <% if performance.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(performance.errors.count, "error") %> prohibited this performance from being saved:</h2>
@@ -11,7 +11,34 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <ul class="performance">
+    <li>
+      <%= f.label :goals, "Goles:" %>
+    </li>
+
+    <li>
+      <%= f.select :goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10].map{ |c| [c, c] })  %>
+    </li>
+
+    <li>
+      <%= f.label :yellow_cards, "Tarjetas amarillas:" %>
+    </li>
+    <li>
+      <%= f.select :yellow_cards, options_for_select([0,1,2].map{ |c| [c, c] })  %>
+    </li>
+
+    <li>
+      <%= f.label :red_cards, "Tarjetas rojas:" %>
+    </li>
+    <li>
+      <%= f.select :red_cards, options_for_select([0,1].map{ |c| [c, c] })  %>
+    </li>
+
+    <%= f.hidden_field :user_id, value: user.id %>
+    <%= f.hidden_field :match_id, value: match.id %>
+
+    <li>
+      <%= f.submit %>
+    </li>
+  </ul>
 <% end %>
