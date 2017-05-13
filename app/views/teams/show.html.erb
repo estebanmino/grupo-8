@@ -29,10 +29,20 @@
 
 <p><strong>Jugadores:</strong></p>
 <% @team.users.each do |user| %>
-  <p> - <%= user.name %> <%= user.last_name %></p>
+  <p> - <%= user.full_name %></p>
 <% end %>
 
-<%= render 'invitation', team: @team %>
+<% captain = captain(@team)%>
+<% if captain != nil %>
+  <p><strong>Capitán:</strong></p>
+  <p> - <%= captain.full_name %>
+<% else %>
+<p> Invitar a capitán: </p>
+  <%= render 'invitation', team: @team, is_captain: true %>
+<% end %>
+
+<p> Invitar jugadores: </p>
+<%= render 'invitation', team: @team, is_captain: false %>
 
 <% if is_admin_logged_in? %>
   <%= link_to 'Edit', edit_team_path(@team) %> |

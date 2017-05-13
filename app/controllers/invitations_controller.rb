@@ -5,7 +5,6 @@ class InvitationsController < ApplicationController
   def create
     @invitation = Invitation.new(invitation_params) # Make a new Invite
     @invitation.sender_id = current_user.id
-    @invitation.is_captain = false
     if @invitation.save
       InvitationMailer.invitation_mail(@invitation, new_user_registration(@invitation.token)).deliver_now
       redirect_to :back
@@ -18,7 +17,7 @@ class InvitationsController < ApplicationController
   private
 
     def invitation_params
-      params.require(:invitation).permit(:email, :team_id)
+      params.require(:invitation).permit(:email, :team_id, :is_captain)
     end
 
    def new_user_registration(token)

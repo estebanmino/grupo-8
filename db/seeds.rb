@@ -94,7 +94,7 @@ position: "medio",
 password: "123456",
 is_admin: true,
 team_id: Team.first.id,
-is_captain: true)
+is_captain: false)
 
 
 User.create(
@@ -105,7 +105,7 @@ position: "atacante",
 password: "123456",
 is_admin: true,
 team_id: Team.first.id,
-is_captain: true)
+is_captain: false)
 
 
 User.create(
@@ -116,7 +116,7 @@ position: "medio",
 password: "123456",
 is_admin: true,
 team_id: Team.first.id,
-is_captain: true)
+is_captain: false)
 
 user_ids = User.pluck(:id)
 
