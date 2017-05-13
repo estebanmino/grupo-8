@@ -14,23 +14,15 @@ table {
     border-spacing: 5px;
 }
 
-table#tabla_pos tr:nth-child(even) {
+table.tabla_pos tr:nth-child(even) {
     background-color: #eee;
 
 }
-table#tabla_pos tr:nth-child(odd) {
+table.tabla_pos tr:nth-child(odd) {
     background-color: #fff;
 }
-table#tabla_pos th {
+table.tabla_pos th {
 
     color: white;
     background-color: #C80A00;
-}
-table#tabla_pos  {
-
-    margin-left: 50px;
-}
-
-.table_text {
-  margin-left: 50px;
 }

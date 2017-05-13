@@ -47,4 +47,5 @@ class User < ApplicationRecord
     "#{name} #{last_name}"
   end
 
+
 end

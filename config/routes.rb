@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   post '/invitations/create', to: 'invitations#create'
   get '/home', to: 'statics#home'
   get '/table', to: 'statics#table', as: 'table'
+  get '/scorers', to: 'statics#scorers', as: 'scorers'
 
   get '/signup', to: 'users#new'
   post '/signup', to: 'users#create'

@@ -1,0 +1,56 @@
+form {
+  padding: 10px;
+}
+
+.actions {
+  margin-left: 320px;
+  input, button {
+    padding: 8px;
+    border: 1px solid #999;
+    background: #C80A00;
+    border-radius: 4px;
+    font-size: 20px;
+    color: white;
+    &:hover {
+      background: #990000;
+      cursor: pointer;
+    }
+  }
+}
+
+.field {
+  margin-bottom: 20px;
+
+  label,
+  input[type=text],
+  input[type=password],
+  input[type=email],
+  textarea {
+    width: 300px;
+    padding: 10px;
+    font-size: 20px;
+    border: none;
+    border-bottom: 1px solid #999;
+    outline: none;
+  }
+
+  label {
+    display: inline-block;
+    text-align: right;
+    border: none;
+    margin: 0;
+  }
+
+  .field_with_errors, &.error {
+    display: inline-block;
+    label, input[type=text], input[type=password], input[type=email], .error-message {
+      color: red;
+    }
+    input[type=text], input[type=password], input[type=email] {
+      border-color: red;
+    }
+    .error-message {
+      margin-left: 10px;
+    }
+  }
+}

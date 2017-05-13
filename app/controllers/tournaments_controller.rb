@@ -1,15 +1,20 @@
 class TournamentsController < ApplicationController
+
   include Secured
+  include TournamentsHelper
 
   before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
+
+
+
 
   # GET /divisions/:division_id/tournaments
   # GET /divisions/:division_id/tournaments.xml
   def index
     #1st you retrieve the division thanks to params[:division_id]
-    division = Division.find(params[:division_id])
+    @division = Division.find(params[:division_id])
     #2nd you get all the tournaments of this division
-    @tournaments = division.tournaments
+    @tournaments = @division.tournaments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -52,17 +57,56 @@ class TournamentsController < ApplicationController
 
   def new_fixture
 
-    p "HOLA MUNDO"
-    p division = Division.find(params[:division_id])
-    p @tournament = division.tournaments.find(params[:id])
 
 
 
+    division = Division.find(params[:division_id])
+    @tournament = division.tournaments.find(params[:id])
+    teams = @tournament.teams.pluck(:id)
+    p "LOS TEAMS"
+    p teams
 
 
-    p "HOLA MUNDO"
+    date1 = params[:date1]["Fecha1(1i)"]+"-"+params[:date1]["Fecha1(2i)"].rjust(2, '0')+
+    "-"+params[:date1]["Fecha1(3i)"].rjust(2, '0')
 
-    p params[:q]
+    date2 = params[:date2]["Fecha2(1i)"]+"-"+params[:date2]["Fecha2(2i)"].rjust(2, '0')+
+    "-"+params[:date2]["Fecha2(3i)"].rjust(2, '0')
+
+    date3 = params[:date3]["Fecha3(1i)"]+"-"+params[:date3]["Fecha3(2i)"].rjust(2, '0')+
+    "-"+params[:date3]["Fecha3(3i)"].rjust(2, '0')
+
+    date4 = params[:date4]["Fecha4(1i)"]+"-"+params[:date4]["Fecha4(2i)"].rjust(2, '0')+
+    "-"+params[:date4]["Fecha4(3i)"].rjust(2, '0')
+
+    date5 = params[:date5]["Fecha5(1i)"]+"-"+params[:date5]["Fecha5(2i)"].rjust(2, '0')+
+    "-"+params[:date5]["Fecha5(3i)"].rjust(2, '0')
+    date6 = params[:date6]["Fecha6(1i)"]+"-"+params[:date6]["Fecha6(2i)"].rjust(2, '0')+
+    "-"+params[:date6]["Fecha6(3i)"].rjust(2, '0')
+    date7 = params[:date7]["Fecha7(1i)"]+"-"+params[:date7]["Fecha7(2i)"].rjust(2, '0')+
+    "-"+params[:date7]["Fecha7(3i)"].rjust(2, '0')
+
+    time1 = params[:time1]["Hora1(1i)"] + "-" + params[:time1]["Hora1(2i)"].rjust(2, '0') +
+    "-" + params[:time1]["Hora1(3i)"].rjust(2, '0') + " " + params[:time1]["Hora1(4i)"].rjust(2, '0') +
+    ":" + params[:time1]["Hora1(5i)"].rjust(2, '0') + ":00"
+
+    time2 = params[:time2]["Hora2(1i)"] + "-" + params[:time2]["Hora2(2i)"].rjust(2, '0') +
+    "-" + params[:time2]["Hora2(3i)"].rjust(2, '0') + " " + params[:time2]["Hora2(4i)"].rjust(2, '0') +
+    ":" + params[:time2]["Hora2(5i)"].rjust(2, '0') + ":00"
+
+    time3 = params[:time3]["Hora3(1i)"] + "-" + params[:time3]["Hora3(2i)"].rjust(2, '0') +
+    "-" + params[:time3]["Hora3(3i)"].rjust(2, '0') + " " + params[:time3]["Hora3(4i)"].rjust(2, '0') +
+    ":" + params[:time3]["Hora3(5i)"].rjust(2, '0') + ":00"
+
+    time4 = params[:time4]["Hora4(1i)"] + "-" + params[:time4]["Hora4(2i)"].rjust(2, '0') +
+    "-" + params[:time4]["Hora4(3i)"].rjust(2, '0') + " " + params[:time4]["Hora4(4i)"].rjust(2, '0') +
+    ":" + params[:time4]["Hora4(5i)"].rjust(2, '0') + ":00"
+
+    times = [time1,time2,time3,time4]
+    dates = [date1,date2,date3,date4,date5,date6,date7]
+
+    create_fix(teams, division, @tournament, dates, times)
+
     redirect_to home_path
   end
 
