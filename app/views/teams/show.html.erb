@@ -2,28 +2,34 @@
 
 <!--<%= image_tag @team.logo.url(:medium) %>-->
 
+<% @team.update_stats %>
+
 <p>
   <strong>Name:</strong>
   <%= @team.name %>
 </p>
 
+
+
+
+
 <p>
-  <strong>Points:</strong>
+  <strong>Puntos:</strong>
   <%= @team.points %>
 </p>
 
 <p>
-  <strong>Won:</strong>
+  <strong>Partidos Ganados:</strong>
   <%= @team.won %>
 </p>
 
 <p>
-  <strong>Lost:</strong>
+  <strong>Partidos Perdidos:</strong>
   <%= @team.lost %>
 </p>
 
 <p>
-  <strong>Tie:</strong>
+  <strong>Partidos Empatados:</strong>
   <%= @team.tie %>
 </p>
 

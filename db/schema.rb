@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170513001624) do
+ActiveRecord::Schema.define(version: 20170514200501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "comments", force: :cascade do |t|
-    t.text     "content",    null: false
+    t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "user_id"
@@ -84,8 +84,8 @@ ActiveRecord::Schema.define(version: 20170513001624) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "description", null: false
+    t.string   "name"
+    t.string   "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
@@ -93,18 +93,20 @@ ActiveRecord::Schema.define(version: 20170513001624) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string   "name",              null: false
+    t.string   "name",                          null: false
     t.integer  "points"
     t.integer  "won"
     t.integer  "lost"
     t.integer  "tie"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "logo_file_name"
     t.string   "logo_content_type"
     t.integer  "logo_file_size"
     t.datetime "logo_updated_at"
     t.integer  "division_id"
+    t.integer  "gf",                default: 0
+    t.integer  "ga",                default: 0
     t.index ["division_id"], name: "index_teams_on_division_id", using: :btree
   end
 
@@ -126,14 +128,15 @@ ActiveRecord::Schema.define(version: 20170513001624) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",                            null: false
-    t.string   "last_name",                       null: false
-    t.string   "email",                           null: false
-    t.string   "position",                        null: false
-    t.boolean  "is_admin",        default: false, null: false
-    t.boolean  "is_captain",      default: false, null: false
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "name"
+    t.string   "last_name"
+    t.string   "email"
+    t.string   "password"
+    t.string   "position"
+    t.boolean  "is_admin"
+    t.boolean  "is_captain"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
     t.string   "password_digest"
     t.integer  "team_id"
     t.index ["team_id"], name: "index_users_on_team_id", using: :btree
