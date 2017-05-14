@@ -39,8 +39,18 @@
     <td><strong>V/S</strong></td>
     <td><%= Team.find_by_id(match.visit_team_id).name %></td>
 
-    <td><%= match.local_goals %></td>
-    <td><%= match.visitor_goals %></td>
+    <% if match.played %>
+      <td><%= match.local_goals %></td>
+      <td><%= match.visitor_goals %></td>
+      <% if is_admin_logged_in? %>
+        <td><%= link_to"Editar resultado", edit_match_path(match) %></td>
+      <% end %>    <% else %>
+      <td> - </td>
+      <td> - </td>
+      <% if is_admin_logged_in? %>
+        <td><%= link_to"Ingresar resultado", edit_match_path(match) %></td>
+      <% end %>
+    <% end %>
   </tr>
   <% end %>
   </tbody>

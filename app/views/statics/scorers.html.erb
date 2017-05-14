@@ -2,45 +2,36 @@
 
 <% @users = User.all.where(is_admin: false).limit(15) %>
 
-
-
 <div class="table_head">
-
-
-<h1 class = "table_text"> Goleadores de la LigaMC</h1>
-
-
-
-
+  <h1 class = "table_text"> Goleadores de la LigaMC</h1>
 </div>
 
-<table class = "tabla_pos">
-  <thead>
-    <tr>
-      <th>Jugador</th>
-      <th>Posición</th>
-      <th>Equipo</th>
-      <th>Goles</th>
-
-
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <% @users.each do |user| %>
+<% for division in @divisions %>
+  <div class="table_head">
+    <h2 class = "table_text"><%= division.name %></h2>
+  </div>
+  <table class = "tabla_pos">
+    <thead>
       <tr>
-
-        <td><%=user.full_name%></td>
-        <td><%=user.position%></td>
-        <td><%=Team.find(user.team_id).name%></td>
-        <td>0</td>
-
-
+        <th>Jugador</th>
+        <th>Posición</th>
+        <th>Equipo</th>
+        <th>Goles</th>
       </tr>
+    </thead>
 
+    <tbody>
+      <% for scorer in @top_scorers[division.id].sort { |b,a| a[:goals] <=> b[:goals] } %>
+
+        <% if scorer[:user] != nil %>
+          <tr>
+            <td><%=scorer[:user].full_name%></td>
+            <td><%=scorer[:user].position%></td>
+            <td><%=scorer[:user].team.name%></td>
+            <td><%=scorer[:goals]%></td>
+          </tr>
+        <% end %>
       <% end %>
-
-
-  </tbody>
-</table>
+    </tbody>
+  </table>
+<% end %>

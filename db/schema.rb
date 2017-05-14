@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20170514200501) do
 
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,13 +60,13 @@ ActiveRecord::Schema.define(version: 20170514200501) do
   end
 
   create_table "performances", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "match_id"
     t.integer  "goals",        null: false
     t.integer  "yellow_cards", null: false
     t.integer  "red_cards",    null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "match_id"
-    t.integer  "user_id"
     t.index ["match_id"], name: "index_performances_on_match_id", using: :btree
     t.index ["user_id"], name: "index_performances_on_user_id", using: :btree
   end
@@ -146,8 +147,6 @@ ActiveRecord::Schema.define(version: 20170514200501) do
   add_foreign_key "matches", "teams", column: "home_team_id"
   add_foreign_key "matches", "teams", column: "visit_team_id"
   add_foreign_key "matches", "tournaments"
-  add_foreign_key "performances", "matches"
-  add_foreign_key "performances", "users"
   add_foreign_key "pictures", "matches"
   add_foreign_key "posts", "users"
   add_foreign_key "teams", "divisions"
