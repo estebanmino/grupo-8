@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-
+  before_action :belongs_to__current_user?, only: %i[update create destroy] 
   # GET /comments
   # GET /comments.json
   def index
@@ -72,5 +72,9 @@ class CommentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
       params.require(:comment).permit(:content, :post_id, :user_id)
+    end
+
+    def belongs_to__current_user?
+      redirect_to(root_path, notice: 'No autorizado!') unless @comment.user == current_user
     end
 end

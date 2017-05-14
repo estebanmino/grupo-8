@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+
+ .new-button, .edit-button {
+  border-color: #818488;
+  color: #818488;
+  font: Sans-serif;
+  margin-left: 10px;
+ }
+
+ .black-button {
+  border-color: #2b3036;
+  color: #2b3036;
+  font: Sans-serif;
+  margin-left: 10px;
+ }
+
+ .img_logo{
+   height: 120px;
+ }
+
+ main{
+   margin-left: 50px;
+ }

@@ -1,0 +1,83 @@
+
+<% if @performance.user_id == nil %>
+  <% update = false %>
+  <% path = "/performances/create" %>
+  <% submt = 'Agregar al partido'  %>
+<% else %>
+  <% update = true %>
+  <% path = "/performances/#{@performance.id}" %>
+  <% submt = 'Actualizar información'  %>
+<% end %>
+
+<%= form_for @performance, :url => path do |f| %>
+  <% if performance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(performance.errors.count, "error") %> prohibited this performance from being saved:</h2>
+
+      <ul>
+      <% performance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+  <table>
+    <td>
+      <% if update %>
+        <p>Jugó   </p>
+      <% else %>
+        <p>No jugó</p>
+      <% end %>
+    </td>
+
+    <td>
+      <%= f.label :goals, "Goles" %>
+    </td>
+    <td>
+      <% if update == true%>
+        <%= f.select :goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10].map{ |c| [c, c] }, selected: @performance.goals)  %>
+      <% else %>
+        <%= f.select :goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10].map{ |c| [c, c] })  %>
+      <% end %>
+    </td>
+
+    <td>
+      <%= f.label :yellow_cards, "Tarjetas amarillas:" %>
+    </td>
+    <td>
+      <% if update == true%>
+        <%= f.select :yellow_cards, options_for_select([0,1,2].map{ |c| [c, c] }, selected: @performance.yellow_cards)  %>
+      <% else %>
+        <%= f.select :yellow_cards, options_for_select([0,1,2].map{ |c| [c, c] })  %>
+      <% end %>
+    </td>
+
+    <td>
+      <%= f.label :red_cards, "Tarjetas rojas:" %>
+    </td>
+
+    <td>
+      <% if update == true%>
+        <%= f.select :red_cards, options_for_select([0,1].map{ |c| [c, c] }, selected: @performance.red_cards)  %>
+      <% else %>
+        <%= f.select :red_cards, options_for_select([0,1].map{ |c| [c, c] })  %>
+      <% end %>
+    </td>
+
+    <%= f.hidden_field :user_id, value: user.id %>
+    <%= f.hidden_field :match_id, value: match.id %>
+    <td>
+      <%= f.submit submt %>
+    </td>
+
+  <% if update %>
+    <td>
+      <td><button><%= link_to 'Eliminar información', @performance, method: :delete, data: { confirm: 'Estás seguro?' } %></button></td>
+    </td>
+  <% end %>
+  </table>
+
+<% end %>

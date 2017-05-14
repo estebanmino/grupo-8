@@ -1,0 +1,62 @@
+<%= form_tag(method: "post") do %>
+
+
+<div class="field">
+  <%= label_tag(:date1, "Fecha1") %>
+  <%= date_select(:date1,"Fecha1", selected: Date.today) %>
+</div>
+
+<div class="field">
+  <%= label_tag(:date2, "Fecha2") %>
+  <%= date_select(:date2,"Fecha2", selected: Date.today) %>
+</div>
+
+<div class="field">
+  <%= label_tag(:date3, "Fecha3") %>
+  <%= date_select(:date3,"Fecha3", selected: Date.today) %>
+</div>
+
+<div class="field">
+  <%= label_tag(:date4, "Fecha4") %>
+  <%= date_select(:date4,"Fecha4", selected: Date.today) %>
+</div>
+
+<div class="field">
+  <%= label_tag(:date5, "Fecha5") %>
+  <%= date_select(:date5,"Fecha5", selected: Date.today) %>
+</div>
+
+<div class="field">
+  <%= label_tag(:date6, "Fecha6") %>
+  <%= date_select(:date6,"Fecha6", selected: Date.today) %>
+</div>
+
+<div class="field">
+  <%= label_tag(:date7, "Fecha7") %>
+  <%= date_select(:date7,"Fecha7", selected: Date.today) %>
+</div>
+
+<div class="field">
+  <%= label_tag(:time1, "Hora1") %>
+  <%= time_select(:time1,"Hora1") %>
+  </div>
+
+<div class="field">
+<%= label_tag(:time2, "Hora2") %>
+<%= time_select(:time2,"Hora2") %>
+</div>
+
+  <div class="field">
+    <%= label_tag(:time3, "Hora3") %>
+    <%= time_select(:time3,"Hora3") %>
+</div>
+
+<div class="field">
+  <%= label_tag(:time4, "Hora4") %>
+  <%= time_select(:time4,"Hora4") %>
+  </div>
+
+<div class="field">
+  <%= submit_tag("Crear") %>
+  </div>
+<% end %>

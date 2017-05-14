@@ -1,38 +1,60 @@
 <p id="notice"><%= notice %></p>
 
-<%= image_tag @team.logo.url(:medium) %>
+<!--<%= image_tag @team.logo.url(:medium) %>-->
+
+<% @team.update_stats %>
 
 <p>
   <strong>Name:</strong>
   <%= @team.name %>
 </p>
 
+
+
+
+
 <p>
-  <strong>Points:</strong>
+  <strong>Puntos:</strong>
   <%= @team.points %>
 </p>
 
 <p>
-  <strong>Won:</strong>
+  <strong>Partidos Ganados:</strong>
   <%= @team.won %>
 </p>
 
 <p>
-  <strong>Lost:</strong>
+  <strong>Partidos Perdidos:</strong>
   <%= @team.lost %>
 </p>
 
 <p>
-  <strong>Tie:</strong>
+  <strong>Partidos Empatados:</strong>
   <%= @team.tie %>
 </p>
 
 <p><strong>Jugadores:</strong></p>
 <% @team.users.each do |user| %>
-  <p> - <%= user.name %> <%= user.last_name %></p>
+  <p> - <%= user.full_name %></p>
 <% end %>
 
-<% if is_admin_logged_in? %>
-  <%= link_to 'Edit', edit_team_path(@team) %> |
+<% captain = captain(@team)%>
+<% if captain != nil %>
+  <p><strong>Capitán:</strong></p>
+  <p> - <%= captain.full_name %>
+<% elsif is_admin_logged_in? %>
+<p> Invitar a capitán: </p>
+  <%= render 'invitation', team: @team, is_captain: true %>
 <% end %>
-<%= link_to 'Back', teams_path %>
+
+<% if current_user_is_captain_of(@team) || is_admin_logged_in? %>
+  <p> Invitar jugadores: </p>
+  <%= render 'invitation', team: @team, is_captain: false %>
+<% end %>
+
+<p>
+<% if is_admin_logged_in? %>
+  <%= link_to 'Editar', edit_team_path(@team) %> |
+<% end %>
+<%= link_to 'Atrás', teams_path %>
+</p>

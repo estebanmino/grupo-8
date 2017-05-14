@@ -1,5 +1,9 @@
 class DivisionsController < ApplicationController
+  include Secured
+
+  before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
   before_action :set_division, only: [:show, :edit, :update, :destroy]
+
 
   # GET /divisions
   # GET /divisions.json

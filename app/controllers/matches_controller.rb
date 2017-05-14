@@ -1,5 +1,8 @@
 class MatchesController < ApplicationController
+  include Secured
+
   before_action :set_match, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
 
   # GET /matches
   # GET /matches.json
@@ -16,6 +19,9 @@ class MatchesController < ApplicationController
   def new
     @match = Match.new
   end
+
+
+
 
   # GET /matches/1/edit
   def edit
@@ -72,4 +78,6 @@ class MatchesController < ApplicationController
       params.require(:match).permit(:date, :time, :home_team_id, :visit_team_id, :tournament_id,
                                     :visitor_goals, :local_goals, :played)
     end
+
+
 end

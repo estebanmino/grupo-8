@@ -1,0 +1,20 @@
+<p>
+   Hola!
+ </p>
+
+ <p>
+   <% if @invitation.is_captain? %>
+    De acuerdo a tu inscripción, te invitamos a crear tu usuario en LaLiga en el siguiente link <%= @link %>.
+    <br>
+    Una vez creada tu cuenta podrás agregar a los miembros de tu equipo ingresando sus emails desde tu perfil de equipo.
+   <% else %>
+    <%= @user.full_name %> te ha invitado a que te unas a su equipo  en LaLiga
+    <br>
+    puedes hacerlo ingresando al siguiente link <%= @link %>
+  <% end %>
+</p>
+
+ <p>
+   Saludos,<br>
+   Equipo LaLiga
+ </p>

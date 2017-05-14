@@ -1,30 +1,31 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <b>Nombre del torneo:</b>
   <%= @tournament.name %>
 </p>
 
 <p>
-  <b>Description:</b>
+  <b>Descripción:</b>
   <%= @tournament.description %>
 </p>
 
 <p>
-  <b>Season:</b>
+  <b>Temporada:</b>
   <%= @tournament.season %>
 </p>
 
 
-<table>
+<table class="tabla_pos">
   <thead>
     <tr>
       <th>Fecha</th>
       <th>Hora</th>
       <th>Local</th>
+      <th>    </th>
+      <th>Visitante</th>
       <th>Goles Local</th>
       <th>Goles Visitante</th>
-      <th>Visitante</th>
 
       <th colspan="3"></th>
     </tr>
@@ -33,11 +34,23 @@
   <% @tournament.matches.each do |match| %>
   <tr>
     <td><%= match.date %></td>
-    <td><%= match.time %></td>
+    <td><%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs</td>
     <td><%= Team.find_by_id(match.home_team_id).name %></td>
-    <td><%= match.local_goals %></td>
-    <td><%= match.visitor_goals %></td>
+    <td><strong>V/S</strong></td>
     <td><%= Team.find_by_id(match.visit_team_id).name %></td>
+
+    <% if match.played %>
+      <td><%= match.local_goals %></td>
+      <td><%= match.visitor_goals %></td>
+      <% if is_admin_logged_in? %>
+        <td><%= link_to"Editar resultado", edit_match_path(match) %></td>
+      <% end %>    <% else %>
+      <td> - </td>
+      <td> - </td>
+      <% if is_admin_logged_in? %>
+        <td><%= link_to"Ingresar resultado", edit_match_path(match) %></td>
+      <% end %>
+    <% end %>
   </tr>
   <% end %>
   </tbody>
@@ -46,6 +59,7 @@
 <% if is_admin_logged_in? %>
   <!-- /divisions/:division_id/tournaments/:id/edit -->
   <%= link_to 'Edit', edit_division_tournament_path(@tournament.division, @tournament) %> |
+  <%= link_to 'Crear Fixture', division_fixture_path(@tournament.division, @tournament) %> |
 <% end %>
 <!-- /divisions/:division_id/tournaments/ -->
 <%= link_to 'Back', division_tournaments_path(@tournament.division) %>

@@ -26,4 +26,11 @@
   <%= @user.position %>
 </p>
 
+<% if !is_admin_logged_in? %>
+  <p>
+    <strong>Equipo:</strong>
+    <%= @user.team.name %> <%= link_to 'Ir a equipo', @user.team  %>
+  </p>
+<% end %>
+
 <%= link_to 'Editar', edit_user_path(@user) %>

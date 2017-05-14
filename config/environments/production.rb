@@ -83,4 +83,21 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Don't care if the mailer can't send.
+  config.action_mailer.raise_delivery_errors = false
+
+  config.action_mailer.perform_caching = false
+
+  config.action_mailer.smtp_settings = {
+    :user_name => ENV['SENDGRID_USER'],
+    :password =>ENV['SENDGRID_PASSWORD'],
+    :domain => 'laliga.herokuapp.com',
+    :address => 'smtp.sendgrid.net',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
+  config.action_mailer.delivery_method = :smtp
+
 end

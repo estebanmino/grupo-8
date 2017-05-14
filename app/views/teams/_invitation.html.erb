@@ -1,0 +1,7 @@
+<%= form_for Invitation.new , :url => '/invitations/create', locals: {is_captain: is_captain} do |f| %>
+<%= f.hidden_field :team_id, :value => @team.id %>
+<%= f.hidden_field :is_captain, :value => is_captain %>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+  <%= f.submit 'Send' %>
+<% end %>

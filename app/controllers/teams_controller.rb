@@ -1,5 +1,8 @@
 class TeamsController < ApplicationController
+  include Secured
+
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
 
   # GET /teams
   # GET /teams.json
@@ -10,6 +13,7 @@ class TeamsController < ApplicationController
   # GET /teams/1
   # GET /teams/1.json
   def show
+    @invitation = Invitation.new
   end
 
   # GET /teams/new

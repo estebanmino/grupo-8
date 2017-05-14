@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
+  include Secured
+
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin_logged_in?, only: %i[index]
+  before_action :is_current_user?, only: %i[edit update destroy]
+  before_action :was_invited?, only: %i[new create]
 
   # GET /users
   # GET /users.json
@@ -15,6 +20,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    @token = params[:invitation_token]
   end
 
   # GET /users/1/edit
@@ -25,14 +31,15 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @user.update_attribute(:is_admin, false)
-    @user.update_attribute(:is_captain, false)
-
+    token = params[:invitation_token]
+    invitation = Invitation.find_by_token(token)
+    @user.is_captain = invitation.is_captain
+    @user.team_id = invitation.team_id
     respond_to do |format|
       if @user.save
         log_in @user
         format.html { redirect_to home_path, notice: 'Te damos la bienvenida a LaLiga.' }
-        # format.json { render :show, status: :created, location: @user }
+          # format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -72,6 +79,11 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :last_name, :email, :position, :password, :password_confirmation, :team_id)
+      params.require(:user).permit(:name, :last_name, :email, :position,
+                                    :password, :password_confirmation)
+    end
+
+    def is_current_user?
+      redirect_to(root_path, notice: 'No autorizado!') unless @user == current_user
     end
 end

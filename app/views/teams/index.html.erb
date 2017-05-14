@@ -1,31 +1,31 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Equipos</h1>
+
+<div id="team_index">
+
+
+<h1 class="table_text">Equipos</h1>
 
 <% Division.all.each do |division| %>
-  <h2><%= division.name %></h2>
-    <table>
+  <h2 class="table_text"><%= division.name %></h2>
+    <table class= "tabla_teams">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Points</th>
-          <th>Won</th>
-          <th>Lost</th>
-          <th>Tie</th>
-          <th colspan="3"></th>
+          <th>Nombre</th>
+          <th>Emblema</th>
+
         </tr>
       </thead>
 
       <tbody>
         <% division.teams.each do |team| %>
           <tr>
-            <td><%= team.name %></td>
+            <td><%= link_to team.name, team,class: 'black-button' %></td>
             <td><%= image_tag team.logo.url(:thumb) %></td>
-            <td><%= team.points %></td>
-            <td><%= team.won %></td>
-            <td><%= team.lost %></td>
-            <td><%= team.tie %></td>
-            <td><%= link_to 'Show', team %></td>
+
+
+
+
             <% if is_admin_logged_in? %>
               <td><%= link_to 'Edit', edit_team_path(team) %></td>
               <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -41,3 +41,4 @@
 <% if is_admin_logged_in? %>
   <%= link_to 'New Team', new_team_path %>
 <% end %>
+</div>

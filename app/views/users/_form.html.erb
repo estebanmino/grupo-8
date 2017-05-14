@@ -13,39 +13,37 @@
 
   <div class="field">
     <%= f.label :name, "Nombre" %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, required: true %>
   </div>
 
   <div class="field">
       <%= f.label :last_name, "Apellido" %>
-      <%= f.text_field :last_name %>
+      <%= f.text_field :last_name, required: true %>
     </div>
 
   <div class="field">
     <%= f.label :email, "Email" %>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :password, "Contraseña" %>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :password_confirmation, "Confirma tu contraseña" %>
-    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :password_confirmation, required: true %>
   </div>
 
   <div class="field">
     <%= f.label :position, "Posición" %>
-    <%= f.text_field :position %>
+    <%= f.text_field :position, required: true %>
   </div>
 
-  <div class="field">
-    <%= f.label :team_id, "Equipo del jugador" %>
-    <%= f.select :team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
-  </div>
-
+  <% if @token != nil %>
+    <%= hidden_field_tag :invitation_token, @token %>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Enviar" %>
