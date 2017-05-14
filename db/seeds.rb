@@ -93,7 +93,7 @@ email: "cristian@gmail.com",
 position: "medio",
 password: "123456",
 is_admin: true,
-team_id: Team.first.id,
+team_id: Team.last.id,
 is_captain: false)
 
 
@@ -104,18 +104,18 @@ email: "efmino@uc.cl",
 position: "atacante",
 password: "123456",
 is_admin: true,
-team_id: Team.first.id,
+team_id: Team.last.id,
 is_captain: false)
 
 
 User.create(
-name: "Felipe",
-last_name: "Pezoa",
-email: "felipe@gmail.com",
+name: "Admin",
+last_name: "Istrador",
+email: "admin@gmail.com",
 position: "medio",
-password: "123456",
+password: "admin1234",
 is_admin: true,
-team_id: Team.first.id,
+team_id: Team.last.id,
 is_captain: false)
 
 user_ids = User.pluck(:id)

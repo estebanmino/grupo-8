@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   root 'statics#home'
 
   post '/invitations/create', to: 'invitations#create'
+  post '/performances/create', to: 'performances#create'
+  
   get '/home', to: 'statics#home'
   get '/table', to: 'statics#table', as: 'table'
   get '/scorers', to: 'statics#scorers', as: 'scorers'

@@ -1,5 +1,8 @@
 class PerformancesController < ApplicationController
+
+  include Secured
   before_action :set_performance, only: [:show, :edit, :update, :destroy]
+  before_action :is_admin_logged_in?, only: %i[index show new edit create update destroy]
 
   # GET /performances
   # GET /performances.json
@@ -28,7 +31,8 @@ class PerformancesController < ApplicationController
 
     respond_to do |format|
       if @performance.save
-        format.html { redirect_to @performance, notice: 'Performance was successfully created.' }
+
+        format.html { redirect_to :back, notice: 'Performance was successfully created.' }
         format.json { render :show, status: :created, location: @performance }
       else
         format.html { render :new }
@@ -42,7 +46,8 @@ class PerformancesController < ApplicationController
   def update
     respond_to do |format|
       if @performance.update(performance_params)
-        format.html { redirect_to @performance, notice: 'Performance was successfully updated.' }
+
+        format.html { redirect_to :back, notice: 'Performance was successfully updated.' }
         format.json { render :show, status: :ok, location: @performance }
       else
         format.html { render :edit }
@@ -56,7 +61,7 @@ class PerformancesController < ApplicationController
   def destroy
     @performance.destroy
     respond_to do |format|
-      format.html { redirect_to performances_url, notice: 'Performance was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Performance was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +74,7 @@ class PerformancesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def performance_params
-      params.fetch(:performance, {})
+      params.require(:performance).permit(:user_id, :match_id, :goals, :yellow_cards,
+                                    :red_cards)
     end
 end
