@@ -1,7 +1,7 @@
 class PerformancesController < ApplicationController
   include Secured
   before_action :set_performance, only: [:show, :edit, :update, :destroy]
-  before_action :is_admin_logged_in, only: %i[index show new edit create update destroy]
+  before_action :is_admin_logged_in?, only: %i[index show new edit create update destroy]
   # GET /performances
   # GET /performances.json
   def index
@@ -43,7 +43,7 @@ class PerformancesController < ApplicationController
   def update
     respond_to do |format|
       if @performance.update(performance_params)
-        format.html { redirect_to @performance, notice: 'Performance was successfully updated.' }
+        format.html { redirect_to :back, notice: 'Performance was successfully updated.' }
         format.json { render :show, status: :ok, location: @performance }
       else
         format.html { render :edit }
