@@ -41,24 +41,28 @@
         <%= f.label :local_goals, "Goles " %>
         <%= f.select :local_goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map{ |c| [c, c] })  %>
       </li>
-      <hr>
-      <% team[1].users.each do |user| %>
-        <li>
-          <% @performance =Performance.new %>
-          <p><%= user.full_name %>
-            <% if !user.matches.find_by_id(match.id) %>
-              <%= render 'performances/form', performance: @performance, user: user, match: match%></p>
-            <% else %>
-              <p>Creada performance</p>
-            <% end %>
-        </li>
-      <% end %>
     </ul>
+    <hr>
+
+    <table>
+      <% team[1].users.each do |user| %>
+        <tr>
+          <td><p><%= user.full_name %></p></td>
+          <% if !user.matches.find_by_id(match.id) %>
+            <% @performance =Performance.new %>
+            <td><%= render 'performances/form', performance: @performance, user: user, match: match, method: 'post'%></td>
+          <% else %>
+            <% @performance = user.performances.find_by(match_id: match.id) %>
+            <td><%= render 'performances/form', performance: @performance, user: user, match: match, method: 'patch'%></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
 
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Enviar" %>
+    <%= f.submit "Actualizar partido" %>
   </div>
 
 

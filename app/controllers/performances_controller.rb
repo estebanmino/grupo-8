@@ -1,6 +1,7 @@
 class PerformancesController < ApplicationController
+  include Secured
   before_action :set_performance, only: [:show, :edit, :update, :destroy]
-
+  before_action :is_admin_logged_in, only: %i[index show new edit create update destroy]
   # GET /performances
   # GET /performances.json
   def index
@@ -56,7 +57,7 @@ class PerformancesController < ApplicationController
   def destroy
     @performance.destroy
     respond_to do |format|
-      format.html { redirect_to performances_url, notice: 'Performance was successfully destroyed.' }
+      format.html { redirect_to :back, notice: 'Performance was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
