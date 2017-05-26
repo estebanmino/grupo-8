@@ -63,8 +63,7 @@ class TournamentsController < ApplicationController
     division = Division.find(params[:division_id])
     @tournament = division.tournaments.find(params[:id])
     teams = @tournament.teams.pluck(:id)
-    p "LOS TEAMS"
-    p teams
+    
 
 
     date1 = params[:date1]["Fecha1(1i)"]+"-"+params[:date1]["Fecha1(2i)"].rjust(2, '0')+

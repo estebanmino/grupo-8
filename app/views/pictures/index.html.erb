@@ -19,8 +19,13 @@
 
         <p><%= picture.comment %></p>
         <td><%= picture.date %></td>
-        <td class="gallery_td"><%= link_to 'Edit', edit_picture_path(picture),class: 'new-button' %></td>
-        <td class="gallery_td"><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' },class: 'new-button' %></td>
+
+        <% if is_admin_logged_in? %>
+          <td class="gallery_td"><%= link_to 'Edit', edit_picture_path(picture),class: 'new-button' %></td>
+          <td class="gallery_td"><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' },class: 'new-button' %></td>
+
+        <% end %>
+
 
       </div>
 
@@ -36,8 +41,10 @@
 </div>
 <br>
 <div class="final_gallery">
-
-
+  <% if is_admin_logged_in? %>
     <%= link_to 'New Picture', new_picture_path  ,id: 'bottom_button',class: 'new-button'%>
+  <% end %>
+
+
 
 </div>

@@ -1,4 +1,6 @@
 class PicturesController < ApplicationController
+  include Secured
+  before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
   before_action :set_picture, only: [:show, :edit, :update, :destroy]
 
   # GET /pictures

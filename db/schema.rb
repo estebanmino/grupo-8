@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170514200501) do
+ActiveRecord::Schema.define(version: 20170526001621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170514200501) do
     t.integer  "visit_team_id"
     t.integer  "home_team_id"
     t.integer  "tournament_id"
+    t.integer  "Datenum"
     t.index ["home_team_id"], name: "index_matches_on_home_team_id", using: :btree
     t.index ["tournament_id"], name: "index_matches_on_tournament_id", using: :btree
     t.index ["visit_team_id"], name: "index_matches_on_visit_team_id", using: :btree
@@ -94,10 +95,10 @@ ActiveRecord::Schema.define(version: 20170514200501) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",                          null: false
-    t.integer  "points"
-    t.integer  "won"
-    t.integer  "lost"
-    t.integer  "tie"
+    t.integer  "points",            default: 0
+    t.integer  "won",               default: 0
+    t.integer  "lost",              default: 0
+    t.integer  "tie",               default: 0
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "logo_file_name"
