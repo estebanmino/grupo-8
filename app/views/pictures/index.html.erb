@@ -12,9 +12,6 @@
 
         <a class = "foto" href= pictures/<%=picture.id%> ><%=image_tag picture.image.url(:thumb) %></a>
 
-
-
-
         <div class="image_desc">
 
         <p><%= picture.comment %></p>
@@ -29,14 +26,10 @@
 
       </div>
 
-
-
         </div>
 
 
     <% end %>
-
-
 
 </div>
 <br>
@@ -44,7 +37,3 @@
   <% if is_admin_logged_in? %>
     <%= link_to 'New Picture', new_picture_path  ,id: 'bottom_button',class: 'new-button'%>
   <% end %>
-
-
-
-</div>
