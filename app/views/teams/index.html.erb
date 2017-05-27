@@ -20,16 +20,15 @@
       <tbody>
         <% division.teams.each do |team| %>
           <tr>
-            <td><%= link_to team.name, team,class: 'black-button' %></td>
+            <td><%= link_to team.name, team %></td>
             <td><%= image_tag team.logo.url(:thumb) %></td>
-
-
-
-
-            <% if is_admin_logged_in? %>
-              <td><%= link_to 'Edit', edit_team_path(team) %></td>
-              <td><%= link_to 'Destroy', team, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
+            <td>
+              <%= link_to 'Ir a equipo', team, class: 'btn btn-primary' %>
+              <% if is_admin_logged_in? %>
+                <%= link_to 'Editar', edit_team_path(team), class: 'btn btn-primary' %>
+                <%= link_to 'Eliminar', team, class: 'btn btn-primary', method: :delete,  data: { confirm: 'Are you sure?' } %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
