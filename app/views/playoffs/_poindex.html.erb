@@ -1,0 +1,103 @@
+<%playoffs = Tournament.all.where(playoff: true )%>
+
+
+<div class="tab">
+<%default = true%>
+<%clase = "tablinks defaultOpen"%>
+<%for i in playoffs%>
+<%a = "playoff"+ i.id.to_s + " tabcontent"%>
+
+<button class="<%=clase%>" data-tab=<%=a%> ><%=i.name%></button>
+<%if default%>
+<%default = false%>
+<%clase = "tablinks"%>
+
+<%end%>
+<%end%>
+</div>
+
+<%for i in playoffs%>
+<%teams = i.teams%>
+<%a = "playoff"+ i.id.to_s + " tabcontent"%>
+<main class= "<%=a%>" id="tournament">
+	<ul class="round round-1">
+		<li class="spacer">&nbsp;</li>
+
+		<li class="game game-top winner"><%=teams[0].name%> <span>-</span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom "><%=teams[7].name%> <span>-</span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+		<li class="game game-top winner"><%=teams[1].name%><span>-</span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom "><%=teams[6].name%><span>-</span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+		<li class="game game-top "><%=teams[4].name%><span>-</span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom winner"><%=teams[3].name%><span>-</span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+		<li class="game game-top winner"><%=teams[5].name%> <span>-</span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom "><%=teams[2].name%> <span>-</span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+
+		<li class="spacer">&nbsp;</li>
+
+
+		<li id="Sep-cuartos" class="game game-spacer">&nbsp;</li>
+
+
+		<li class="spacer">&nbsp;</li>
+
+
+		<li class="spacer">&nbsp;</li>
+
+	</ul>
+	<ul class="round round-2">
+		<li class="spacer">&nbsp;</li>
+
+		<li class="game game-top winner">Semifinalista 1 <span>-</span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom ">Semifinalista 2 <span>-</span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+		<li class="game game-top winner">Semifinalista 3 <span>-</span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom ">Semifinalista 4 <span>-</span></li>
+
+
+		<li id="Sep-semis" class="game game-spacer">&nbsp;</li>
+
+
+		<li class="spacer">&nbsp;</li>
+	</ul>
+	<ul class="round round-3">
+		<li class="spacer">&nbsp;</li>
+
+		<li class="game game-top winner">Finalista 1 <span>-</span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom ">Finalista 2 <span>-</span></li>
+
+		<li id="Sep-final" class="game game-spacer">&nbsp;</li>
+
+	</ul>
+	<ul class="round round-4">
+		<li class="spacer">&nbsp;</li>
+
+		<li class="game game-top winner">Campeón <span>-</span></li>
+		<li id="Sep-winner" class="game game-spacer">&nbsp;</li>
+
+
+
+	</ul>
+</main>
+
+<%end%>
