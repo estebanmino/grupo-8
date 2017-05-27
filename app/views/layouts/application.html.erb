@@ -12,17 +12,10 @@
 
 
     <%= render "layouts/header" %>
-    <main>
-      <% [:alert, :notice].each do |flash_type| %>
-        <% if (flash_message = flash[flash_type]).present? %>
-          <div class="<%= flash_type %>"><%= flash_message %></div>
-        <% end %>
-      <% end %>
-      <%= yield %>
-    </main>
 
+    <%= yield %>
     <footer>
-
+      
       <div id="project">© LigaMC 2017 Powered by MCprod</div>
 
     </footer>

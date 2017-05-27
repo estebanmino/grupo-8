@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   resources :users
 
   resources :invitations
+
+  resources :playoffs, only: [:index, :new, :create]
+  post '/playoffs/new', to: 'playoffs#new_create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 
@@ -23,7 +26,7 @@ Rails.application.routes.draw do
 
   post '/invitations/create', to: 'invitations#create'
   post '/performances/create', to: 'performances#create'
-  
+
   get '/home', to: 'statics#home'
   get '/table', to: 'statics#table', as: 'table'
   get '/scorers', to: 'statics#scorers', as: 'scorers'

@@ -28,7 +28,21 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.json
   def create
+
     @team = Team.new(team_params)
+
+    tournament_id = params[:tournament_id]
+    b = Division.find(@team.division_id).tournaments.pluck(:id)
+
+
+
+    if b.include?(tournament_id.to_i)
+      
+      @team.tournaments <<  Tournament.find(params[:tournament_id])
+
+
+
+
 
     respond_to do |format|
       if @team.save
@@ -39,6 +53,11 @@ class TeamsController < ApplicationController
         format.json { render json: @team.errors, status: :unprocessable_entity }
       end
     end
+  else
+    redirect_to new_team_path, flash: {notice: "No se creó el equipo, el torneo no pertenece a la división!"}
+      end
+
+
   end
 
   # PATCH/PUT /teams/1
@@ -73,6 +92,6 @@ class TeamsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
-      params.require(:team).permit(:name, :points, :won, :lost, :tie, :logo, :tournament_id, :division_id)
+      params.require(:team).permit(:name, :points, :won, :lost, :tie, :logo, :division_id)
     end
 end

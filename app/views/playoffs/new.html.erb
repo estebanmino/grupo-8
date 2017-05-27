@@ -1,0 +1,56 @@
+<h1>Nuevo Playoff </h1>
+
+<%= form_tag(method: "post") do %>
+
+
+<div class="field">
+  <%= label_tag :division, "Division del playoff" %>
+  <%= select_tag :division, options_for_select(Division.all.map{ |c| [c.name, c.id] })  %>
+</div>
+
+
+<div class="field">
+  <%= label_tag(:date1, "Fecha de cuartos de final") %>
+  <%= date_select(:date1,"Ronda1", selected: Date.today) %>
+</div>
+
+
+<div class="field">
+  <%= label_tag(:time1, "Hora primeras llaves") %>
+  <%= time_select(:time1,"Hora1") %>
+</div>
+
+
+<div class="field">
+  <%= label_tag(:time2, "Hora segundas llaves") %>
+  <%= time_select(:time2,"Hora2") %>
+</div>
+
+<div class="field">
+  <%= label_tag(:date2, "Fecha de Semifinal") %>
+  <%= date_select(:date2,"Ronda2", selected: Date.today) %>
+</div>
+
+
+
+<div class="field">
+    <%= label_tag(:time3, "Hora de semifinales") %>
+    <%= time_select(:time3,"Hora3") %>
+</div>
+
+<div class="field">
+  <%= label_tag(:date3, "Fecha de la final") %>
+  <%= date_select(:date3,"Final", selected: Date.today) %>
+</div>
+
+
+
+<div class="field">
+  <%= label_tag(:time4, "Hora de la final") %>
+  <%= time_select(:time4,"Hora4") %>
+  </div>
+
+<div class="field">
+  <%= submit_tag("Crear") %>
+  </div>
+<% end %>

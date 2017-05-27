@@ -10,6 +10,7 @@
 <table class="tabla_pos">
   <thead>
     <tr>
+      <th>Jornada</th>
       <th>Fecha</th>
       <th>Hora</th>
       <th>Local</th>
@@ -24,8 +25,9 @@
 
   <tbody>
     <% @matches.each do |match| %>
+      <% if !match.playoff %>
       <tr>
-
+        <td><%= match.Datenum %></td>
         <td><%= match.date %></td>
         <td><%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs</td>
         <td><%= Team.find_by_id(match.home_team_id).name %></td>
@@ -40,6 +42,7 @@
           <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end  %>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

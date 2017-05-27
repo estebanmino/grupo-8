@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170526001621) do
+ActiveRecord::Schema.define(version: 20170527004251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,12 +48,13 @@ ActiveRecord::Schema.define(version: 20170526001621) do
     t.integer  "visitor_goals"
     t.integer  "local_goals"
     t.boolean  "played"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "visit_team_id"
     t.integer  "home_team_id"
     t.integer  "tournament_id"
     t.integer  "Datenum"
+    t.boolean  "playoff",       default: false
     t.index ["home_team_id"], name: "index_matches_on_home_team_id", using: :btree
     t.index ["tournament_id"], name: "index_matches_on_tournament_id", using: :btree
     t.index ["visit_team_id"], name: "index_matches_on_visit_team_id", using: :btree
@@ -119,12 +120,13 @@ ActiveRecord::Schema.define(version: 20170526001621) do
   end
 
   create_table "tournaments", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.string   "description", null: false
-    t.string   "season",      null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",                        null: false
+    t.string   "description",                 null: false
+    t.string   "season",                      null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "division_id"
+    t.boolean  "playoff",     default: false
     t.index ["division_id"], name: "index_tournaments_on_division_id", using: :btree
   end
 

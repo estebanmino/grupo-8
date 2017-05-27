@@ -1,18 +1,18 @@
-<h1>Torneos de la división:</h1>
-<h2><%=@division.name%></h2>
+<h1>Listing tournaments</h1>
 
 <table>
   <tr>
-    <th>Nombre del torneo</th>
-    <th>Descripción</th>
-    <th>Temporada</th>
-    
+    <th>Name</th>
+    <th>Description</th>
+    <th>Season</th>
+    <th>Division</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
 <% @tournaments.each do |tournament| %>
+  <% if !tournament.playoff %>
   <tr>
     <td><%= tournament.name %></td>
     <td><%= tournament.description %></td>
@@ -27,6 +27,7 @@
       <td><%= link_to 'Destroy', [tournament.division, tournament], :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
+<% end %>
 <% end %>
 </table>
 

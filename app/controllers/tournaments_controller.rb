@@ -51,6 +51,14 @@ class TournamentsController < ApplicationController
   end
 
   def fixture
+    division = Division.find(params[:division_id])
+    @tournament = division.tournaments.find(params[:id])
+    teams = @tournament.teams.pluck(:id)
+    if teams.length > 0
+      redirect_to([@tournament.division, @tournament], :notice => 'No se pudo crear el fixture inicial, ya existen partidos creados!')
+
+
+    end
 
 
   end
@@ -63,8 +71,6 @@ class TournamentsController < ApplicationController
     division = Division.find(params[:division_id])
     @tournament = division.tournaments.find(params[:id])
     teams = @tournament.teams.pluck(:id)
-    
-
 
     date1 = params[:date1]["Fecha1(1i)"]+"-"+params[:date1]["Fecha1(2i)"].rjust(2, '0')+
     "-"+params[:date1]["Fecha1(3i)"].rjust(2, '0')
@@ -107,6 +113,8 @@ class TournamentsController < ApplicationController
     create_fix(teams, division, @tournament, dates, times)
 
     redirect_to home_path
+
+
   end
 
 
