@@ -96,10 +96,10 @@ ActiveRecord::Schema.define(version: 20170527004251) do
 
   create_table "teams", force: :cascade do |t|
     t.string   "name",                          null: false
-    t.integer  "points",            default: 0
-    t.integer  "won",               default: 0
-    t.integer  "lost",              default: 0
-    t.integer  "tie",               default: 0
+    t.integer  "points"
+    t.integer  "won"
+    t.integer  "lost"
+    t.integer  "tie"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.string   "logo_file_name"
