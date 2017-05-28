@@ -1,3 +1,20 @@
 // Place all the styles related to the Divisions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.panel-div {
+  display: inline-block;
+  height: 100%;
+  width: 30%;
+  position: relative;
+  padding: 0 5px 0 5px;
+  background: white;
+  margin: 1%;
+
+  .links {
+    text-align: right;
+    border-top: 1px solid #cfcfcf;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}

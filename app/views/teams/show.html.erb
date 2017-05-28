@@ -4,45 +4,68 @@
 
 <% @team.update_stats %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @team.name %>
-</p>
 
+<div class="team-info">
 
+  <div class="basic">
+    <h1><%= @team.name %></h1>
+    <h3><%= @team.division.name %></h3>
+  </div>
+  <div class="box-wrapper">
+    <div class="box">
+      <h3>Puntos</h3>
+      <h1><%= @team.points %></h1>
+    </div>
+    <div class="box">
+      <h3>Ganados</h3>
+      <h1><%= @team.won %></h1>
+    </div>
+    <div class="box">
+      <h3>Perdidos</h3>
+      <h1><%= @team.lost %></h1>
+    </div>
+    <div class="box">
+      <h3>Empatados</h3>
+      <h1><%= @team.tie %></h1>
+    </div>
+    <div class="box">
+      <h3>Goles</h3>
+      <h1><%= @team.gf %>:<%= @team.ga %></h1>
+    </div>
+  </div>
+</div>
 
-
-
-<p>
-  <strong>Puntos:</strong>
-  <%= @team.points %>
-</p>
-
-<p>
-  <strong>Partidos Ganados:</strong>
-  <%= @team.won %>
-</p>
-
-<p>
-  <strong>Partidos Perdidos:</strong>
-  <%= @team.lost %>
-</p>
-
-<p>
-  <strong>Partidos Empatados:</strong>
-  <%= @team.tie %>
-</p>
-
-<p><strong>Jugadores:</strong></p>
-<% @team.users.each do |user| %>
-  <p> - <%= user.full_name %></p>
-<% end %>
 
 <% captain = captain(@team)%>
-<% if captain != nil %>
-  <p><strong>Capitán:</strong></p>
-  <p> - <%= captain.full_name %>
-<% elsif is_admin_logged_in? %>
+
+<table class="players">
+  <thead>
+    <tr>
+      <th>Jugador</th>
+      <th>Goles</th>
+      <th>Amarillas</th>
+      <th>Rojas</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for scorer in @team.users.sort { |b,a| a[:goals] <=> b[:goals] } %>
+      <tr>
+          <% if scorer != nil %>
+            <% if scorer.is_captain? %>
+              <td><%=scorer.full_name%> (Capitán)</td>
+            <% else %>
+              <td><%=scorer.full_name%></td>
+            <% end %>
+            <td><%=scorer.goals%></td>
+            <td><%=scorer.yellow_cards%></td>
+            <td><%=scorer.red_cards%></td>
+          <% end %>
+      </tr>
+      <% end %>
+  </tbody>
+</table>
+
+<% if is_admin_logged_in? && !captain %>
 <p> Invitar a capitán: </p>
   <%= render 'invitation', team: @team, is_captain: true %>
 <% end %>
@@ -56,5 +79,4 @@
 <% if is_admin_logged_in? %>
   <%= link_to 'Editar', edit_team_path(@team) %> |
 <% end %>
-<%= link_to 'Atrás', teams_path %>
 </p>

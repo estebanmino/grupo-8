@@ -6,6 +6,9 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :email, null: false
       t.string :password, null: false
       t.string :position, null: false
+      t.integer :goals, null: false
+      t.integer :yellow_cards, null: false
+      t.integer :red_cards, null: false
       t.boolean :is_admin, null: false, default: false
       t.boolean :is_captain, null: false, default: false
 

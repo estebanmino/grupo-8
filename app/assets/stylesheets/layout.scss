@@ -19,49 +19,6 @@ body {
   font-family: sans-serif;
 }
 
-.panel-div {
-  display: inline-block;
-  height: 100%;
-  width: 30%;
-  position: relative;
-  margin-left: 0;
-  padding: 0 5px 0 5px;
-  background: white;
-  .links {
-    text-align: right;
-    border-top: 1px solid #cfcfcf;
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
-}
-
-.panel-match {
-  display: inline-block;
-  height: 80px;
-  width: 1150px;
-  position: relative;
-  margin: 10px 0 10px 0;
-  padding: 10px;
-  background: white;
-  .date {
-    width: 100%;
-    text-align: center;
-    margin: 10px;
-  }
-  .result {
-    width: 100%;
-    text-align: center;
-    margin: 10px;
-    font-size: 120%;
-    .links {
-      text-align: right;
-      position: absolute;
-    }
-  }
-
-
-}
-
 #pagewrapper {
   width: 1170px !important;
   background-color: #f1f1f1;
@@ -139,36 +96,3 @@ footer {
 
 
 /* ---- */
-
-
-.btn-primary {
-  padding: 8px 8px;
-  background-color: #cc0001;
-  color: #ffffff;
-  font-weight: bold;
-  text-align: center;
-  border: 1px solid #cc0001;
-  border-radius: 4px;
-}
-
-.btn-primary:hover {
-background-color: #950700;
-}
-
-.new-button, .edit-button {
- border-color: #818488;
- color: #818488;
- font: Sans-serif;
- margin-left: 10px;
-}
-
-.black-button {
- border-color: #2b3036;
- color: #2b3036;
- font: Sans-serif;
- margin-left: 10px;
-}
-
-.img_logo{
-  height: 120px;
-}

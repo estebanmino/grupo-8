@@ -45,6 +45,9 @@
     <% if @token != nil %>
       <%= hidden_field_tag :invitation_token, @token %>
     <% end %>
+    <%= hidden_field_tag :goals, value: 0 %>
+    <%= hidden_field_tag :yellow_cards, value: 0 %>
+    <%= hidden_field_tag :red_cards, value: 0 %>
 
     <div class="field">
       <%= f.submit "Enviar", class: 'btn btn-primary' %>

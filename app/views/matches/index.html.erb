@@ -4,8 +4,13 @@
 <h1>Partidos</h1>
 
 
-
+<% matchday = 0 %>
 <% @matches.each do |match| %>
+  <% if matchday != match.Datenum %>
+    <% matchday = match.Datenum %>
+    <h2>Jornada <%= match.Datenum %></h2>
+  <% end %>
+
   <% if !match.playoff %>
     <div class="panel-match">
       <div class="date">
@@ -16,10 +21,10 @@
 
       <div class="result">
         <%= Team.find_by_id(match.home_team_id).name %>
-        <%= match.local_goals %>:<%= match.visitor_goals %>
+        <%= match.local_goals %> : <%= match.visitor_goals %>
         <%= Team.find_by_id(match.visit_team_id).name %>
 
-        <div class="links">
+        <div class="btns">
           <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
           <% if is_admin_logged_in? %>
             <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>

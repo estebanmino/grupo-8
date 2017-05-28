@@ -83,3 +83,35 @@ div {
 label {
   display: block;
 }
+
+.btn-primary {
+  padding: 8px 8px;
+  background-color: #cc0001;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #cc0001;
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+background-color: #950700;
+}
+
+.new-button, .edit-button {
+ border-color: #818488;
+ color: #818488;
+ font: Sans-serif;
+ margin-left: 10px;
+}
+
+.black-button {
+ border-color: #2b3036;
+ color: #2b3036;
+ font: Sans-serif;
+ margin-left: 10px;
+}
+
+.img_logo{
+  height: 120px;
+}
