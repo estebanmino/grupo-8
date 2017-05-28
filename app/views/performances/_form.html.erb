@@ -24,7 +24,6 @@
 
 
 
-  <table>
     <td>
       <% if update %>
         <p>Jugó   </p>
@@ -67,17 +66,18 @@
       <% end %>
     </td>
 
+    <% if update %>
+      <td><%= link_to 'Eliminar información', @performance, class: 'btn btn-primary', method: :delete, data: { confirm: 'Estás seguro?' } %></td>
+    <% else %>
+      <td></td>
+    <% end %>
+
     <%= f.hidden_field :user_id, value: user.id %>
     <%= f.hidden_field :match_id, value: match.id %>
     <td>
-      <%= f.submit submt %>
+      <%= f.submit submt, class: 'btn btn-primary' %>
     </td>
 
-  <% if update %>
-    <td>
-      <td><button><%= link_to 'Eliminar información', @performance, method: :delete, data: { confirm: 'Estás seguro?' } %></button></td>
-    </td>
-  <% end %>
-  </table>
+
 
 <% end %>

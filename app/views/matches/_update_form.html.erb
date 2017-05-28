@@ -13,32 +13,44 @@
 
   <div class="field">
     <%= f.label :tournament_id, "Torneo" %>
-    <% f.text_field :tournament_id,  value:@match.tournament_id, :readonly => true %>
-    <%= @match.tournament.name %>
+    <div class="selections">
+      <%= @match.tournament.name %>
+      <% f.text_field :tournament_id,  value:@match.tournament_id, :readonly => true %>
+    </div>
   </div>
 
   <div class="field">
     <%= f.label :date, "Fecha" %>
-    <%= f.date_select :date %>
+    <div class="selections">
+      <%= f.date_select :date %>
+    </div>
   </div>
 
   <div class="field">
     <%= f.label :time, "Hora" %>
-    <%= f.time_select :time %>
+    <div class="selections">
+      <%= f.time_select :time %>
+    </div>
   </div>
 
   <div class="field">
     <%= f.label :played, "Jugado" %>
-    <%= f.select :played, options_for_select([["Si", true], ["No", false]] )  %>
-  </div>
+    <div class="selections">
+      <%= f.select :played, options_for_select([["Si", true], ["No", false]] )  %>
+    </div>
+</div>
 
   <h2>Equipo Local: </h2>
     <ul>
       <li>
         <% f.text_field :home_team_id,  value:@match.home_team_id, :readonly => true %>
         <%= @match.home_team.name %>
-        <%= f.label :local_goals, "Goles " %>
-        <%= f.select :local_goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map{ |c| [c, c] }, selected: @match.local_goals)  %>
+        <div class="field">
+          <%= f.label :local_goals, "Goles " %>
+            <div class="selections">
+            <%= f.select :local_goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map{ |c| [c, c] }, selected: @match.local_goals)  %>
+          </div>
+        </div>
       </li>
     </ul>
   <hr>
@@ -48,31 +60,33 @@
       <li>
         <% f.text_field :visit_team_id,  value:@match.visit_team_id, :readonly => true %>
         <%= @match.visit_team.name %>
-        <%= f.label :visitor_goals, "Goles " %>
-        <%= f.select :visitor_goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map{ |c| [c, c] }, selected: @match.visitor_goals)  %>
+        <div class="field">
+          <%= f.label :visitor_goals, "Goles " %>
+          <div class="selections">
+            <%= f.select :visitor_goals, options_for_select([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map{ |c| [c, c] }, selected: @match.visitor_goals)  %>
+          </div>
+        </div>
       </li>
     </ul>
   <hr>
-
-  <div class="actions">
-    <%= f.submit "Actualizar partido" %>
+  <div class="selections">
+    <%= f.submit "Actualizar partido", class: 'btn btn-primary' %>
   </div>
-
 <% end %>
 
 <% [['Equipo Local', @match.home_team],['Equipo Visitante', @match.visit_team]].each do |team| %>
+  <h2><%= team[1].name %></h2>
   <table>
-    <h2><%= team[1].name %></h2>
     <% team[1].users.each do |user| %>
       <tr>
-        <td><p><%= user.full_name %></p></td>
-        <td><p><%= user.team.id %></p></td>
+        <td><%= user.full_name %></td>
+        <td><%= user.team.id %></td>
         <% if !user.matches.find_by_id(@match.id) %>
           <% @performance =Performance.new %>
         <% else %>
           <% @performance = user.performances.find_by(match_id: @match.id) %>
         <% end %>
-        <td><%= render 'performances/form', performance: @performance, user: user, match: @match%></td>
+        <%= render 'performances/form', performance: @performance, user: user, match: @match%>
       </tr>
     <% end %>
   </table>

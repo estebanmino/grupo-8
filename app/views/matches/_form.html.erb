@@ -19,7 +19,6 @@
   <div class="field">
     <%= f.label :visit_team_id, "Equipo visitante" %>
     <%= f.select :visit_team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
-
   </div>
 
   <div class="field">
