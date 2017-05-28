@@ -98,6 +98,35 @@
 
 
 	</ul>
-</main>
 
+
+
+
+</main>
+<%for match in i.matches%>
+
+    <div class="panel-match">
+      <div class="date">
+        <%= match.Datenum %>
+        <%= match.date.day %>/<%= match.date.month %>/<%= match.date.year %>
+        <%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs
+      </div>
+
+      <div class="result">
+        <%= Team.find_by_id(match.home_team_id).name %>
+        <%= match.local_goals %>:<%= match.visitor_goals %>
+        <%= Team.find_by_id(match.visit_team_id).name %>
+
+        <div class="links">
+          <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
+          <% if is_admin_logged_in? %>
+            <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
+            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end  %>
+        </div>
+      </div>
+
+  
+  </div>
+<%end%>
 <%end%>
