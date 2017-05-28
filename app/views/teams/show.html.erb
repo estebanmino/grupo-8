@@ -52,9 +52,9 @@
       <tr>
           <% if scorer != nil %>
             <% if scorer.is_captain? %>
-              <td><%=scorer.full_name%> (Capitán)</td>
+              <td><%= link_to scorer.name, scorer %> (Capitán)</td>
             <% else %>
-              <td><%=scorer.full_name%></td>
+              <td><%= link_to scorer.name, scorer %></td>
             <% end %>
             <td><%=scorer.goals%></td>
             <td><%=scorer.yellow_cards%></td>
@@ -77,6 +77,6 @@
 
 <p>
 <% if is_admin_logged_in? %>
-  <%= link_to 'Editar', edit_team_path(@team), class: 'btn btn-primary' %> 
+  <%= link_to 'Editar', edit_team_path(@team), class: 'btn btn-primary' %>
 <% end %>
 </p>

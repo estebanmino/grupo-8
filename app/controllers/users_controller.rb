@@ -35,6 +35,9 @@ class UsersController < ApplicationController
     invitation = Invitation.find_by_token(token)
     @user.is_captain = invitation.is_captain
     @user.team_id = invitation.team_id
+    @user.goals = 0
+    @user.yellow_cards = 0
+    @user.red_cards = 0
     respond_to do |format|
       if @user.save
         log_in @user
