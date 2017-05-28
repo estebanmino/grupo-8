@@ -54,7 +54,8 @@ class TournamentsController < ApplicationController
     division = Division.find(params[:division_id])
     @tournament = division.tournaments.find(params[:id])
     teams = @tournament.teams.pluck(:id)
-    if teams.length > 0
+    matches = @tournament.matches
+    if matches.length > 0
       redirect_to([@tournament.division, @tournament], :notice => 'No se pudo crear el fixture inicial, ya existen partidos creados!')
 
 
