@@ -43,16 +43,31 @@ textarea {
   margin: 0;
 }
 
+input {
+  height: 36px;
+  width: 70%;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  margin: 0
+}
+
+.invitation-form {
+  width: 100%;
+  display: inline-block;
+  input {
+    width: 45%;
+    margin-right: 55px;
+  }
+  input .btn {
+    width: 20%;
+  }
+
+}
+
 .field {
   margin-bottom: 25px;
 
-  input {
-    height: 36px;
-    width: 70%;
-    border: 1px solid #bbb;
-    border-radius: 4px;
-    margin: 0
-  }
+
 
   label, .label {
     color: #555;

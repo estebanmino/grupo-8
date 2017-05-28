@@ -41,6 +41,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         log_in @user
+        invitation.destroy
         format.html { redirect_to home_path, notice: 'Te damos la bienvenida a LaLiga.' }
           # format.json { render :show, status: :created, location: @user }
       else
