@@ -22,7 +22,7 @@
 <main class= "<%=a%>" id="tournament">
 	<ul class="round round-1">
 		<li class="spacer">&nbsp;</li>
-		<%partido1 = Match.all.where(playoff: true).first%>
+		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).first%>
 		<%gol1 = partido1.local_goals%>
 		<%gol2 = partido1.visitor_goals%>
 		<%team1 = Team.find(partido1.home_team_id).name%>
@@ -34,7 +34,7 @@
 
 		<li class="spacer">&nbsp;</li>
 
-		<%partido2 = Match.all.where(playoff: true).second%>
+		<%partido2 = Match.all.where(playoff: true).where(tournament_id: i.id).second%>
 		<%gol1 = partido2.local_goals%>
 		<%gol2 = partido2.visitor_goals%>
 		<%team1 = Team.find(partido2.home_team_id).name%>
@@ -46,7 +46,7 @@
 
 		<li class="spacer">&nbsp;</li>
 
-		<%partido3 = Match.all.where(playoff: true).third%>
+		<%partido3 = Match.all.where(playoff: true).where(tournament_id: i.id).third%>
 		<%gol1 = partido3.local_goals%>
 		<%gol2 = partido3.visitor_goals%>
 		<%team1 = Team.find(partido3.home_team_id).name%>
@@ -58,7 +58,7 @@
 
 		<li class="spacer">&nbsp;</li>
 
-		<%partido4 = Match.all.where(playoff: true).third%>
+		<%partido4 = Match.all.where(playoff: true).where(tournament_id: i.id).third%>
 		<%gol1 = partido4.local_goals%>
 		<%gol2 = partido4.visitor_goals%>
 		<%team1 = Team.find(partido4.home_team_id).name%>
@@ -86,7 +86,7 @@
 	<ul class="round round-2">
 		<li class="spacer">&nbsp;</li>
 
-		<%partido1 = Match.all.where(playoff: true).where(Datenum: 2).first%>
+		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 2).first%>
 		<%if partido1 != nil%>
 		<%gol1 = partido1.local_goals%>
 		<%gol2 = partido1.visitor_goals%>
@@ -105,7 +105,7 @@
 
 		<li class="spacer">&nbsp;</li>
 
-		<%partido1 = Match.all.where(playoff: true).where(Datenum: 2).second%>
+		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 2).second%>
 		<%if partido1 != nil%>
 		<%gol1 = partido1.local_goals%>
 		<%gol2 = partido1.visitor_goals%>
@@ -132,7 +132,7 @@
 	<ul class="round round-3">
 		<li class="spacer">&nbsp;</li>
 
-		<%partido7 = Match.all.where(playoff: true).where(Datenum: 3).first%>
+		<%partido7 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 3).first%>
 		<%if partido7 != nil%>
 		<%gol1 = partido7.local_goals%>
 		<%gol2 = partido7.visitor_goals%>
@@ -172,7 +172,10 @@
 
 	</ul>
 
+	<% if is_admin_logged_in? %>
 
+	<%= link_to 'Borrar Playoff', [i.division, i], :confirm => 'Are you sure?', :method => :delete %>
+	<% end  %>
 
 
 </main>
@@ -205,12 +208,7 @@
   </div>
 	  </div>
 <%end%>
-<% if is_admin_logged_in? %>
 
-
-
-<%= link_to 'Borrar Playoff', [i.division, i], :confirm => 'Are you sure?', :method => :delete %> |
-<% end  %>
 <%end%>
 
 <% if is_admin_logged_in? %>
