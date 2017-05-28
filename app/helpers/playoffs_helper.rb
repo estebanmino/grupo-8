@@ -20,6 +20,8 @@ module PlayoffsHelper
       j.tournaments << playoff
     end
 
+    p teams1.pluck(:name)
+    p teams2.pluck(:name)
 
 
     p1 = Match.new(:date => fecha1, :time => time1, :visitor_goals => 0,
@@ -31,12 +33,12 @@ module PlayoffsHelper
     teams2[2].id, :tournament_id => playoff.id, :Datenum => 1, :playoff => true)
 
     p3 = Match.new(:date => fecha1, :time => time1, :visitor_goals => 0,
-    :local_goals => 0, :played => false, :visit_team_id => teams1[2].id, :home_team_id =>
-    teams2[1].id, :tournament_id => playoff.id, :Datenum => 1, :playoff => true)
+    :local_goals => 0, :played => false, :visit_team_id => teams2[0].id, :home_team_id =>
+    teams1[3].id, :tournament_id => playoff.id, :Datenum => 1, :playoff => true)
 
     p4 = Match.new(:date => fecha1, :time => time1, :visitor_goals => 0,
-    :local_goals => 0, :played => false, :visit_team_id => teams1[3].id, :home_team_id =>
-    teams2[0].id, :tournament_id => playoff.id, :Datenum => 1, :playoff => true)
+    :local_goals => 0, :played => false, :visit_team_id => teams2[1].id, :home_team_id =>
+    teams1[2].id, :tournament_id => playoff.id, :Datenum => 1, :playoff => true)
 
     p1.save
     p2.save

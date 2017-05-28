@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   resources :playoffs, only: [:index, :new, :create]
   post '/playoffs/new', to: 'playoffs#new_create'
+  get '/playoffs/new_match', to: 'playoffs#new_match'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 

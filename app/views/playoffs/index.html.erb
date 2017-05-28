@@ -8,5 +8,6 @@
 <%= render 'statindex' %>
 <%end%>
 
-
+<% if is_admin_logged_in? %>
 <%= link_to 'Crear Playoff', new_playoff_path %>
+<%end%>
