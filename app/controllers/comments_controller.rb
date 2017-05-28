@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
-  before_action :belongs_to__current_user?, only: %i[update create destroy] 
+  before_action :belongs_to__current_user?, only: %i[update destroy]
   # GET /comments
   # GET /comments.json
   def index
@@ -30,6 +30,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
+        Mailer.comment_mail(@comment.user, @comment.post.user, @comment.content, @comment.post).deliver_now
         format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
       else
