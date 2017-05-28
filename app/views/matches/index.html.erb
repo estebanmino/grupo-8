@@ -1,53 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<div class="table_head">
 
-<h1 class="table_text">Partidos</h1>
+<h1>Partidos</h1>
 
 
-</div>
 
-<table class="tabla_pos">
-  <thead>
-    <tr>
-      <th>Jornada</th>
-      <th>Fecha</th>
-      <th>Hora</th>
-      <th>Local</th>
-      <th>    </th>
-      <th>Visitante</th>
-      <th>Goles Local</th>
-      <th>Goles Visitante</th>
+<% @matches.each do |match| %>
+  <% if !match.playoff %>
+    <div class="panel-match">
+      <div class="date">
+        <%= match.Datenum %>
+        <%= match.date.day %>/<%= match.date.month %>/<%= match.date.year %>
+        <%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs
+      </div>
 
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="result">
+        <%= Team.find_by_id(match.home_team_id).name %>
+        <%= match.local_goals %>:<%= match.visitor_goals %>
+        <%= Team.find_by_id(match.visit_team_id).name %>
 
-  <tbody>
-    <% @matches.each do |match| %>
-      <% if !match.playoff %>
-      <tr>
-        <td><%= match.Datenum %></td>
-        <td><%= match.date %></td>
-        <td><%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs</td>
-        <td><%= Team.find_by_id(match.home_team_id).name %></td>
-        <td><strong>V/S</strong></td>
-        <td><%= Team.find_by_id(match.visit_team_id).name %></td>
+        <div class="links">
+          <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
+          <% if is_admin_logged_in? %>
+            <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
+            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end  %>
+        </div>
+      </div>
 
-        <td><%= match.local_goals %></td>
-        <td><%= match.visitor_goals %></td>
-        <td><%= link_to 'Show', match %></td>
-        <% if is_admin_logged_in? %>
-          <td><%= link_to 'Edit', edit_match_path(match) %></td>
-          <td><%= link_to 'Destroy', match, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end  %>
-      </tr>
-      <% end %>
     <% end %>
-  </tbody>
-</table>
+  </div>
+<% end %>
 
-<br>
 
 <% if is_admin_logged_in? %>
   <%= link_to 'New Match', new_match_path %>

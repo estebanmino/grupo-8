@@ -25,17 +25,17 @@
 
 		<li class="game game-top winner"><%=teams[0].name%> <span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom "><%=teams[7].name%> <span>-</span></li>
+		<li class="game game-bottom winner"><%=teams[7].name%> <span>-</span></li>
 
 		<li class="spacer">&nbsp;</li>
 
 		<li class="game game-top winner"><%=teams[1].name%><span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom "><%=teams[6].name%><span>-</span></li>
+		<li class="game game-bottom winner"><%=teams[6].name%><span>-</span></li>
 
 		<li class="spacer">&nbsp;</li>
 
-		<li class="game game-top "><%=teams[4].name%><span>-</span></li>
+		<li class="game game-top winner"><%=teams[4].name%><span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
 		<li class="game game-bottom winner"><%=teams[3].name%><span>-</span></li>
 
@@ -43,7 +43,7 @@
 
 		<li class="game game-top winner"><%=teams[5].name%> <span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom "><%=teams[2].name%> <span>-</span></li>
+		<li class="game game-bottom winner"><%=teams[2].name%> <span>-</span></li>
 
 		<li class="spacer">&nbsp;</li>
 
@@ -65,13 +65,13 @@
 
 		<li class="game game-top winner">Semifinalista 1 <span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom ">Semifinalista 2 <span>-</span></li>
+		<li class="game game-bottom winner">Semifinalista 2 <span>-</span></li>
 
 		<li class="spacer">&nbsp;</li>
 
 		<li class="game game-top winner">Semifinalista 3 <span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom ">Semifinalista 4 <span>-</span></li>
+		<li class="game game-bottom winner">Semifinalista 4 <span>-</span></li>
 
 
 		<li id="Sep-semis" class="game game-spacer">&nbsp;</li>
@@ -84,7 +84,7 @@
 
 		<li class="game game-top winner">Finalista 1 <span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom ">Finalista 2 <span>-</span></li>
+		<li class="game game-bottom winner">Finalista 2 <span>-</span></li>
 
 		<li id="Sep-final" class="game game-spacer">&nbsp;</li>
 
@@ -103,11 +103,13 @@
 
 
 </main>
-<%for match in i.matches%>
 
+<%fase = {"1"=>"Cuartos de final", "2"=>"Semifinal", "3"=>"Final"}%>
+<%for match in i.matches%>
+<div class= "<%=a%>" >
     <div class="panel-match">
       <div class="date">
-        <%= match.Datenum %>
+        <%= fase[match.Datenum.to_s] %>
         <%= match.date.day %>/<%= match.date.month %>/<%= match.date.year %>
         <%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs
       </div>
@@ -126,7 +128,8 @@
         </div>
       </div>
 
-  
+
   </div>
+	  </div>
 <%end%>
 <%end%>

@@ -4,65 +4,53 @@
 
 <% @divisions.each do |division| %>
 
-<div class="table_head">
+
+  <h1 class = "table_text"><%=division.name%></h1>
+
+    <% for tournament in division.tournaments %>
+      <h2><%=tournament.name%></h2>
+
+      <div id="tablewrapper">
+
+        <table>
+          <thead>
+            <tr>
+              <th class="team">Lugar</th>
+              <th>Equipo</th>
+              <th>Jugados</th>
+              <th>Ganados</th>
+              <th>Empatados</th>
+              <th>Goles</th>
+              <th>Diferencia</th>
+              <th>Puntos</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <%teams = []%>
+            <% for team in tournament.teams %>
+              <% team.update_stats%>
+              <% teams << team%>
+
+            <%end%>
+            <%lugar = 0%>
 
 
-<h1 class = "table_text"><%=division.name%></h1>
-
-<% for tournament in division.tournaments %>
-  <h2 class= "table_text"><%=tournament.name%></h2>
-
-</div>
-
-<table class = "tabla_pos">
-  <thead>
-    <tr>
-      <th>Lugar</th>
-      <th>Equipo</th>
-      <th>PJ</th>
-      <th>PG</th>
-      <th>PE</th>
-      <th>GF</th>
-      <th>GA</th>
-      <th>DIFF</th>
-      <th>PTS</th>
-
-    </tr>
-  </thead>
-
-  <tbody>
-    <%teams = []%>
-    <% for team in tournament.teams %>
-      <% team.update_stats%>
-      <% teams << team%>
-
-    <%end%>
-    <%lugar = 0%>
-
-
-    <% for team in teams.sort_by{|x| [-x.points, -(x.gf - x.ga)]} %>
-    <%lugar += 1%>
-
-
-
-      <tr>
-
-        <td><%=lugar%></td>
-        <td><%= team.name %></td>
-        <td><%= team.won + team.lost + team.tie%></td>
-        <td><%= team.won %></td>
-        <td><%= team.tie %></td>
-        <td><%= team.gf %></td>
-        <td><%= team.ga %></td>
-        <td><%= team.gf - team.ga %></td>
-        <td><%= team.points %></td>
-
-      </tr>
-
-      <% end %>
-
-
-  </tbody>
-</table>
-<% end %>
+            <% for team in teams.sort_by{|x| [-x.points, -(x.gf - x.ga)]} %>
+              <%lugar += 1%>
+              <tr>
+                <td><%=lugar%></td>
+                <td><%= team.name %></td>
+                <td><%= team.won + team.lost + team.tie%></td>
+                <td><%= team.won %></td>
+                <td><%= team.tie %></td>
+                <td><b><%= team.gf %>:<%= team.ga %></b></td>
+                <td><%= team.gf - team.ga %></td>
+                <td><b><%= team.points %></b></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
 <% end %>

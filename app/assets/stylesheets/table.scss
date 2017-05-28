@@ -1,28 +1,51 @@
+#tablewrapper {
+  padding: 20px;
+  background: white;
+}
+
 table, th, td {
     border: 1px;
     border-collapse: collapse;
 }
 
 th, td {
-    padding: 15px;
+  padding: 15px;
+  font-weight: normal;
+  text-align: right;
 }
-th {
-    text-align: left;
+
+.team {
+  text-align: left;
+}
+
+.info {
+  text-align: right;
+}
+
+td:nth-child(1),:nth-child(2) {
+  text-align: left;
+}
+
+th:nth-child(1),:nth-child(2) {
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #cfcfcf;
+  border-top: 1px solid #cfcfcf;
+  margin-left: 10px;
+  text-align: right;
+}
+
+tr {
+  margin-left: 20px;
+}
+thead {
+  color: #818181;
 }
 
 table {
     border-spacing: 5px;
-}
-
-table.tabla_pos tr:nth-child(even) {
-    background-color: #eee;
-
-}
-table.tabla_pos tr:nth-child(odd) {
-    background-color: #fff;
-}
-table.tabla_pos th {
-
-    color: white;
-    background-color: #C80A00;
+    width: 100%;
+    background-color: white;
 }
