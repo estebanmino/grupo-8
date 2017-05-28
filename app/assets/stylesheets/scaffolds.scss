@@ -1,10 +1,7 @@
-p, ol, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-}
+
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: inherit;
+
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -39,11 +36,7 @@ td {
   padding-right: 5px;
 }
 
-div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
-}
+
 
 #notice {
   color: green;
@@ -101,14 +94,14 @@ background-color: #950700;
 .new-button, .edit-button {
  border-color: #818488;
  color: #818488;
- font: Sans-serif;
+
  margin-left: 10px;
 }
 
 .black-button {
  border-color: #2b3036;
  color: #2b3036;
- font: Sans-serif;
+ 
  margin-left: 10px;
 }
 

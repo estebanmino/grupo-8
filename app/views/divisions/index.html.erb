@@ -5,7 +5,10 @@
 <% @divisions.each do |division| %>
 
   <div class="panel-div">
-      <h3><%= division.name %></h3>
+      <div class="division-name">
+
+        <h3><%= division.name %></h3>
+      </div>
       <h4><%= division.description %></h4>
       <%= render 'team_list', division: division %>
       <div class="links">

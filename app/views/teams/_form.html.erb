@@ -22,7 +22,7 @@
   </div>
 
   <div class="field">
-    <%= label_tag :tournament_id, "Division del playoff" %>
+    <%= label_tag :tournament_id, "Torneo a jugar" %>
     <%= select_tag :tournament_id, options_for_select(Tournament.all.where(playoff: false).map{ |c| [c.name, c.id] })  %>
   </div>
 

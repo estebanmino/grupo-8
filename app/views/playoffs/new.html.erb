@@ -3,25 +3,25 @@
 <%= form_tag(method: "post") do %>
 
 
-<div class="field">
+<div class="field", class="playoff-form">
   <%= label_tag :division, "Division del playoff" %>
   <%= select_tag :division, options_for_select(Division.all.map{ |c| [c.name, c.id] })  %>
 </div>
 
 
-<div class="field">
+<div class="field", class="playoff-form">
   <%= label_tag(:date1, "Fecha de cuartos de final") %>
   <%= date_select(:date1,"Ronda1", selected: Date.today) %>
 </div>
 
 
-<div class="field">
+<div class="field", class="playoff-form">
   <%= label_tag(:time1, "Hora primeras llaves") %>
   <%= time_select(:time1,"Hora1") %>
 </div>
 
 
-<div class="field">
+<div class="field", class="playoff-form">
   <%= label_tag(:time2, "Hora segundas llaves") %>
   <%= time_select(:time2,"Hora2") %>
 </div>

@@ -1,11 +1,11 @@
-<h1>Listing tournaments</h1>
+<h1>Torneos</h1>
 
 <table>
   <tr>
-    <th>Name</th>
-    <th>Description</th>
-    <th>Season</th>
-    <th>Division</th>
+    <th>Nombre del torneo</th>
+    <th>Descripción</th>
+    <th>Temporada</th>
+    <th>División</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,12 +19,12 @@
     <td><%= tournament.season %></td>
 
     <!-- /divisions/:division_id/tournaments/:id -->
-    <td><%= link_to 'Show', [tournament.division, tournament] %></td>
+    <td><%= link_to 'Ver', [tournament.division, tournament] %></td>
     <!-- /divisions/:division_id/tournaments/:id/edit -->
     <% if is_admin_logged_in? %>
-      <td><%= link_to 'Edit', edit_division_tournament_path(tournament.division, tournament)%></td>
+      <td><%= link_to 'Editar', edit_division_tournament_path(tournament.division, tournament)%></td>
       <!-- /divisions/:division_id/tournaments/:id -->
-      <td><%= link_to 'Destroy', [tournament.division, tournament], :confirm => 'Are you sure?', :method => :delete %></td>
+      <td><%= link_to 'Borrar', [tournament.division, tournament], :confirm => 'Are you sure?', :method => :delete %></td>
     <% end %>
   </tr>
 <% end %>
