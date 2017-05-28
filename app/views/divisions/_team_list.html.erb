@@ -1,5 +1,13 @@
 <p><strong>Equipos:</strong></p>
 <% division.teams.each do |team| %>
-  <p><%= link_to team.name, team %></p>
+  <ul>
+    <td><%= link_to team.name, team %></td>
+    <% if is_admin_logged_in? %>
+      <td><%= link_to 'Editar', edit_team_path(team), class: 'new-button' %></td>
+      <td><%= link_to 'Eliminar', team, method: :delete, class: 'new-button', data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </ul>
+
+
 
 <% end %>

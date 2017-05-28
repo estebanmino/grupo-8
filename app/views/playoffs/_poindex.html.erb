@@ -195,7 +195,7 @@
         <%= match.local_goals %>:<%= match.visitor_goals %>
         <%= Team.find_by_id(match.visit_team_id).name %>
 
-        <div class="links">
+        <div class="btns">
           <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
           <% if is_admin_logged_in? %>
             <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
