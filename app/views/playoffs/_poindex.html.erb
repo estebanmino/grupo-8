@@ -1,0 +1,216 @@
+<%playoffs = Tournament.all.where(playoff: true )%>
+
+
+<div class="tab">
+<%default = true%>
+<%clase = "tablinks defaultOpen"%>
+<%for i in playoffs%>
+<%a = "playoff"+ i.id.to_s + " tabcontent"%>
+
+<button class="<%=clase%>" data-tab=<%=a%> ><%=i.name%></button>
+<%if default%>
+<%default = false%>
+<%clase = "tablinks"%>
+
+<%end%>
+<%end%>
+</div>
+
+<%for i in playoffs%>
+<%@teams = i.teams%>
+<%a = "playoff"+ i.id.to_s + " tabcontent"%>
+<main class= "<%=a%>" id="tournament">
+	<ul class="round round-1">
+		<li class="spacer">&nbsp;</li>
+		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).first%>
+		<%gol1 = partido1.local_goals%>
+		<%gol2 = partido1.visitor_goals%>
+		<%team1 = Team.find(partido1.home_team_id).name%>
+		<%team2 = Team.find(partido1.visit_team_id).name%>
+
+		<li class="game game-top winner"><%=team1%> <span><%=gol1%></span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom winner"><%=team2%> <span><%=gol2%></span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+		<%partido2 = Match.all.where(playoff: true).where(tournament_id: i.id).second%>
+		<%gol1 = partido2.local_goals%>
+		<%gol2 = partido2.visitor_goals%>
+		<%team1 = Team.find(partido2.home_team_id).name%>
+		<%team2 = Team.find(partido2.visit_team_id).name%>
+
+		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom winner"><%=team2%><span><%=gol2%></span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+		<%partido3 = Match.all.where(playoff: true).where(tournament_id: i.id).third%>
+		<%gol1 = partido3.local_goals%>
+		<%gol2 = partido3.visitor_goals%>
+		<%team1 = Team.find(partido3.home_team_id).name%>
+		<%team2 = Team.find(partido3.visit_team_id).name%>
+
+		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom winner"><%=team2%><span><%=gol2%></span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+		<%partido4 = Match.all.where(playoff: true).where(tournament_id: i.id).third%>
+		<%gol1 = partido4.local_goals%>
+		<%gol2 = partido4.visitor_goals%>
+		<%team1 = Team.find(partido4.home_team_id).name%>
+		<%team2 = Team.find(partido4.visit_team_id).name%>
+
+		<li class="game game-top winner"><%=team1%> <span><%=gol1%></span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom winner"><%=team2%> <span><%=gol2%></span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+
+		<li class="spacer">&nbsp;</li>
+
+
+		<li id="Sep-cuartos" class="game game-spacer">&nbsp;</li>
+
+
+		<li class="spacer">&nbsp;</li>
+
+
+		<li class="spacer">&nbsp;</li>
+
+	</ul>
+	<ul class="round round-2">
+		<li class="spacer">&nbsp;</li>
+
+		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 2).first%>
+		<%if partido1 != nil%>
+		<%gol1 = partido1.local_goals%>
+		<%gol2 = partido1.visitor_goals%>
+		<%team1 = Team.find(partido1.home_team_id).name%>
+		<%team2 = Team.find(partido1.visit_team_id).name%>
+		<%else%>
+		<%gol1 = "-"%>
+		<%gol2 = "-"%>
+		<%team1 = "Semifinalista 1"%>
+		<%team2 = "Semifinalista 2"%>
+		<%end%>
+
+		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom winner"> <%=team2%><span><%=gol2%></span></li>
+
+		<li class="spacer">&nbsp;</li>
+
+		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 2).second%>
+		<%if partido1 != nil%>
+		<%gol1 = partido1.local_goals%>
+		<%gol2 = partido1.visitor_goals%>
+		<%team1 = Team.find(partido1.home_team_id).name%>
+		<%team2 = Team.find(partido1.visit_team_id).name%>
+		<%else%>
+		<%gol1 = "-"%>
+		<%gol2 = "-"%>
+		<%team1 = "Semifinalista 3"%>
+		<%team2 = "Semifinalista 4"%>
+		<%end%>
+
+
+		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom winner"><%=team2%><span><%=gol2%></span></li>
+
+
+		<li id="Sep-semis" class="game game-spacer">&nbsp;</li>
+
+
+		<li class="spacer">&nbsp;</li>
+	</ul>
+	<ul class="round round-3">
+		<li class="spacer">&nbsp;</li>
+
+		<%partido7 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 3).first%>
+		<%if partido7 != nil%>
+		<%gol1 = partido7.local_goals%>
+		<%gol2 = partido7.visitor_goals%>
+		<%team1 = Team.find(partido7.home_team_id).name%>
+		<%team2 = Team.find(partido7.visit_team_id).name%>
+		<%else%>
+		<%gol1 = "-"%>
+		<%gol2 = "-"%>
+		<%team1 = "Finalista 1"%>
+		<%team2 = "Finalista 2"%>
+		<%end%>
+
+
+		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
+		<li class="game game-spacer">&nbsp;</li>
+		<li class="game game-bottom winner"><%=team2%><span><%=gol2%></span></li>
+
+		<li id="Sep-final" class="game game-spacer">&nbsp;</li>
+
+	</ul>
+	<ul class="round round-4">
+		<li class="spacer">&nbsp;</li>
+		<%if partido7 != nil && partido7.played%>
+		<%if gol1 > gol2%>
+		<%campeon = team1%>
+		<%else%>
+		<%campeon = team2%>
+		<%end%>
+		<%else%>
+		<%campeon = "Campeón"%>
+		<%end%>
+
+		<li class="game game-top winner"><%=campeon%> <span></span></li>
+		<li id="Sep-winner" class="game game-spacer">&nbsp;</li>
+
+
+
+	</ul>
+
+	<% if is_admin_logged_in? %>
+
+	<%= link_to 'Borrar Playoff', [i.division, i], :confirm => 'Are you sure?', :method => :delete %>
+	<% end  %>
+
+
+</main>
+
+<%fase = {"1"=>"Cuartos de final", "2"=>"Semifinal", "3"=>"Final"}%>
+<%for match in i.matches%>
+<div class= "<%=a%>" >
+    <div class="panel-match">
+      <div class="date">
+        <%= fase[match.Datenum.to_s] %>
+        <%= match.date.day %>/<%= match.date.month %>/<%= match.date.year %>
+        <%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs
+      </div>
+
+      <div class="result">
+        <%= Team.find_by_id(match.home_team_id).name %>
+        <%= match.local_goals %>:<%= match.visitor_goals %>
+        <%= Team.find_by_id(match.visit_team_id).name %>
+
+        <div class="btns">
+          <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
+          <% if is_admin_logged_in? %>
+            <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
+            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end  %>
+        </div>
+      </div>
+
+
+  </div>
+	  </div>
+<%end%>
+
+<%end%>
+
+<% if is_admin_logged_in? %>
+	<%= link_to 'Crear partido de Playoff', playoffs_new_match_path %> |
+<%end%>

@@ -28,10 +28,9 @@ class PerformancesController < ApplicationController
   # POST /performances.json
   def create
     @performance = Performance.new(performance_params)
-
     respond_to do |format|
       if @performance.save
-
+        @performance.user.update_attribute(:goals, @performance.user.goals + @performance.goals)
         format.html { redirect_to :back, notice: 'Performance was successfully created.' }
         format.json { render :show, status: :created, location: @performance }
       else
@@ -44,9 +43,10 @@ class PerformancesController < ApplicationController
   # PATCH/PUT /performances/1
   # PATCH/PUT /performances/1.json
   def update
+    last_goals = @performance.goals
     respond_to do |format|
       if @performance.update(performance_params)
-
+        @performance.user.update_attribute(:goals, @performance.user.goals + @performance.goals - last_goals)
         format.html { redirect_to :back, notice: 'Performance was successfully updated.' }
         format.json { render :show, status: :ok, location: @performance }
       else
@@ -59,6 +59,7 @@ class PerformancesController < ApplicationController
   # DELETE /performances/1
   # DELETE /performances/1.json
   def destroy
+    @performance.user.update_attribute(:goals, @performance.user.goals - @performance.goals)
     @performance.destroy
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Performance was successfully destroyed.' }

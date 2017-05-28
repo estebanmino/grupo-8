@@ -79,7 +79,10 @@ for team in teams
       password: Faker::Internet.password,
       is_admin: false,
       team_id: team.id,
-      is_captain: cap
+      is_captain: cap,
+      goals: 0,
+      yellow_cards: 0,
+      red_cards: 0
     )
     cap = false
 
@@ -94,7 +97,10 @@ position: "medio",
 password: "123456",
 is_admin: true,
 team_id: Team.last.id,
-is_captain: false)
+is_captain: false,
+goals: 0,
+yellow_cards: 0,
+red_cards: 0)
 
 
 User.create(
@@ -105,7 +111,10 @@ position: "atacante",
 password: "123456",
 is_admin: true,
 team_id: Team.last.id,
-is_captain: false)
+is_captain: false,
+goals: 0,
+yellow_cards: 0,
+red_cards: 0)
 
 
 User.create(
@@ -116,7 +125,10 @@ position: "medio",
 password: "admin1234",
 is_admin: true,
 team_id: Team.last.id,
-is_captain: false)
+is_captain: false,
+goals: 0,
+yellow_cards: 0,
+red_cards: 0)
 
 user_ids = User.pluck(:id)
 

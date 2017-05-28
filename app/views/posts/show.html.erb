@@ -1,53 +1,44 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @post.name %>
-</p>
+<div class="post-wrapper">
+  <div class="post">
+    <h1><%= @post.name %></h1>
+    <h3><%= @post.description %></h3>
+    <h6>Publicado por <%= @post.user.full_name %></h6>
 
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
-
-<% if (logged_in? && post_belongs_to_user(@post)) || is_admin_logged_in?  %>
-  <td><%= link_to 'Editar', edit_post_path(@post) %></td>
-  <td><%= link_to 'Eliminar', @post, method: :delete, data: { confirm: '¿Estás segur@?' } %></td>
-<% end %>
+    <% if (logged_in? && post_belongs_to_user(@post)) || is_admin_logged_in?  %>
+      <div class="btns">
+        <%= link_to 'Editar', edit_post_path(@post), class: 'btn btn-primary' %>
+        <%= link_to 'Eliminar', @post, method: :delete, data: { confirm: '¿Estás segur@?' }, class: 'btn btn-primary' %>
+      </div>
+    <% end %>
 
 
-<h3>Comentarios</h3>
-<% if @post && @post.comments %>
-  <table>
-    <thead>
-      <tr>
-        <th>Id</th>
-        <th>Contenido</th>
-        <th>Usuario</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody>
+  </div>
+
+  <h2>Comentarios</h2>
+  <% if @post && @post.comments %>
+
     <% @post.comments.each do |comment| %>
-      <tr>
-        <td><%= comment.id %></td>
-        <td><%= comment.content %></td>
-        <td><%= comment.user.name %></td>
+      <div class="comments">
+        <%= comment.content %>
+        <div class="btns">
         <% if (logged_in? && (comment_belongs_to_user(comment) || post_belongs_to_user(@post))) || is_admin_logged_in?  %>
-          <td><%= link_to 'Editar', edit_comment_path(comment) %></td>
-          <td><%= link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás segur@?' } %></td>
+          <%= link_to 'Editar', edit_comment_path(comment), class: 'btn btn-primary' %>
+          <%= link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás segur@?' }, class: 'btn btn-primary' %>
         <% end %>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>
-
-<% if logged_in? %>
-  <%= form_for :comment, url: "/comments", method: "post" do |f| %>
-    <%= f.text_area :content, required: true %>
-    <%= f.hidden_field :user_id, value: current_user.id %>
-    <%= f.hidden_field :post_id, value: @post.id %>
-    <%= f.submit "Comentar" %>
+        </div>
+        <h6>Por: <%= comment.user.full_name %><h6>
+      </div>
+    <% end %>
   <% end %>
-<% end %>
+
+  <% if logged_in? %>
+    <%= form_for :comment, url: "/comments", method: "post", html: {class: "comment-form"} do |f| %>
+      <%= f.text_area :content, required: true %>
+      <%= f.hidden_field :user_id, value: current_user.id %>
+      <%= f.hidden_field :post_id, value: @post.id %>
+      <%= f.submit "Comentar", class: 'btn btn-primary' %>
+    <% end %>
+  <% end %>
+</div>

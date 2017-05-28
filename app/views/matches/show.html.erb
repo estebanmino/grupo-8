@@ -1,54 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Partido:</h1>
+<div class="match-info">
+  <div  class="space1"></div>
+  <div class="tournament">
+    <h4><%= @match.tournament.name %></h4>
+    <% if is_admin_logged_in? %>
+      <%= link_to 'Editar', edit_match_path(@match), class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+  <div  class="space"></div>
+  <div class="basic">
+    <h4><%= @match.date.day %>/<%= @match.date.month %>/<%= @match.date.year %>
+    <%= @match.time.hour%>:<%= @match.time.min.to_s.rjust(2, '0')%> hrs</h4>
+    <% if  @match.played  %>
+        <h4>Partido Jugado</h4>
+      <% else %>
+        <h4>Aún no se juega este partido</h4>
+      <% end %>
 
-<p>
-  <strong>Visitante:</strong>
-  <%= Team.find(@match.visit_team_id).name %>
+      <div class="result">
+        <h3><%= Team.find(@match.visit_team_id).name %></h3>
+        <h1><%=  @match.visitor_goals %>:<%=  @match.local_goals %></h1>
+        <h3><%= Team.find(@match.home_team_id).name %></h3>
+    </div>
+  </div>
 
-</p>
-
-<p>
-  <strong>Goles visita:</strong>
-  <%=  @match.visitor_goals %>
-
-</p>
-
-<p>
-  <strong>Torneo:</strong>
-  <%= Tournament.find(@match.tournament_id).name %>
-
-</p>
-
-<p>
-  <strong>Local:</strong>
-  <%= Team.find(@match.home_team_id).name %>
-</p>
-
-<p>
-  <strong>Goles local:</strong>
-  <%=  @match.local_goals %>
-
-</p>
-
-<p>
-  <strong>Date:</strong>
-  <%= @match.date %>
-</p>
-
-<p>
-  <strong>Time:</strong>
-  <%= @match.time %>
-</p>
-
-<p><strong>Jugado:</strong></p>
-<% if  @match.played  %>
-    <p>Si</p>
-  <% else %>
-    <p>No</p>
-  <% end %>
-
-<% if is_admin_logged_in? %>
-  <%= link_to 'Edit', edit_match_path(@match) %> |
-<% end %>
-<%= link_to 'Back', matches_path %>
+</div>

@@ -31,7 +31,6 @@
 <br>
 
 <% if logged_in? %>
-  <%= link_to 'Crea un nuevo post', new_post_path %>
-<% else %>
-  <%= link_to 'Crea una cuenta para postear', new_user_path %>
+  <%= link_to 'Crea un nuevo post', new_post_path, class: 'btn btn-primary' %>
+
 <% end %>

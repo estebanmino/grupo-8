@@ -4,28 +4,20 @@
     <title>LaLigaMC</title>
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application',"https://fonts.googleapis.com/css?family=Merriweather|Montserrat|Roboto", media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
 
-
     <%= render "layouts/header" %>
-    <main>
-      <% [:alert, :notice].each do |flash_type| %>
-        <% if (flash_message = flash[flash_type]).present? %>
-          <div class="<%= flash_type %>"><%= flash_message %></div>
-        <% end %>
-      <% end %>
+
+    <div id="pagewrapper">
       <%= yield %>
-    </main>
+    </div>
 
-    <footer>
+    <%= render "layouts/footer" %>
 
-      <div id="project">© LigaMC 2017 Powered by MCprod</div>
-
-    </footer>
   </body>
 
 </html>

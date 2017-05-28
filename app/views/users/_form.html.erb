@@ -11,41 +11,45 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name, "Nombre" %>
-    <%= f.text_field :name, required: true %>
-  </div>
 
-  <div class="field">
-      <%= f.label :last_name, "Apellido" %>
-      <%= f.text_field :last_name, required: true %>
+    <div class="field">
+      <%= f.label :name, "Nombre" %>
+      <%= f.text_field :name, required: true %>
     </div>
 
-  <div class="field">
-    <%= f.label :email, "Email" %>
-    <%= f.text_field :email, required: true %>
-  </div>
+    <div class="field">
+        <%= f.label :last_name, "Apellido" %>
+        <%= f.text_field :last_name, required: true %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password, "Contraseña" %>
-    <%= f.password_field :password, required: true %>
-  </div>
+    <div class="field">
+      <%= f.label :email, "Email" %>
+      <%= f.text_field :email, required: true %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation, "Confirma tu contraseña" %>
-    <%= f.password_field :password_confirmation, required: true %>
-  </div>
+    <div class="field">
+      <%= f.label :password, "Contraseña" %>
+      <%= f.password_field :password, required: true %>
+    </div>
 
-  <div class="field">
-    <%= f.label :position, "Posición" %>
-    <%= f.text_field :position, required: true %>
-  </div>
+    <div class="field">
+      <%= f.label :password_confirmation, "Confirmación" %>
+      <%= f.password_field :password_confirmation, required: true %>
+    </div>
 
-  <% if @token != nil %>
-    <%= hidden_field_tag :invitation_token, @token %>
-  <% end %>
+    <div class="field">
+      <%= f.label :position, "Posición" %>
+      <%= f.text_field :position, required: true %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Enviar" %>
-  </div>
+    <% if @token != nil %>
+      <%= hidden_field_tag :invitation_token, @token %>
+    <% end %>
+    <%= hidden_field_tag :goals, value: 0 %>
+    <%= hidden_field_tag :yellow_cards, value: 0 %>
+    <%= hidden_field_tag :red_cards, value: 0 %>
+
+    <div class="field">
+      <%= f.submit "Enviar", class: 'btn btn-primary' %>
+    </div>
 <% end %>

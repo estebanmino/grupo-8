@@ -26,7 +26,7 @@ module TournamentsHelper
 
           a = Match.new(:date => date, :time => time, :visitor_goals => 0,
           :local_goals => 0, :played => false, :visit_team_id => away, :home_team_id => home,
-          :tournament_id => tmt.id)
+          :tournament_id => tmt.id, :Datenum => j +1)
           a.save
         end
         ind1 +=1
@@ -45,7 +45,7 @@ module TournamentsHelper
 
       a = Match.new(:date => date, :time => time, :visitor_goals => 0,
       :local_goals => 0, :played => false, :visit_team_id => away, :home_team_id => home,
-      :tournament_id => tmt.id)
+      :tournament_id => tmt.id, :Datenum => 5)
       a.save
     end
 
@@ -61,7 +61,7 @@ module TournamentsHelper
 
       a = Match.new(:date => date, :time => time, :visitor_goals => 0,
       :local_goals => 0, :played => false, :visit_team_id => away, :home_team_id => home,
-      :tournament_id => tmt.id)
+      :tournament_id => tmt.id, :Datenum => 6)
       a.save
     end
 
@@ -76,7 +76,7 @@ module TournamentsHelper
 
       a = Match.new(:date => date, :time => time, :visitor_goals => 0,
       :local_goals => 0, :played => false, :visit_team_id => away, :home_team_id => home,
-      :tournament_id => tmt.id)
+      :tournament_id => tmt.id, :Datenum => 7)
       a.save
     end
 

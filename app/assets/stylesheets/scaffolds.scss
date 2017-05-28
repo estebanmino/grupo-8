@@ -1,18 +1,12 @@
-body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  margin: 33px;
+
+
+h1, h2, h3, h4, h5, h6 {
+
+  font-weight: 500;
+  line-height: 1.1;
+  color: inherit;
 }
 
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  margin: 33px;
-}
 
 pre {
   background-color: #eee;
@@ -22,14 +16,13 @@ pre {
 
 a {
   color: #000;
+  text-decoration: none;
 
   &:visited {
-    color: #666;
   }
 
   &:hover {
-    color: #fff;
-    background-color: #000;
+    color: #cfcfcf;
   }
 }
 
@@ -43,11 +36,7 @@ td {
   padding-right: 5px;
 }
 
-div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
-}
+
 
 #notice {
   color: green;
@@ -55,13 +44,13 @@ div {
 
 .field_with_errors {
   padding: 2px;
-  background-color: red;
+  border-color: #C80A00;
   display: table;
 }
 
 #error_explanation {
   width: 450px;
-  border: 2px solid red;
+  border: 2px solid #C80A00;
   padding: 7px;
   padding-bottom: 0;
   margin-bottom: 20px;
@@ -74,7 +63,7 @@ div {
     font-size: 12px;
     margin: -7px;
     margin-bottom: 0;
-    background-color: #c00;
+    background-color: #C80A00;
     color: #fff;
   }
 
@@ -86,4 +75,36 @@ div {
 
 label {
   display: block;
+}
+
+.btn-primary {
+  padding: 8px 8px;
+  background-color: #cc0001;
+  color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  border: 1px solid #cc0001;
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+background-color: #950700;
+}
+
+.new-button, .edit-button {
+ border-color: #818488;
+ color: #818488;
+
+ margin-left: 10px;
+}
+
+.black-button {
+ border-color: #2b3036;
+ color: #2b3036;
+ 
+ margin-left: 10px;
+}
+
+.img_logo{
+  height: 120px;
 }

@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+<main>
+
 
 <div class="galeria">
 
@@ -12,19 +14,19 @@
 
         <a class = "foto" href= pictures/<%=picture.id%> ><%=image_tag picture.image.url(:thumb) %></a>
 
-
-
-
         <div class="image_desc">
 
         <p><%= picture.comment %></p>
         <td><%= picture.date %></td>
-        <td class="gallery_td"><%= link_to 'Edit', edit_picture_path(picture),class: 'new-button' %></td>
-        <td class="gallery_td"><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' },class: 'new-button' %></td>
+
+        <% if is_admin_logged_in? %>
+          <td class="gallery_td"><%= link_to 'Edit', edit_picture_path(picture),class: 'new-button' %></td>
+          <td class="gallery_td"><%= link_to 'Destroy', picture, method: :delete, data: { confirm: 'Are you sure?' },class: 'new-button' %></td>
+
+        <% end %>
+
 
       </div>
-
-
 
         </div>
 
@@ -34,10 +36,10 @@
 
 
 </div>
-<br>
+
+</main>
 <div class="final_gallery">
-
-
-    <%= link_to 'New Picture', new_picture_path  ,id: 'bottom_button',class: 'new-button'%>
-
+  <% if is_admin_logged_in? %>
+    <%= link_to 'Agregar Foto', new_picture_path  ,id: 'bottom_button',class: 'new-button'%>
+  <% end %>
 </div>

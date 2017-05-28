@@ -35,9 +35,13 @@ class UsersController < ApplicationController
     invitation = Invitation.find_by_token(token)
     @user.is_captain = invitation.is_captain
     @user.team_id = invitation.team_id
+    @user.goals = 0
+    @user.yellow_cards = 0
+    @user.red_cards = 0
     respond_to do |format|
       if @user.save
         log_in @user
+        invitation.destroy
         format.html { redirect_to home_path, notice: 'Te damos la bienvenida a LaLiga.' }
           # format.json { render :show, status: :created, location: @user }
       else
@@ -80,7 +84,7 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :last_name, :email, :position,
-                                    :password, :password_confirmation)
+                                    :password, :password_confirmation, :goals, :yellow_cards, :red_cards)
     end
 
     def is_current_user?

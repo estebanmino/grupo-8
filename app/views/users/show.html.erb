@@ -6,31 +6,33 @@
   </h3>
 <% end %>
 
-<p>
-  <strong>Nombre:</strong>
-  <%= @user.name %>
-</p>
+<div class="player-info">
 
-<p>
-  <strong>Apellido:</strong>
-  <%= @user.last_name %>
-</p>
+  <div class="basic">
+    <h1><%= @user.full_name %></h1>
+    <h3><%= @user.position %></h3>
+    <h3><%= @user.team.name %></h3>
+    <h5><%= link_to 'Ir a equipo', @user.team  %></h5>
+    <% if user_is_logged?(@user) || is_admin_logged_in? %>
+      <div class="btns">
+        <%= link_to 'Editar', edit_user_path(@user), class: 'btn btn-primary' %>
+      </div>
+    <% end %>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  </div>
+  <div class="box-wrapper">
+    <div class="box">
+      <h3>Goles</h3>
+      <h1><%= @user.goals %></h1>
+    </div>
+    <div class="box">
+      <h3>Amarillas</h3>
+      <h1><%= @user.yellow_cards %></h1>
+    </div>
+    <div class="box">
+      <h3>Rojas</h3>
+      <h1><%= @user.red_cards %></h1>
+    </div>
+  </div>
 
-<p>
-  <strong>Posición:</strong>
-  <%= @user.position %>
-</p>
-
-<% if !is_admin_logged_in? %>
-  <p>
-    <strong>Equipo:</strong>
-    <%= @user.team.name %> <%= link_to 'Ir a equipo', @user.team  %>
-  </p>
-<% end %>
-
-<%= link_to 'Editar', edit_user_path(@user) %>
+</div>

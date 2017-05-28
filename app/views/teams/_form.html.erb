@@ -22,31 +22,18 @@
   </div>
 
   <div class="field">
+    <%= label_tag :tournament_id, "Torneo a jugar" %>
+    <%= select_tag :tournament_id, options_for_select(Tournament.all.where(playoff: false).map{ |c| [c.name, c.id] })  %>
+  </div>
+
+  <div class="field">
     <%= f.label :logo %>
     <%= f.file_field :logo %>
   </div>
 
-  <div class="field">
-    <%= f.label :points %>
-    <%= f.number_field :points %>
-  </div>
 
-  <div class="field">
-    <%= f.label :won %>
-    <%= f.number_field :won %>
-  </div>
-
-  <div class="field">
-    <%= f.label :lost %>
-    <%= f.number_field :lost %>
-  </div>
-
-  <div class="field">
-    <%= f.label :tie %>
-    <%= f.number_field :tie %>
-  </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Enviar' %>
   </div>
 <% end %>

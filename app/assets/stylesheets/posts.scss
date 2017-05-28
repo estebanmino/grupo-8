@@ -1,3 +1,66 @@
 // Place all the styles related to the posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.post-wrapper {
+  width: 60%;
+  margin: 0 auto;
+}
+
+.post {
+  background-color: rgba(200, 10, 0, 0.7);
+  padding: 20px;
+  height: 150px;
+  h6 {
+    margin: 0;
+  }
+  .btns {
+    margin-left: 77%;
+    display: inline-block;
+  }
+  .description {
+    display: inline-block;
+    background-color: white;
+  }
+}
+
+.comments {
+  border-top: 1px solid #cfcfcf;
+  width: 90%;
+  margin: 0 auto;
+  padding: 20px;
+  a:nth-child(1) {
+    margin-top: -0px;
+    right: 300px;
+  }
+  a:nth-child(2) {
+    margin-top: -0px;
+    right: 190px;
+  }
+  h6 {
+    margin: 10px 0 0 0;
+  }
+  .author {
+
+  }
+  .comment {
+  }
+  .btns {
+    margin-left: 76%;
+    display: inline-block;
+  }
+}
+
+.comment-form {
+  margin: 0;
+  width: 100%;
+  display: inline-block;
+  textarea {
+    width: 100%;
+    margin: 0 auto;
+  }
+  .btn {
+    width: 100%;
+    margin-left: 0%;
+  }
+}
