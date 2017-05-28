@@ -17,33 +17,33 @@
 </div>
 
 <%for i in playoffs%>
-<%teams = i.teams%>
+<%@teams = i.teams%>
 <%a = "playoff"+ i.id.to_s + " tabcontent"%>
 <main class= "<%=a%>" id="tournament">
 	<ul class="round round-1">
 		<li class="spacer">&nbsp;</li>
 
-		<li class="game game-top winner"><%=teams[0].name%> <span>-</span></li>
+		<li class="game game-top winner"><%=@teams[0].name%> <span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=teams[7].name%> <span>-</span></li>
+		<li class="game game-bottom winner"><%=@teams[7].name%> <span>-</span></li>
 
 		<li class="spacer">&nbsp;</li>
 
-		<li class="game game-top winner"><%=teams[1].name%><span>-</span></li>
+		<li class="game game-top winner"><%=@teams[1].name%><span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=teams[6].name%><span>-</span></li>
+		<li class="game game-bottom winner"><%=@teams[6].name%><span>-</span></li>
 
 		<li class="spacer">&nbsp;</li>
 
-		<li class="game game-top winner"><%=teams[4].name%><span>-</span></li>
+		<li class="game game-top winner"><%=@teams[4].name%><span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=teams[3].name%><span>-</span></li>
+		<li class="game game-bottom winner"><%=@teams[3].name%><span>-</span></li>
 
 		<li class="spacer">&nbsp;</li>
 
-		<li class="game game-top winner"><%=teams[5].name%> <span>-</span></li>
+		<li class="game game-top winner"><%=@teams[5].name%> <span>-</span></li>
 		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=teams[2].name%> <span>-</span></li>
+		<li class="game game-bottom winner"><%=@teams[2].name%> <span>-</span></li>
 
 		<li class="spacer">&nbsp;</li>
 
@@ -133,3 +133,6 @@
 	  </div>
 <%end%>
 <%end%>
+
+
+<%= link_to 'Crear partido de playoff', playoffs_new_match_path %> |
