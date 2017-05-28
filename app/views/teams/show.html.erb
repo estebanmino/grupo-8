@@ -77,6 +77,6 @@
 
 <p>
 <% if is_admin_logged_in? %>
-  <%= link_to 'Editar', edit_team_path(@team) %> |
+  <%= link_to 'Editar', edit_team_path(@team), class: 'btn btn-primary' %> 
 <% end %>
 </p>
