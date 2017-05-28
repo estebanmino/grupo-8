@@ -1,19 +1,15 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <b>Nombre del torneo:</b>
-  <%= @tournament.name %>
-</p>
 
-<p>
-  <b>Descripción:</b>
-  <%= @tournament.description %>
-</p>
+<div class="tournament-info">
+  <div class="space"></div>
+  <div class="basic">
+      <h2><%= @tournament.name %></h2>
+      <h4><%= @tournament.season %></h4>
+      <h4><%= @tournament.description %></h4>
+  </div>
+</div>
 
-<p>
-  <b>Temporada:</b>
-  <%= @tournament.season %>
-</p>
 
 
 <table class="tabla_pos">
