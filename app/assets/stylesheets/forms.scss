@@ -34,18 +34,17 @@ select {
   position: relative;
   right: 10px;
 }
+
+textarea {
+  border: 1px solid #bbb;
+  width: 60%;
+  font-size: 20px;
+  border-radius: 4px;
+  margin: 0;
+}
+
 .field {
   margin-bottom: 25px;
-
-  textarea {
-    width: 69%;
-    font-size: 20px;
-    border-radius: 4px;
-    margin: 0;
-  }
-
-
-
 
   input {
     height: 36px;
@@ -53,7 +52,6 @@ select {
     border: 1px solid #bbb;
     border-radius: 4px;
     margin: 0
-
   }
 
   label, .label {
