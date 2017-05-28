@@ -1,4 +1,12 @@
 <p id="notice"><%= notice %></p>
 
+<h1>2017 FIXTURE de Playoffs</h1>
+
+<%if Tournament.all.where(playoff: true).pluck(:id).length > 0%>
+<%= render 'poindex' %>
+<%else%>
+<%= render 'statindex' %>
+<%end%>
+
 
 <%= link_to 'Crear Playoff', new_playoff_path %>

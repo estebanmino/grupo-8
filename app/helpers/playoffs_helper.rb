@@ -9,7 +9,7 @@ module PlayoffsHelper
     playoff = Tournament.new(:name => "Playoff de #{division.name}", :description =>
     "Playoffs finales, que decidirán al campeón", :season => "#{tournament1.season}",
     :division_id => division.id, :playoff => true)
-    playoff.save
+
 
 
     for i in teams1
@@ -42,7 +42,7 @@ module PlayoffsHelper
     p2.save
     p3.save
     p4.save
-
+    playoff.save
 
   end
 end
