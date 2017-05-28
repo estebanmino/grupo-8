@@ -7,7 +7,7 @@ class InvitationsController < ApplicationController
     @invitation = Invitation.new(invitation_params) # Make a new Invite
     @invitation.sender_id = current_user.id
     if @invitation.save
-      InvitationMailer.invitation_mail(@invitation, new_user_registration(@invitation.token)).deliver_now
+      Mailer.invitation_mail(@invitation, new_user_registration(@invitation.token)).deliver_now
       redirect_to :back
     else
       redirect_to root_path
