@@ -33,6 +33,14 @@ form {
     margin: 0;
   }
 
+  .selections {
+    margin: 0 0 0 170px;
+  }
+  select {
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    height: 28px;
+  }
   input {
     height: 36px;
     width: 70%;
@@ -42,7 +50,7 @@ form {
 
   }
 
-  label {
+  label, .label {
     color: #555;
     display: inline-block;
     line-height: 36px;
