@@ -21,6 +21,12 @@ module SessionsHelper
     current_user.is_admin
   end
 
+  def user_is_logged?(user)
+    if logged_in?
+      @current_user.id == user.id
+    end
+  end
+
   def is_admin_logged_in?
     if logged_in?
       is_admin?

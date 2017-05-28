@@ -52,9 +52,9 @@
       <tr>
           <% if scorer != nil %>
             <% if scorer.is_captain? %>
-              <td><%=scorer.full_name%> (Capitán)</td>
+              <td><%= link_to scorer.name, scorer %> (Capitán)</td>
             <% else %>
-              <td><%=scorer.full_name%></td>
+              <td><%= link_to scorer.name, scorer %></td>
             <% end %>
             <td><%=scorer.goals%></td>
             <td><%=scorer.yellow_cards%></td>
@@ -66,17 +66,15 @@
 </table>
 
 <% if is_admin_logged_in? && !captain %>
-<p> Invitar a capitán: </p>
+<h2> Invitar a capitán: </h2>
   <%= render 'invitation', team: @team, is_captain: true %>
 <% end %>
 
 <% if current_user_is_captain_of(@team) || is_admin_logged_in? %>
-  <p> Invitar jugadores: </p>
+  <h2> Invitar jugadores: </h2>
   <%= render 'invitation', team: @team, is_captain: false %>
 <% end %>
 
-<p>
 <% if is_admin_logged_in? %>
-  <%= link_to 'Editar', edit_team_path(@team), class: 'btn btn-primary' %> 
+  <%= link_to 'Editar', edit_team_path(@team), class: 'btn btn-primary' %>
 <% end %>
-</p>
