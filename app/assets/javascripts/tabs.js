@@ -5,7 +5,7 @@ $(document).on('turbolinks:load', function () {
    $('.tablinks').on('click', function() {
    var link = $(this);
    var tab = $('.' + link.data('tab'));
- 
+
      // Get all elements with class="tabcontent" and hide them
      $('.tabcontent').each(function() {
        $(this).hide();
@@ -18,6 +18,7 @@ $(document).on('turbolinks:load', function () {
 
      // Show the current tab, and add an "active" class to the button that opened the tab
      tab.show();
+
      link.addClass('active');
    });
    $('.defaultOpen').click();

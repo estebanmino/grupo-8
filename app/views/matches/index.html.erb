@@ -1,43 +1,80 @@
 <p id="notice"><%= notice %></p>
 
+<%divisions = Division.all%>
+
 
 <h1>Partidos</h1>
 
+<div class="tab">
+<%default = true%>
+<%clase = "tablinks defaultOpen"%>
 
-<% matchday = 0 %>
-<% @matches.each do |match| %>
-  <% if matchday != match.Datenum %>
-    <% matchday = match.Datenum %>
-    <h2>Jornada <%= match.Datenum %></h2>
-  <% end %>
 
-  <% if !match.playoff %>
-    <div class="panel-match">
-      <div class="date">
-        <%= match.Datenum %>
-        <%= match.date.day %>/<%= match.date.month %>/<%= match.date.year %>
-        <%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs
-      </div>
+<%divisions.each do |division|%>
+<%a = "division"+ division.id.to_s + " tabcontent"%>
 
-      <div class="result">
-        <%= Team.find_by_id(match.home_team_id).name %>
-        <%= match.local_goals %> : <%= match.visitor_goals %>
-        <%= Team.find_by_id(match.visit_team_id).name %>
+<button class="<%=clase%>" data-tab=<%=a%> ><%=division.name%></button>
+<%if default%>
+<%default = false%>
+<%clase = "tablinks"%>
 
-        <div class="btns">
-          <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
-          <% if is_admin_logged_in? %>
-            <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
-            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end  %>
-        </div>
-      </div>
+<%end%>
+<%end%>
+</div>
 
-    <% end %>
-  </div>
+
+
+
+<%divisions.each do |division|%>
+
+<%a = "division"+ division.id.to_s + " tabcontent"%>
+<div class= "<%=a%>">
+
+<h2><%=division.name%></h2>
+<%division.tournaments.where(playoff: false).each do |tournament|%>
+<h3><%=tournament.name%></h3>
+<% matchday1 = 0 %>
+<%tournament.matches.order(:Datenum).each do |match|%>
+
+<% if matchday1 != match.Datenum %>
+  <% matchday1 = match.Datenum %>
+  <h2>Jornada <%= match.Datenum %></h2>
 <% end %>
+<div class="panel-match">
+  <div class="date">
+    <%= match.Datenum %>
+    <%= match.date.day %>/<%= match.date.month %>/<%= match.date.year %>
+    <%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs
+  </div>
+
+  <div class="result">
+    <%= Team.find_by_id(match.home_team_id).name %>
+    <%= match.local_goals %> : <%= match.visitor_goals %>
+    <%= Team.find_by_id(match.visit_team_id).name %>
+
+    <div class="btns">
+      <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
+      <% if is_admin_logged_in? %>
+        <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
+        <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
+      <% end  %>
+    </div>
+  </div>
+
+
+</div>
+
+
+<%end%>
+<%end%>
+</div>
+<%end%>
 
 
 <% if is_admin_logged_in? %>
   <%= link_to 'Nuevo Partido', new_match_path %>
 <% end %>
+
+</div>
+
+</div>

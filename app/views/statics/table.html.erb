@@ -2,12 +2,38 @@
 
 <% @divisions = Division.all %>
 
+
+<div class="tab">
+<%default = true%>
+<%clase = "tablinks defaultOpen"%>
+
 <% @divisions.each do |division| %>
+
+<%a = "division"+ division.id.to_s + " tabcontent"%>
+
+<button class="<%=clase%>" data-tab=<%=a%> ><%=division.name%></button>
+<%if default%>
+<%default = false%>
+<%clase = "tablinks"%>
+
+<%end%>
+<%end%>
+</div>
+
+
+
+
+
+<% @divisions.each do |division| %>
+
+
+<%a = "division"+ division.id.to_s + " tabcontent"%>
+<div class= "<%=a%>">
 
 
   <h1 class = "table_text"><%=division.name%></h1>
 
-    <% for tournament in division.tournaments %>
+    <% division.tournaments.where(playoff:false).each do |tournament| %>
       <h2><%=tournament.name%></h2>
 
       <div id="tablewrapper">
@@ -53,4 +79,7 @@
         </table>
       </div>
     <% end %>
-<% end %>
+
+    </div>
+
+<%end%>
