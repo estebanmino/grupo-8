@@ -64,7 +64,7 @@ li.game{
   div.tab {
        overflow: hidden;
        border: 1px solid #ccc;
-       background-color: #f1f1f1;
+       background-color: #606367;
        margin-top: 10px;
        margin-bottom: 40px;
 
@@ -79,16 +79,19 @@ li.game{
      padding: 14px 16px;
      transition: 0.3s;
      font: sans-serif;
+     font-size: 16px;
      font-weight:bold;
+     color: white;
+     text-transform: uppercase;
  }
 
  div.tab button:hover {
-     background-color: #ddd;
+     background-color: #babcbf;
  }
 
  /* Create an active/current tablink class */
  div.tab button.active {
-     background-color: #ccc;
+     background-color: #2b3036;
  }
 
  #portada-playoff{
