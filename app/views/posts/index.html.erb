@@ -2,6 +2,8 @@
 
 <h1>Foro</h1>
 
+
+
 <table>
   <thead>
     <tr>
@@ -14,16 +16,19 @@
 
   <tbody>
     <% @posts.each do |post| %>
-      <tr>
+      <tr class="posts" data-post-id="<%= post.id %>">
+
         <td><%= post.name %></td>
         <td><%= post.description %></td>
         <td><%= post.user.name %></td>
         <td><%= link_to 'Leer', post %></td>
         <% if (logged_in? && post_belongs_to_user(post)) || is_admin_logged_in?  %>
           <td><%= link_to 'Editar', edit_post_path(post) %></td>
-          <td><%= link_to 'Eliminar', post, method: :delete, data: { confirm: '¿Estás segur@?' } %></td>
+          <td><%= link_to 'Eliminar', post, method: :delete, data: { confirm: '¿Estás segur@?', remote: true } %></td>
         <% end %>
-      </tr>
+    </tr>
+
+
       <% end %>
   </tbody>
 </table>
