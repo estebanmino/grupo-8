@@ -31,8 +31,8 @@ class PerformancesController < ApplicationController
     respond_to do |format|
       if @performance.save
         @performance.user.update_attribute(:goals, @performance.user.goals + @performance.goals)
-        format.html { redirect_to :back, notice: 'Performance was successfully created.' }
-        format.json { render :show, status: :created, location: @performance }
+        #format.html { redirect_to :back, notice: 'Performance was successfully created.' }
+        format.json do render json:{ performance: @performance } end
       else
         format.html { render :new }
         format.json { render json: @performance.errors, status: :unprocessable_entity }
