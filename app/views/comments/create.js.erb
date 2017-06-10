@@ -1,0 +1,17 @@
+
+
+<%last_comment = Post.find(@comment.post_id).comments.last%>
+
+$("#Comments-holder").append("<div class= comments data-comment-id= <%= @comment.id%>></div>");
+
+var comment = $('[data-comment-id="<%= last_comment.id %>"]');
+comment.append("<%= last_comment.content %>");
+
+comment.append("<div class = btns btn-comment-id= <%= @comment.id%>></div>");
+
+var btn = $('[btn-comment-id="<%= last_comment.id %>"]');
+btn.append('<%= link_to 'Editar', edit_comment_path(@comment), class: 'btn btn-primary' %>');
+btn.append('<%= link_to 'Eliminar', @comment, method: :delete, data: { confirm: '¿Estás segur@?' }, class: 'btn btn-primary', remote: true %>');
+
+
+comment.append("<h6>Por: <%= last_comment.user.full_name %><h6>");
