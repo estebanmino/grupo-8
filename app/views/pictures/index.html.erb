@@ -12,7 +12,7 @@
     <% @pictures.each do |picture| %>
     <div class="gallery" data-gallery-id="<%=picture.id%>">
 
-        <%=image_tag picture.image.url(:thumb), class: "img_logo", id: "myImg" %>
+        <%=image_tag picture.image.url(:medium), class: "img_modal foto" %>
         <!-- <a class = "foto" href= pictures/<%=picture.id%> ><%=image_tag picture.image.url(:thumb) %></a> -->
 
         <div class="image_desc">
@@ -37,10 +37,6 @@
 
     <% end %>
 
-    <%= image_tag "laliga.png", class: "img_logo", id:"myImg" %>
-
-
-    <!-- The Modal -->
     <div id="myModal" class="modal">
       <span class="close">&times;</span>
       <img class="modal-content" id="img01">
