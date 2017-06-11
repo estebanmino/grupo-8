@@ -5,10 +5,12 @@ if (!<%= @save %>) {
   $("#position<%= @performanceindex %>  #performance_yellow_cards").val('0');
   $("#position<%= @performanceindex %>  #performance_red_cards").val('0');
 } else {
+  $("#position<%= @performanceindex%> .create-performance").attr('value', 'Actualizar información');
 
   $("#position<%= @performanceindex %>").attr('id','<%= @performance.id %>');
 
   $form = $("#<%= @performance.id %> #new_performance");
+
 
   $form.attr('value','Actualizar información');
   $form.attr('class','edit_performance');

@@ -1,9 +1,10 @@
 if (!<%= @save %>) {
   alert('No pueden haber más goles por equipo que los ingresados!');
-
+  $("#<%= @performance.id %>  #performance_goals").val('<%= @performance.goals %>');
+  $("#<%= @performance.id %>  #performance_yellow_cards").val('<%= @performance.yellow_cards %>');
+  $("#<%= @performance.id %>  #performance_red_cards").val('<%= @performance.red_cards %>');
 } else {
-
+  $("#<%= @performance.id %>  #performance_goals").val('<%= @performance.goals %>');
+  $("#<%= @performance.id %>  #performance_yellow_cards").val('<%= @performance.yellow_cards %>');
+  $("#<%= @performance.id %>  #performance_red_cards").val('<%= @performance.red_cards %>');
 }
-$("#<%= @performance.id %>  #performance_goals").val('<%= @performance.goals %>');
-$("#<%= @performance.id %>  #performance_yellow_cards").val('<%= @performance.yellow_cards %>');
-$("#<%= @performance.id %>  #performance_red_cards").val('<%= @performance.red_cards %>');
