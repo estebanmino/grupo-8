@@ -1,0 +1,12 @@
+<% if @invalids != [] %>
+$('#invalid-mails h3 ').remove()
+$('#invalid-mails p').remove()
+  $('#invalid-mails').append('<h3>Los siguientes correos son inválidos, intentalo nuevamente</h3>');
+  <% @invalids.each do |invalid| %>
+    $('#invalid-mails').append('<p><%= invalid %></p>');
+  <% end %>
+<% else %>
+  $('#invalid-mails h3 ').remove()
+  $('#invalid-mails p').remove()
+  $('#invalid-mails').append('<h3>Invitaciones enviadas exitosamente!</h3>');
+<% end %>

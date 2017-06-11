@@ -4,14 +4,29 @@ class InvitationsController < ApplicationController
 
 
   def create
-    @invitation = Invitation.new(invitation_params) # Make a new Invite
-    @invitation.sender_id = current_user.id
-    if @invitation.save
-      Mailer.invitation_mail(@invitation, new_user_registration(@invitation.token)).deliver_now
-      redirect_to :back
-    else
-      redirect_to root_path
-      # oh no, creating an new invitation failed
+
+    @invitations = Invitation.new(invitation_params) # Make a new Invite
+    emails =  @invitations.email.delete('  ').split(',')
+
+    @invalids = []
+    @invitations_count = 0
+    emails.each do |email|
+      if validate_email(email)
+        @invitation = Invitation.new(email: email, team_id: params[:invitation][:team_id], is_captain:params[:invitation][:is_captain])
+        @invitation.sender_id = current_user.id
+        if @invitation.save
+          @invitations_count += 1
+          Mailer.invitation_mail(@invitation, new_user_registration(@invitation.token)).deliver_now
+        else
+          @invalids.append(email)
+          # oh no, creating an new invitation failed
+        end
+      else
+        @invalids.append(email)
+      end
+    end
+    respond_to do |format|
+      format.js
     end
   end
 
