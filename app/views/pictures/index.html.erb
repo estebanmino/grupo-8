@@ -10,14 +10,18 @@
 
 
     <% @pictures.each do |picture| %>
-    <div class="gallery">
+    <div class="gallery" data-gallery-id="<%=picture.id%>">
 
-        <a class = "foto" href= pictures/<%=picture.id%> ><%=image_tag picture.image.url(:thumb) %></a>
+        <%=image_tag picture.image.url(:medium), class: "img_modal foto" %>
+        <!-- <a class = "foto" href= pictures/<%=picture.id%> ><%=image_tag picture.image.url(:thumb) %></a> -->
 
         <div class="image_desc">
 
         <p><%= picture.comment %></p>
         <td><%= picture.date %></td>
+
+
+
 
         <% if is_admin_logged_in? %>
           <td class="gallery_td"><%= link_to 'Edit', edit_picture_path(picture),class: 'new-button' %></td>
@@ -33,9 +37,14 @@
 
     <% end %>
 
+    <div id="myModal" class="modal">
+      <span class="close">&times;</span>
+      <img class="modal-content" id="img01">
+      <div id="caption"></div>
+    </div>
 
 
-</div>
+
 
 </main>
 <div class="final_gallery">
