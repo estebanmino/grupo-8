@@ -8,7 +8,13 @@
 <% submt = 'Actualizar información'  %>
 <% end %>
 
-<%= form_for @performance, :html => {'performance-id': @performance.id}, :url => path, remote: true do |f| %>
+<% if !update %>
+<tr id="position<%= @performanceindex %>">
+<% else %>
+<tr id="<%= @performance.id %>">
+
+<% end %>
+<%= form_for @performance, url: path, remote: true, data: {performanceindex: @performanceindex} do |f| %>
 <% if performance.errors.any? %>
 <div id="error_explanation">
     <h2><%= pluralize(performance.errors.count, "error") %>
@@ -22,10 +28,10 @@
 </div>
 <% end %>
 
-<tr>
-    <td><%= user.full_name %></td>
 
-    <td>
+    <td class="name"><%= user.full_name %></td>
+
+    <td class="played">
         <% if update %>
         <p>Jugó
         </p>
@@ -62,17 +68,18 @@
     </td>
 
     <% if update %>
-    <td><%= link_to 'Eliminar información', @performance, class: 'btn btn-primary', method: :delete, data: { confirm: 'Estás seguro?' } %></td>
-<% else %>
-    <td></td>
+      <td><%= link_to 'Eliminar información', performance_path(@performance, performanceindex: @performanceindex), class: 'btn btn-primary destroy-performance', method: :delete, remote: true %></td>
+    <% else %>
+      <td class='empty'></td>
     <% end %>
 
     <%= f.hidden_field :user_id, value: user.id %>
     <%= f.hidden_field :match_id, value: match.id %>
+    <%= f.hidden_field :performanceindex, value: @performanceindex %>
     <td>
-        <%= f.submit submt, class: 'btn btn-primary' %>
+        <%= f.submit submt, class: 'btn btn-primary create-performance' %>
     </td>
 
-</tr>
+  </tr>
 
 <% end %>

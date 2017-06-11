@@ -91,6 +91,7 @@
 
 <h1>Rendimientos individuales</h1>
 
+<% @performanceindex = 0 %>
 <% [['Equipo Local', @match.home_team],['Equipo Visitante', @match.visit_team]].each do |team| %>
 <h2><%= team[1].name %></h2>
 <table>
@@ -107,13 +108,14 @@
     </thead>
     <tbody>
         <% team[1].users.each do |user| %>
-        <% if !user.matches.find_by_id(@match.id) %>
-        <% @performance =Performance.new %>
-    <% else %>
-        <% @performance = user.performances.find_by(match_id: @match.id) %>
-        <% end %>
-        <%= render 'performances/form', performance: @performance, user: user, match: @match%>
-        <% end %>
+          <% @performanceindex += 1 %>
+          <% if !user.matches.find_by_id(@match.id) %>
+            <% @performance =Performance.new %>
+          <% else %>
+            <% @performance = user.performances.find_by(match_id: @match.id) %>
+            <% end %>
+              <%= render 'performances/form', performance: @performance, user: user, match: @match,  performanceindex: @performanceindex %>
+          <% end %>
     </tbody>
 </table>
 <% end %>

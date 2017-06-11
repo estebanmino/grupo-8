@@ -1,0 +1,26 @@
+$("#<%= @performance.id %> .destroy-performance").hide();
+
+$("#<%= @performance.id %> .played").html('<p>No jugó</p>');
+
+$("#<%= @performance.id %>  #performance_goals").val('0');
+$("#<%= @performance.id %>  #performance_yellow_cards").val('0');
+$("#<%= @performance.id %>  #performance_red_cards").val('0');
+$("#<%= @performance.id%> input[name=_method]").remove();
+
+console.log('index');
+console.log(<%= @performanceindex %>);
+$("#<%= @performance.id %>").attr('id','position<%= @performanceindex%>');
+
+
+$("#position<%= @performanceindex%> .create-performance").attr('value', 'Agregar al partido');
+
+
+$("#edit_performance_<%= @performance.id%>").attr('class','new_performance');
+$("#edit_performance_<%= @performance.id%>").attr('action',"/performances/create");
+$("#edit_performance_<%= @performance.id%>").attr('method',"post");
+$("#edit_performance_<%= @performance.id%>").attr('id','new_performance');
+
+
+
+
+console.log(<%= @performance.id %>);

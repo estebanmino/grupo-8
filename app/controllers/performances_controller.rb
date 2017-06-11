@@ -2,6 +2,7 @@ class PerformancesController < ApplicationController
 
   include Secured
   before_action :set_performance, only: [:show, :edit, :update, :destroy]
+  before_action :set_performance_index, only: [:create]
   before_action :is_admin_logged_in?, only: %i[index show new edit create update destroy]
 
   # GET /performances
@@ -28,14 +29,18 @@ class PerformancesController < ApplicationController
   # POST /performances.json
   def create
     @performance = Performance.new(performance_params)
+
     respond_to do |format|
       if @performance.save
+        p @performanceindex
         @performance.user.update_attribute(:goals, @performance.user.goals + @performance.goals)
-        #format.html { redirect_to :back, notice: 'Performance was successfully created.' }
-        format.json do render json:{ performance: @performance } end
+        format.html { redirect_to :back, notice: 'Performance was successfully created.' }
+        format.json { head :no_content }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @performance.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -49,9 +54,11 @@ class PerformancesController < ApplicationController
         @performance.user.update_attribute(:goals, @performance.user.goals + @performance.goals - last_goals)
         format.html { redirect_to :back, notice: 'Performance was successfully updated.' }
         format.json { render :show, status: :ok, location: @performance }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @performance.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -59,11 +66,13 @@ class PerformancesController < ApplicationController
   # DELETE /performances/1
   # DELETE /performances/1.json
   def destroy
+    @performanceindex = params[:performanceindex]
     @performance.user.update_attribute(:goals, @performance.user.goals - @performance.goals)
     @performance.destroy
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Performance was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
@@ -77,5 +86,9 @@ class PerformancesController < ApplicationController
     def performance_params
       params.require(:performance).permit(:user_id, :match_id, :goals, :yellow_cards,
                                     :red_cards)
+    end
+
+    def set_performance_index
+      @performanceindex = params[:performance][:performanceindex]
     end
 end

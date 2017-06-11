@@ -62,4 +62,7 @@
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+
+  ## Usefull with js in forms
+  config.action_view.automatically_disable_submit_tag = false
 end
