@@ -1,7 +1,19 @@
-<%= form_for Invitation.new , :url => '/invitations/create', locals: {is_captain: is_captain}, html: {class: "invitation-form"} do |f| %>
+<table class="invitation-form">
+<%= form_for Invitation.new , :url => '/invitations/create', locals: {is_captain: is_captain}, html: {class: "invitation-form"}, remote:true do |f| %>
   <%= f.hidden_field :team_id, :value => @team.id %>
   <%= f.hidden_field :is_captain, :value => is_captain %>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
-  <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+  <% f.label :email %>
+  <tr>
+    <td>
+        <% if (is_captain == true) %>
+          <%= f.text_area :email, placeholder: 'Ingresa la direccione de email, si deseas invitar a mas de uno ingresalas separadas por comas' %>
+        <% else %>
+          <%= f.text_area :email, placeholder: 'Ingresa las direcciones de email separadas por comas' %>
+        <% end %>
+    </td>
+    <td>
+      <%= f.submit 'Enviar', class: 'btn btn-primary' %>
+    </td>
+  </tr>
+</table>
 <% end %>
