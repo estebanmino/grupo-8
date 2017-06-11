@@ -1,16 +1,18 @@
-$("#position<%= @performanceindex %> .create-performance").attr('value','Actualizar información');
 $("#position<%= @performanceindex %>").attr('id','<%= @performance.id %>');
 
+$form = $("#<%= @performance.id %> #new_performance");
 
-$("#<%= @performance.id %> #new_performance").attr('class','edit_performance');
-$("#<%= @performance.id %> #new_performance").attr('action',"/performances/<%= @performance.id%>");
-$("#<%= @performance.id %> #new_performance").attr('method','patch');
-$("#<%= @performance.id %> #new_performance").attr('id','edit_performance_<%= @performance.id%>');
+$form.attr('value','Actualizar información');
+$form.attr('class','edit_performance');
+$form.attr('action',"/performances/<%= @performance.id%>");
+$form.attr('method','patch');
+$form.attr('id','edit_performance_<%= @performance.id%>');
 
 $("#<%= @performance.id %> .played").html('<p>Jugó</p>');
 
 var dummy = '<input type="hidden" name="_method" value="patch">';
 $('#<%= @performance.id %> input[name=utf8]').after( dummy);
 
-var delte = '<a class="btn btn-primary destroy-performance" data-remote="true" rel="nofollow" data-method="delete" href="/performances/<%= @performance.id%>?performanceindex=<%= @performanceindex%>">Eliminar información</a>'
+var delte = '<a class="btn btn-primary destroy-performance" data-remote="true" data-method="delete" href="/performances/<%= @performance.id%>?performanceindex=<%= @performanceindex%>">Eliminar información</a>'
 $('#<%= @performance.id %> .empty').append( delte);
+$('#<%= @performance.id %> .destroy-performance').show();
