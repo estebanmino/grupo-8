@@ -30,9 +30,24 @@ class PerformancesController < ApplicationController
   def create
     @performance = Performance.new(performance_params)
 
+    local_goals = 0
+    visitor_goals = 0
+    @performance.match.performances.each do |perf|
+      if ( perf.user.team.id  ==  @performance.match.home_team.id )
+        local_goals +=  perf.goals
+      else
+        visitor_goals+= perf.goals;
+      end
+    end
+    if ( @performance.user.team.id  ==  @performance.match.home_team.id )
+      local_goals +=  @performance.goals
+    else
+      visitor_goals+= @performance.goals;
+    end
+    @save = !(local_goals > @performance.match.local_goals || visitor_goals > @performance.match.visitor_goals)
+
     respond_to do |format|
-      if @performance.save
-        p @performanceindex
+      if @save && @performance.save
         @performance.user.update_attribute(:goals, @performance.user.goals + @performance.goals)
         format.html { redirect_to :back, notice: 'Performance was successfully created.' }
         format.json { head :no_content }
@@ -49,8 +64,25 @@ class PerformancesController < ApplicationController
   # PATCH/PUT /performances/1.json
   def update
     last_goals = @performance.goals
+
+    local_goals = 0
+    visitor_goals = 0
+    @performance.match.performances.each do |perf|
+      if ( perf.user.team.id  ==  @performance.match.home_team.id )
+        local_goals +=  perf.goals
+      else
+        visitor_goals+= perf.goals;
+      end
+    end
+    if ( @performance.user.team.id  ==  @performance.match.home_team.id )
+      local_goals +=  @performance.goals
+    else
+      visitor_goals+= @performance.goals;
+    end
+    @save = !(local_goals > @performance.match.local_goals || visitor_goals > @performance.match.visitor_goals)
+
     respond_to do |format|
-      if @performance.update(performance_params)
+      if @save && @performance.update(performance_params)
         @performance.user.update_attribute(:goals, @performance.user.goals + @performance.goals - last_goals)
         format.html { redirect_to :back, notice: 'Performance was successfully updated.' }
         format.json { render :show, status: :ok, location: @performance }

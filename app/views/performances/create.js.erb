@@ -1,18 +1,27 @@
-$("#position<%= @performanceindex %>").attr('id','<%= @performance.id %>');
 
-$form = $("#<%= @performance.id %> #new_performance");
+if (!<%= @save %>) {
+  alert('No pueden haber más goles por equipo que los ingresados!');
+  $("#position<%= @performanceindex %>  #performance_goals").val('0');
+  $("#position<%= @performanceindex %>  #performance_yellow_cards").val('0');
+  $("#position<%= @performanceindex %>  #performance_red_cards").val('0');
+} else {
 
-$form.attr('value','Actualizar información');
-$form.attr('class','edit_performance');
-$form.attr('action',"/performances/<%= @performance.id%>");
-$form.attr('method','patch');
-$form.attr('id','edit_performance_<%= @performance.id%>');
+  $("#position<%= @performanceindex %>").attr('id','<%= @performance.id %>');
 
-$("#<%= @performance.id %> .played").html('<p>Jugó</p>');
+  $form = $("#<%= @performance.id %> #new_performance");
 
-var dummy = '<input type="hidden" name="_method" value="patch">';
-$('#<%= @performance.id %> input[name=utf8]').after( dummy);
+  $form.attr('value','Actualizar información');
+  $form.attr('class','edit_performance');
+  $form.attr('action',"/performances/<%= @performance.id%>");
+  $form.attr('method','patch');
+  $form.attr('id','edit_performance_<%= @performance.id%>');
 
-var delte = '<a class="btn btn-primary destroy-performance" data-remote="true" data-method="delete" href="/performances/<%= @performance.id%>?performanceindex=<%= @performanceindex%>">Eliminar información</a>'
-$('#<%= @performance.id %> .empty').append( delte);
-$('#<%= @performance.id %> .destroy-performance').show();
+  $("#<%= @performance.id %> .played").html('<p>Jugó</p>');
+
+  var dummy = '<input type="hidden" name="_method" value="patch">';
+  $('#<%= @performance.id %> input[name=utf8]').after( dummy);
+
+  var delte = '<a class="btn btn-primary destroy-performance" data-remote="true" data-method="delete" href="/performances/<%= @performance.id%>?performanceindex=<%= @performanceindex%>">Eliminar información</a>'
+  $('#<%= @performance.id %> .empty').append( delte);
+  $('#<%= @performance.id %> .destroy-performance').show();
+}
