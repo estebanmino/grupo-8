@@ -100,4 +100,6 @@ Rails.application.configure do
   }
   config.action_mailer.delivery_method = :smtp
 
+  ## Usefull with js in forms
+  config.action_view.automatically_disable_submit_tag = false
 end
