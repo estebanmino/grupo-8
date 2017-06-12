@@ -7,6 +7,9 @@ form {
   margin-bottom: 20px;
 }
 
+.editmatch {
+  width: auto;
+}
 
 
 .actions {
@@ -54,18 +57,22 @@ input {
 }
 
 .invitation-form {
-  display: inline-block;
-  input {
-    width: 45%;
+  table {
+    width: 100%;
+    text-align: center;
   }
-
+  margin: 10px;
+  width: 100%;
+  textarea {
+    width: 100%;
+  }
+  input {
+    width: 100%;
+  }
 }
 
 .field {
   margin-bottom: 25px;
-
-
-
   label, .label {
     color: #555;
     display: inline-block;
@@ -74,14 +81,11 @@ input {
     width: 25%;
     border: none;
     margin: 0;
-
   }
-
   .btn {
     margin-left: 25%;
     width: 70%;
   }
-
   .field_with_errors, &.error {
     display: inline-block;
     label, input[type=text], input[type=password], input[type=email], .error-message {

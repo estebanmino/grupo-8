@@ -10,6 +10,9 @@
   <div class="basic">
     <h1><%= @team.name %></h1>
     <h3><%= @team.division.name %></h3>
+    <% if is_admin_logged_in? %>
+      <%= link_to 'Editar', edit_team_path(@team), class: 'btn btn-primary' %>
+    <% end %>
   </div>
   <div class="box-wrapper">
     <div class="box">
@@ -66,7 +69,7 @@
 </table>
 
 <% if is_admin_logged_in? && !captain %>
-<h2> Invitar a capitán: </h2>
+  <h2> Invitar a capitán: </h2>
   <%= render 'invitation', team: @team, is_captain: true %>
 <% end %>
 
@@ -75,6 +78,5 @@
   <%= render 'invitation', team: @team, is_captain: false %>
 <% end %>
 
-<% if is_admin_logged_in? %>
-  <%= link_to 'Editar', edit_team_path(@team), class: 'btn btn-primary' %>
-<% end %>
+<div id="invalid-mails">
+</div>

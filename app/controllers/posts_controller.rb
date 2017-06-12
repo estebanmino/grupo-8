@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :belongs_to__current_user?, only: %i[update destroy]
-  before_action :logged_in?, only: %i[create] 
+  before_action :logged_in?, only: %i[create]
 
   # GET /posts
   # GET /posts.json
@@ -61,6 +61,7 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
@@ -76,6 +77,6 @@ class PostsController < ApplicationController
     end
 
     def belongs_to__current_user?
-      redirect_to(root_path, notice: 'No autorizado!') unless @post.user == current_user
+      redirect_to(root_path, notice: 'No autorizado!') unless @post.user == current_user || is_admin_logged_in?
     end
 end

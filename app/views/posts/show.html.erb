@@ -20,21 +20,27 @@
   <% if @post && @post.comments %>
 
     <% @post.comments.each do |comment| %>
-      <div class="comments">
+
+
+
+      <div class="comments" data-comment-id="<%= comment.id %>">
         <%= comment.content %>
         <div class="btns">
         <% if (logged_in? && (comment_belongs_to_user(comment) || post_belongs_to_user(@post))) || is_admin_logged_in?  %>
           <%= link_to 'Editar', edit_comment_path(comment), class: 'btn btn-primary' %>
-          <%= link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás segur@?' }, class: 'btn btn-primary' %>
+          <%= link_to 'Eliminar', comment, method: :delete, data: { confirm: '¿Estás segur@?' }, class: 'btn btn-primary', remote: true %>
         <% end %>
         </div>
         <h6>Por: <%= comment.user.full_name %><h6>
       </div>
+
     <% end %>
+    <div id="Comments-holder">
+      </div>
   <% end %>
 
   <% if logged_in? %>
-    <%= form_for :comment, url: "/comments", method: "post", html: {class: "comment-form"} do |f| %>
+    <%= form_for :comment, url: "/comments", method: "post",remote: true, html: {class: "comment-form"} do |f| %>
       <%= f.text_area :content, required: true %>
       <%= f.hidden_field :user_id, value: current_user.id %>
       <%= f.hidden_field :post_id, value: @post.id %>

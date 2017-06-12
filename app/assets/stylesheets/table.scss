@@ -11,7 +11,7 @@ table, th, td {
 th, td {
   padding: 15px;
   font-weight: normal;
-  text-align: right;
+  text-align: center;
 }
 
 .team {
@@ -20,6 +20,13 @@ th, td {
 
 .info {
   text-align: right;
+}
+
+td {
+  border-bottom: 1px solid #cfcfcf;
+  border-top: 1px solid #cfcfcf;
+  margin-left: 10px;
+  text-align: center;
 }
 
 td:nth-child(1),td:nth-child(2) {
@@ -31,15 +38,14 @@ th:nth-child(1),th:nth-child(2) {
 }
 
 .players td:nth-child(2) {
-  text-align: right;
+  text-align: left;
 }
 
-td {
-  border-bottom: 1px solid #cfcfcf;
-  border-top: 1px solid #cfcfcf;
-  margin-left: 10px;
-  text-align: right;
+
+.matchtable td, .matchtable th  {
+  text-align: left;
 }
+
 
 tr {
   margin-left: 20px;

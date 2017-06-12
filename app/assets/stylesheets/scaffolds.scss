@@ -26,16 +26,6 @@ a {
   }
 }
 
-th {
-  padding-bottom: 5px;
-}
-
-td {
-  padding-bottom: 7px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
 
 
 #notice {
@@ -88,7 +78,8 @@ label {
 }
 
 .btn-primary:hover {
-background-color: #950700;
+  background-color: #950700;
+  cursor: pointer;
 }
 
 .new-button, .edit-button {
@@ -101,7 +92,7 @@ background-color: #950700;
 .black-button {
  border-color: #2b3036;
  color: #2b3036;
- 
+
  margin-left: 10px;
 }
 

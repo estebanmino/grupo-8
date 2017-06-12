@@ -1,28 +1,95 @@
 <p id="notice"><%= notice %></p>
 
 <div class="match-info">
-  <div  class="space1"></div>
+  <div class="space1"></div>
   <div class="tournament">
     <h4><%= @match.tournament.name %></h4>
     <% if is_admin_logged_in? %>
-      <%= link_to 'Editar', edit_match_path(@match), class: 'btn btn-primary' %>
+    <%= link_to 'Editar', edit_match_path(@match), class: 'btn btn-primary' %>
     <% end %>
   </div>
-  <div  class="space"></div>
+  <div class="space"></div>
   <div class="basic">
     <h4><%= @match.date.day %>/<%= @match.date.month %>/<%= @match.date.year %>
-    <%= @match.time.hour%>:<%= @match.time.min.to_s.rjust(2, '0')%> hrs</h4>
+      <%= @match.time.hour%>:<%= @match.time.min.to_s.rjust(2, '0')%>
+      hrs</h4>
     <% if  @match.played  %>
-        <h4>Partido Jugado</h4>
-      <% else %>
-        <h4>Aún no se juega este partido</h4>
-      <% end %>
+    <h4>Partido Jugado</h4>
+  <% else %>
+    <h4>Aún no se juega este partido</h4>
+    <% end %>
 
-      <div class="result">
-        <h3><%= Team.find(@match.visit_team_id).name %></h3>
-        <h1><%=  @match.visitor_goals %>:<%=  @match.local_goals %></h1>
-        <h3><%= Team.find(@match.home_team_id).name %></h3>
+    <div class="result">
+      <h3><%= Team.find(@match.visit_team_id).name %></h3>
+      <h1><%=  @match.visitor_goals %>:<%=  @match.local_goals %></h1>
+      <h3><%= Team.find(@match.home_team_id).name %></h3>
     </div>
   </div>
 
+</div>
+
+<div id="performances-wrapper">
+
+  <h1>Rendimientos individuales</h1>
+
+  <% @performanceindex = 0 %>
+  <% [['Equipo Local', @match.home_team],['Equipo Visitante', @match.visit_team]].each do |team| %>
+  <h2><%= team[1].name %></h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Jugador</th>
+        <th>Presente</th>
+        <th>Goles</th>
+        <th>Amarillas</th>
+        <th>Roja</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% team[1].users.each do |user| %>
+      <% performances = Performance.where(user_id: user.id ).where(match_id: @match.id) %>
+
+      <% if performances != [] %>
+      <% performances.each do |perf| %>
+      <tr>
+        <td>
+          <%= user.full_name %>
+        </td>
+        <td>
+          <p>Jugó</p>
+        </td>
+        <td>
+          <%= perf.goals %>
+        </td>
+        <td>
+          <%= perf.yellow_cards %>
+        </td>
+        <td>
+          <%= perf.red_cards %>
+        </td>
+      </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td>
+          <%= user.full_name %>
+        </td>
+        <td>
+          <p>No Jugó</p>
+        </td>
+        <td>
+          <p>0</p>
+        </td>
+        <td>
+          <p>0</p>
+        </td>
+        <td>
+          <p>0</p>
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
 </div>

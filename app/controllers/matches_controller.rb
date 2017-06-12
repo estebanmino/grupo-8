@@ -33,7 +33,10 @@ class MatchesController < ApplicationController
     @match = Match.new(match_params)
 
     respond_to do |format|
-      if @match.save
+      if @match.home_team_id == @match.visit_team_id
+        format.html { render :index, notice: 'No se puede crear un partido entre el mismo equipo' }
+        
+      elsif @match.save
         format.html { redirect_to @match, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
       else
@@ -47,12 +50,14 @@ class MatchesController < ApplicationController
   # PATCH/PUT /matches/1.json
   def update
     respond_to do |format|
-      if @match.update(match_params)
+      if params[:match][:played]  && @match.update(match_params)
         format.html { redirect_to @match, notice: 'Match was successfully updated.' }
         format.json { render :show, status: :ok, location: @match }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @match.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -64,6 +69,7 @@ class MatchesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to matches_url, notice: 'Match was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
