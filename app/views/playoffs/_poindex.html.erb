@@ -84,7 +84,7 @@
 		<%gol1 = "-"%>
 		<%gol2 = "-"%>
 		<%end%>
-		
+
 		<%team1 = Team.find(partido4.home_team_id).name%>
 		<%team2 = Team.find(partido4.visit_team_id).name%>
 
@@ -224,7 +224,7 @@
           <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
           <% if is_admin_logged_in? %>
             <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
-            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
+            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
           <% end  %>
         </div>
       </div>
