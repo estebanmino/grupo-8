@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :performances
   resources :teams
   resources :divisions do
@@ -25,6 +26,8 @@ Rails.application.routes.draw do
 
   root 'statics#home'
 
+  get '/rooms/show', to: 'rooms#show'
+
   post '/invitations/create', to: 'invitations#create'
   post '/performances/create', to: 'performances#create'
 
@@ -41,4 +44,6 @@ Rails.application.routes.draw do
 
   get 'comments/:id', to: 'comments#update', as: 'comment_update'
 
+  # Serve websocket cable requests in-process
+  mount ActionCable.server => '/cable'
 end
