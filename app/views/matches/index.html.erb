@@ -40,6 +40,7 @@
   <% matchday1 = match.Datenum %>
   <h2>Jornada <%= match.Datenum %></h2>
 <% end %>
+<div  data-match-id="<%= match.id %>">
 <div class="panel-match">
   <div class="date">
     <%= match.Datenum %>
@@ -56,12 +57,13 @@
       <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
       <% if is_admin_logged_in? %>
         <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
-        <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
       <% end  %>
     </div>
   </div>
 
 
+</div>
 </div>
 
 

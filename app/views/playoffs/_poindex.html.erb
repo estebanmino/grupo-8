@@ -23,8 +23,14 @@
 	<ul class="round round-1">
 		<li class="spacer">&nbsp;</li>
 		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).first%>
+		<%if partido1.played%>
 		<%gol1 = partido1.local_goals%>
 		<%gol2 = partido1.visitor_goals%>
+		<%else%>
+		<%gol1 = "-"%>
+		<%gol2 = "-"%>
+		<%end%>
+
 		<%team1 = Team.find(partido1.home_team_id).name%>
 		<%team2 = Team.find(partido1.visit_team_id).name%>
 
@@ -35,8 +41,14 @@
 		<li class="spacer">&nbsp;</li>
 
 		<%partido2 = Match.all.where(playoff: true).where(tournament_id: i.id).second%>
+		<%if partido2.played%>
 		<%gol1 = partido2.local_goals%>
 		<%gol2 = partido2.visitor_goals%>
+		<%else%>
+		<%gol1 = "-"%>
+		<%gol2 = "-"%>
+		<%end%>
+
 		<%team1 = Team.find(partido2.home_team_id).name%>
 		<%team2 = Team.find(partido2.visit_team_id).name%>
 
@@ -47,8 +59,14 @@
 		<li class="spacer">&nbsp;</li>
 
 		<%partido3 = Match.all.where(playoff: true).where(tournament_id: i.id).third%>
+		<%if partido3.played%>
 		<%gol1 = partido3.local_goals%>
 		<%gol2 = partido3.visitor_goals%>
+		<%else%>
+		<%gol1 = "-"%>
+		<%gol2 = "-"%>
+		<%end%>
+
 		<%team1 = Team.find(partido3.home_team_id).name%>
 		<%team2 = Team.find(partido3.visit_team_id).name%>
 
@@ -59,8 +77,14 @@
 		<li class="spacer">&nbsp;</li>
 
 		<%partido4 = Match.all.where(playoff: true).where(tournament_id: i.id).third%>
+		<%if partido4.played%>
 		<%gol1 = partido4.local_goals%>
 		<%gol2 = partido4.visitor_goals%>
+		<%else%>
+		<%gol1 = "-"%>
+		<%gol2 = "-"%>
+		<%end%>
+		
 		<%team1 = Team.find(partido4.home_team_id).name%>
 		<%team2 = Team.find(partido4.visit_team_id).name%>
 
@@ -182,6 +206,7 @@
 
 <%fase = {"1"=>"Cuartos de final", "2"=>"Semifinal", "3"=>"Final"}%>
 <%for match in i.matches%>
+<div  data-match-id="<%= match.id %>">
 <div class= "<%=a%>" >
     <div class="panel-match">
       <div class="date">
@@ -199,7 +224,7 @@
           <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
           <% if is_admin_logged_in? %>
             <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
-            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' }, remote: true %>
           <% end  %>
         </div>
       </div>
@@ -207,6 +232,7 @@
 
   </div>
 	  </div>
+		</div>
 <%end%>
 
 <%end%>
