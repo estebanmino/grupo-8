@@ -33,7 +33,10 @@ class MatchesController < ApplicationController
     @match = Match.new(match_params)
 
     respond_to do |format|
-      if @match.save
+      if @match.home_team_id == @match.visit_team_id
+        format.html { render :index, notice: 'No se puede crear un partido entre el mismo equipo' }
+        
+      elsif @match.save
         format.html { redirect_to @match, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
       else
