@@ -9,7 +9,7 @@
         <ul>
           <div id="navwrapper">
             <li class="nav-link defaultClick"><%= link_to "Home", root_path %></li>
-            <li class="nav-link"><%= link_to 'Divisiones', divisions_path %></li>
+            <li class="<%= 'nav-link active' if current_page?(divisions_path) %>"><%= link_to 'Divisiones', divisions_path %></li>
             <li class="nav-link"><%= link_to 'Fechas', matches_path %></li>
             <li class="nav-link"><%= link_to "Playoffs", playoffs_path %></li>
             <li class="nav-link"><%= link_to 'Tabla', table_path %></li>

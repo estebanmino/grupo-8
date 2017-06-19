@@ -20,7 +20,7 @@ body {
 }
 
 #pagewrapper {
-  width: 1170px !important;
+  width: 1170px;
   background-color: #f1f1f1;
   margin: 20px auto 20px auto;
   min-height: 460px;
@@ -65,12 +65,12 @@ li.right  {
 li a {
   text-decoration-color: white;
   display: block;
-  color: white !important;
+  color: white;
   text-align: center;
   padding: 20px 16px;
   text-decoration: none;
-  font-family: sans-serif !important;
-  font-size: 16px !important;
+  font-family: sans-serif;
+  font-size: 16px;
   font-weight: bold;
   text-transform: uppercase;
 }

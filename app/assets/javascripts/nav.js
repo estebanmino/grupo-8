@@ -2,7 +2,7 @@
 
 $(document).on('turbolinks:load', function(){
 
-  $('.nav-link').on('click', function(){
+  $('.nav-link').on('click', function(e){
 
     var btn = $(this);
 
@@ -16,8 +16,10 @@ $(document).on('turbolinks:load', function(){
     btn.addClass('active');
 
 
+
+
 });
 
 //default behavior
-$('.defaultClick').click();
+$(this).click();
 });
