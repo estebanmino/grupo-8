@@ -8,15 +8,15 @@
       <nav>
         <ul>
           <div id="navwrapper">
-            <li class="nav-link defaultClick"><%= link_to "Home", root_path %></li>
-            <li class="nav-link"><%= link_to 'Divisiones', divisions_path %></li>
-            <li class="nav-link"><%= link_to 'Fechas', matches_path %></li>
-            <li class="nav-link"><%= link_to "Playoffs", playoffs_path %></li>
-            <li class="nav-link"><%= link_to 'Tabla', table_path %></li>
-            <li class="nav-link"><%= link_to 'Equipos', teams_path %></li>
-            <li class="nav-link"><%= link_to 'Goleadores', scorers_path %></li>
-            <li class="nav-link"><%= link_to 'Galería', pictures_path %></li>
-            <li class="nav-link"><%= link_to "Foro", posts_path %></li>
+            <li class="<%= 'active' if current_page?(root_path) %>"><%= link_to "Home", root_path %></li>
+            <li class="<%= 'active' if current_page?(divisions_path) %>"><%= link_to 'Divisiones', divisions_path %></li>
+            <li class="<%= 'active' if current_page?(matches_path) %>"><%= link_to 'Fechas', matches_path %></li>
+            <li class="<%= 'active' if current_page?(playoffs_path) %>"><%= link_to "Playoffs", playoffs_path %></li>
+            <li class="<%= 'active' if current_page?(table_path) %>"><%= link_to 'Tabla', table_path %></li>
+            <li class="<%= 'active' if current_page?(teams_path) %>"><%= link_to 'Equipos', teams_path %></li>
+            <li class="<%= 'active' if current_page?(scorers_path) %>"><%= link_to 'Goleadores', scorers_path %></li>
+            <li class="<%= 'active' if current_page?(pictures_path) %>"><%= link_to 'Galería', pictures_path %></li>
+            <li class="<%= 'active' if current_page?(posts_path) %>"><%= link_to "Foro", posts_path %></li>
 
             <% if !logged_in? %>
               <li class="right"><%= link_to "Log In", login_path %></li>
