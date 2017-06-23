@@ -89,7 +89,7 @@ for team in teams
   end
 end
 
-User.create(
+c = User.create(
 name: "Cristian",
 last_name: "Carreño",
 email: "cristian@gmail.com",
@@ -102,8 +102,9 @@ goals: 0,
 yellow_cards: 0,
 red_cards: 0)
 
+c.generate_token_and_save
 
-User.create(
+e = User.create(
 name: "Esteban",
 last_name: "Miño",
 email: "efmino@uc.cl",
@@ -115,9 +116,10 @@ is_captain: false,
 goals: 0,
 yellow_cards: 0,
 red_cards: 0)
+e.generate_token_and_save
 
 
-User.create(
+adm = User.create(
 name: "Admin",
 last_name: "Istrador",
 email: "admin@gmail.com",
@@ -129,6 +131,9 @@ is_captain: false,
 goals: 0,
 yellow_cards: 0,
 red_cards: 0)
+
+adm.generate_token_and_save
+
 
 user_ids = User.pluck(:id)
 
