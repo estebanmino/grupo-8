@@ -35,7 +35,7 @@ class MatchesController < ApplicationController
     respond_to do |format|
       if @match.home_team_id == @match.visit_team_id
         format.html { render :index, notice: 'No se puede crear un partido entre el mismo equipo' }
-        
+
       elsif @match.save
         format.html { redirect_to @match, notice: 'Match was successfully created.' }
         format.json { render :show, status: :created, location: @match }
@@ -82,7 +82,8 @@ class MatchesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def match_params
       params.require(:match).permit(:date, :time, :home_team_id, :visit_team_id, :tournament_id,
-                                    :visitor_goals, :local_goals, :played, :Datenum, :playoff)
+                                    :visitor_goals, :local_goals, :played, :Datenum, :playoff,
+                                    :address, :commune)
     end
 
 

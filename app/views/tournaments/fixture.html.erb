@@ -1,56 +1,43 @@
 <h1>Crear fixture</h1>
 
-<%= form_tag(method: "post") do %>
+<%= form_tag({method: "post"}, {class: 'editmatch'}) do %>
+
+<% numbers = [1,2,3,4,5,6,7] %>
+
+<% numbers.each do |number| %>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          <h2>Jornada <%= number %></h2>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+        <td>
+          <%= label_tag(:"date#{number}", "Fecha") %>
+        </td>
+        <td>
+          <%= date_select(:"date#{number}","Fecha#{number}", selected: Date.today) %>
+        </td>
+        <td>
+          <%= label_tag(:"address#{number}", "Lugar")%>
+        </td>
+        <td>
+          <%= text_field_tag(:"place#{number}", nil, placeholder: 'Nombre') %>
+        </td>
+        <td>
+          <%= text_field_tag(:"address#{number}", nil, placeholder: 'Dirección') %>
+        </td>
+        <td>
+          <%= text_field_tag(:"commune#{number}", nil, placeholder: 'Comuna') %>
+        </td>
+    </tbody>
+  </table>
+  <br />
+<% end %>
 
 
-<div class="field">
-  <%= label_tag(:date1, "Fecha1") %>
-  <div class="selections">
-    <%= date_select(:date1,"Fecha1", selected: Date.today) %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:date2, "Fecha2") %>
-  <div class="selections">
-    <%= date_select(:date2,"Fecha2", selected: Date.today) %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:date3, "Fecha3") %>
-  <div class="selections">
-    <%= date_select(:date3,"Fecha3", selected: Date.today) %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:date4, "Fecha4") %>
-  <div class="selections">
-    <%= date_select(:date4,"Fecha4", selected: Date.today) %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:date5, "Fecha5") %>
-  <div class="selections">
-    <%= date_select(:date5,"Fecha5", selected: Date.today) %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:date6, "Fecha6") %>
-  <div class="selections">
-    <%= date_select(:date6,"Fecha6", selected: Date.today) %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:date7, "Fecha7") %>
-  <div class="selections">
-    <%= date_select(:date7,"Fecha7", selected: Date.today) %>
-  </div>
-</div>
 
 <div class="field">
   <%= label_tag(:time1, "Hora1") %>
@@ -83,4 +70,6 @@
 <div class="field">
   <%= submit_tag("Crear", class: 'btn btn-primary') %>
 </div>
+
+
 <% end %>

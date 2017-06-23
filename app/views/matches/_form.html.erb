@@ -37,6 +37,16 @@
   </div>
 
   <div class="field">
+    <%= f.label :address, "Dirección" %>
+    <%= f.time_select :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :commune, "Comuna" %>
+    <%= f.time_select :commune %>
+  </div>
+
+  <div class="field">
     <%= f.label :local_goals, "Goles local" %>
     <%= f.number_field :local_goals, value: 0 %>
 

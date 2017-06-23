@@ -1,13 +1,8 @@
 class TournamentsController < ApplicationController
-
   include Secured
   include TournamentsHelper
-
+  
   before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
-
-
-
-
   # GET /divisions/:division_id/tournaments
   # GET /divisions/:division_id/tournaments.xml
   def index
@@ -66,9 +61,6 @@ class TournamentsController < ApplicationController
 
   def new_fixture
 
-
-
-
     division = Division.find(params[:division_id])
     @tournament = division.tournaments.find(params[:id])
     teams = @tournament.teams.pluck(:id)
@@ -108,13 +100,18 @@ class TournamentsController < ApplicationController
     "-" + params[:time4]["Hora4(3i)"].rjust(2, '0') + " " + params[:time4]["Hora4(4i)"].rjust(2, '0') +
     ":" + params[:time4]["Hora4(5i)"].rjust(2, '0') + ":00"
 
+    addresses = [params[:address1],params[:address2],params[:address3],params[:address4],
+                params[:address5], params[:address6],params[:address7]]
+    communes = [params[:commune1],params[:commune2],params[:commune3],params[:commune4],
+                params[:commune5], params[:commune6],params[:commune7]]
+    places = [params[:place1],params[:place2],params[:place3],params[:place4],
+                params[:place5], params[:place6],params[:place7]]
     times = [time1,time2,time3,time4]
     dates = [date1,date2,date3,date4,date5,date6,date7]
 
-    create_fix(teams, division, @tournament, dates, times)
+    create_fix(teams, division, @tournament, dates, times, addresses, communes, places)
 
     redirect_to home_path
-
 
   end
 

@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(version: 20170527004251) do
   create_table "matches", force: :cascade do |t|
     t.date     "date"
     t.time     "time"
+    t.text     "place"
+    t.text     "address"
+    t.text     "commune"
+    t.float    "lat"
+    t.float    "long"
     t.integer  "visitor_goals"
     t.integer  "local_goals"
     t.boolean  "played"
