@@ -1,7 +1,8 @@
 class TournamentsController < ApplicationController
+
   include Secured
   include TournamentsHelper
-  
+
   before_action :is_admin_logged_in?, only: %i[edit destroy new create update]
   # GET /divisions/:division_id/tournaments
   # GET /divisions/:division_id/tournaments.xml
@@ -48,71 +49,73 @@ class TournamentsController < ApplicationController
   def fixture
     division = Division.find(params[:division_id])
     @tournament = division.tournaments.find(params[:id])
-    teams = @tournament.teams.pluck(:id)
     matches = @tournament.matches
     if matches.length > 0
       redirect_to([@tournament.division, @tournament], :notice => 'No se pudo crear el fixture inicial, ya existen partidos creados!')
-
-
     end
-
-
   end
 
   def new_fixture
-
     division = Division.find(params[:division_id])
     @tournament = division.tournaments.find(params[:id])
     teams = @tournament.teams.pluck(:id)
 
-    date1 = params[:date1]["Fecha1(1i)"]+"-"+params[:date1]["Fecha1(2i)"].rjust(2, '0')+
-    "-"+params[:date1]["Fecha1(3i)"].rjust(2, '0')
-
-    date2 = params[:date2]["Fecha2(1i)"]+"-"+params[:date2]["Fecha2(2i)"].rjust(2, '0')+
-    "-"+params[:date2]["Fecha2(3i)"].rjust(2, '0')
-
-    date3 = params[:date3]["Fecha3(1i)"]+"-"+params[:date3]["Fecha3(2i)"].rjust(2, '0')+
-    "-"+params[:date3]["Fecha3(3i)"].rjust(2, '0')
-
-    date4 = params[:date4]["Fecha4(1i)"]+"-"+params[:date4]["Fecha4(2i)"].rjust(2, '0')+
-    "-"+params[:date4]["Fecha4(3i)"].rjust(2, '0')
-
-    date5 = params[:date5]["Fecha5(1i)"]+"-"+params[:date5]["Fecha5(2i)"].rjust(2, '0')+
-    "-"+params[:date5]["Fecha5(3i)"].rjust(2, '0')
-    date6 = params[:date6]["Fecha6(1i)"]+"-"+params[:date6]["Fecha6(2i)"].rjust(2, '0')+
-    "-"+params[:date6]["Fecha6(3i)"].rjust(2, '0')
-    date7 = params[:date7]["Fecha7(1i)"]+"-"+params[:date7]["Fecha7(2i)"].rjust(2, '0')+
-    "-"+params[:date7]["Fecha7(3i)"].rjust(2, '0')
-
-    time1 = params[:time1]["Hora1(1i)"] + "-" + params[:time1]["Hora1(2i)"].rjust(2, '0') +
-    "-" + params[:time1]["Hora1(3i)"].rjust(2, '0') + " " + params[:time1]["Hora1(4i)"].rjust(2, '0') +
-    ":" + params[:time1]["Hora1(5i)"].rjust(2, '0') + ":00"
-
-    time2 = params[:time2]["Hora2(1i)"] + "-" + params[:time2]["Hora2(2i)"].rjust(2, '0') +
-    "-" + params[:time2]["Hora2(3i)"].rjust(2, '0') + " " + params[:time2]["Hora2(4i)"].rjust(2, '0') +
-    ":" + params[:time2]["Hora2(5i)"].rjust(2, '0') + ":00"
-
-    time3 = params[:time3]["Hora3(1i)"] + "-" + params[:time3]["Hora3(2i)"].rjust(2, '0') +
-    "-" + params[:time3]["Hora3(3i)"].rjust(2, '0') + " " + params[:time3]["Hora3(4i)"].rjust(2, '0') +
-    ":" + params[:time3]["Hora3(5i)"].rjust(2, '0') + ":00"
-
-    time4 = params[:time4]["Hora4(1i)"] + "-" + params[:time4]["Hora4(2i)"].rjust(2, '0') +
-    "-" + params[:time4]["Hora4(3i)"].rjust(2, '0') + " " + params[:time4]["Hora4(4i)"].rjust(2, '0') +
-    ":" + params[:time4]["Hora4(5i)"].rjust(2, '0') + ":00"
-
     addresses = [params[:address1],params[:address2],params[:address3],params[:address4],
                 params[:address5], params[:address6],params[:address7]]
+
     communes = [params[:commune1],params[:commune2],params[:commune3],params[:commune4],
                 params[:commune5], params[:commune6],params[:commune7]]
+
     places = [params[:place1],params[:place2],params[:place3],params[:place4],
                 params[:place5], params[:place6],params[:place7]]
-    times = [time1,time2,time3,time4]
-    dates = [date1,date2,date3,date4,date5,date6,date7]
 
-    create_fix(teams, division, @tournament, dates, times, addresses, communes, places)
+    times = (1..7).each.map{|i| (1..4).map{|j| params[:"time#{(i-1)*4+j}"]}}
+    #times = [params[:time1],params[:time2],params[:time3],params[:time4]]
 
-    redirect_to home_path
+    dates = [params[:date1],params[:date2],params[:date3],params[:date4],
+             params[:date5],params[:date6],params[:date7]]
 
+    failed = false
+    hours = [0,0,0,0,0,0,0]
+    for i in 0...teams.length
+      for j in i+1...teams.length
+        datenum = (i ^ j).to_i - 1
+        date = date_format(dates[datenum],datenum+1)
+
+        time = time_format(times[datenum][hours[datenum]], hours[datenum]+1, datenum+1)
+
+        hours[datenum] += 1
+        address = addresses[datenum]
+        commune = communes[datenum]
+        place = places[datenum]
+
+        if j%2 != 0
+          home_team = teams[i]
+          away_team = teams[j]
+        else
+          home_team = teams[j]
+          away_team = teams[i]
+        end
+
+        match = Match.new(date: date, time: time, visitor_goals: 0, local_goals: 0,
+          played: false, visit_team_id: away_team, home_team_id: home_team, tournament_id: @tournament.id,
+          Datenum: datenum+1, address: address, commune: commune,place: place)
+
+        if !match.save
+          failed = true
+          break
+        end
+      end
+    end
+    respond_to do |format|
+      if !failed
+        format.html { redirect_to division_tournament_path, notice: 'Torneo creado correctamente' }
+      else
+        format.html { render :fixture }
+        format.json { render json: @tournament.errors, status: :unprocessable_entity }
+
+      end
+    end
   end
 
 
@@ -120,18 +123,13 @@ class TournamentsController < ApplicationController
 
   # GET /divisions/:division_id/tournaments/:id/edit
   def edit
-
     division = Division.find(params[:division_id])
-
     @tournament = division.tournaments.find(params[:id])
   end
 
   def create
-
     division = Division.find(params[:division_id])
-
     @tournament = division.tournaments.create(tournament_params)
-
     respond_to do |format|
       if @tournament.save
         #1st argument of redirect_to is an array, in order to build the correct route to the nested resource tournament
@@ -181,10 +179,8 @@ class TournamentsController < ApplicationController
       end
     end
 
-    private
-        def tournament_params
-          params.require(:tournament).permit(:name, :description, :season)
-        end
-
-
+  private
+    def tournament_params
+      params.require(:tournament).permit(:name, :description, :season)
+    end
 end

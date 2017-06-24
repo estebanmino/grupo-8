@@ -4,6 +4,26 @@
 
 <% numbers = [1,2,3,4,5,6,7] %>
 
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <%= label_tag("check", "Fijar todas lugares en Jornada 1") %>
+      </td>
+      <td>
+        <%= check_box_tag("check_locations", value = "1", checked = false, options = {})  %>
+      </td>
+      <td>
+        <%= label_tag("check", "Fijar todas los horarios en Jornada 1") %>
+      </td>
+      <td>
+        <%= check_box_tag("check_hours", value = "1", checked = false, options = {})  %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+
 <% numbers.each do |number| %>
   <table>
     <thead>
@@ -14,6 +34,7 @@
       </tr>
     </thead>
     <tbody>
+      <tr>
         <td>
           <%= label_tag(:"date#{number}", "Fecha") %>
         </td>
@@ -32,40 +53,31 @@
         <td>
           <%= text_field_tag(:"commune#{number}", nil, placeholder: 'Comuna') %>
         </td>
+      </tr>
+
+      <% [1,3].each do |time| %>
+      <tr class="match_hour">
+        <td></td>
+        <td>
+          <%= label_tag(:"time#{(number-1)*4+time}", "Hora #{(number-1)*4+time}") %>
+        </td>
+        <td>
+          <%= time_select(:"time#{(number-1)*4+time}","Hora #{(number-1)*4+time}") %>
+        </td>
+        <td></td>
+        <td>
+          <%= label_tag(:"time#{(number-1)*4+1+time}", "Hora #{(number-1)*4+1+time}") %>
+        </td>
+        <td>
+          <%= time_select(:"time#{(number-1)*4+1+time}","Hora #{(number-1)*4+1+time}") %>
+        </td>
+      </tr>
+      <% end %>
+
     </tbody>
   </table>
   <br />
 <% end %>
-
-
-
-<div class="field">
-  <%= label_tag(:time1, "Hora1") %>
-  <div class="selections">
-    <%= time_select(:time1,"Hora1") %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:time2, "Hora2") %>
-  <div class="selections">
-    <%= time_select(:time2,"Hora2") %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:time3, "Hora3") %>
-  <div class="selections">
-    <%= time_select(:time3,"Hora3") %>
-  </div>
-</div>
-
-<div class="field">
-  <%= label_tag(:time4, "Hora4") %>
-  <div class="selections">
-    <%= time_select(:time4,"Hora4") %>
-  </div>
-</div>
 
 <div class="field">
   <%= submit_tag("Crear", class: 'btn btn-primary') %>
