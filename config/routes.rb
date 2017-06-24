@@ -43,12 +43,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :comments, only: [:index, :create, :show]
-      resources :posts, only: [:index, :create, :show]
-      resources :users, only: [:show, :index]
-      resources :matches, only: [:show, :index]
-      resources :teams, only: [:show, :index]
-      resources :tournaments, only: [:show, :index]
+      resources :comments, only: [:index, :create, :show, :destroy]
+      resources :posts, only: [:index, :create, :show, :destroy]
+      resources :users, only: [:show, :index, :destroy]
+      resources :matches, only: [:show, :index, :create, :destroy]
+      resources :teams, only: [:show, :index, :create, :destroy]
+      resources :tournaments, only: [:show, :index, :create, :destroy]
     end
   end
 
