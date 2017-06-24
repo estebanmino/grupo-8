@@ -44,7 +44,11 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :comments, only: [:index, :create, :show]
-      resources :users, only: [:show]
+      resources :posts, only: [:index, :create, :show]
+      resources :users, only: [:show, :index]
+      resources :matches, only: [:show, :index]
+      resources :teams, only: [:show, :index]
+      resources :tournaments, only: [:show, :index]
     end
   end
 

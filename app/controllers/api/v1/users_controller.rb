@@ -7,5 +7,11 @@ module Api::V1
       @user = User.find(params[:id])
 
     end
+
+    def index
+
+      @users = User.all
+
+    end
   end
 end
