@@ -1,28 +1,30 @@
 <h1>Crear fixture</h1>
 
+
+  <table>
+    <tbody>
+      <tr class="checkers">
+        <td>
+          <% @check_locations = false %>
+          <%= check_box_tag(@check_locations, true, false,
+              :onclick=>
+              "if (checked)
+                {$('.match_hour').hide();
+              } else {
+                $('.match_hour').show();
+                }")%>
+
+          <p id="po" value="true"><%= @check_locations %></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+<br />
+
+
 <%= form_tag({method: "post"}, {class: 'editmatch'}) do %>
 
 <% numbers = [1,2,3,4,5,6,7] %>
-
-<table>
-  <tbody>
-    <tr>
-      <td>
-        <%= label_tag("check", "Fijar todas lugares en Jornada 1") %>
-      </td>
-      <td>
-        <%= check_box_tag("check_locations", value = "1", checked = false, options = {})  %>
-      </td>
-      <td>
-        <%= label_tag("check", "Fijar todas los horarios en Jornada 1") %>
-      </td>
-      <td>
-        <%= check_box_tag("check_hours", value = "1", checked = false, options = {})  %>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<br />
 
 <% numbers.each do |number| %>
   <table>
@@ -56,7 +58,11 @@
       </tr>
 
       <% [1,3].each do |time| %>
-      <tr class="match_hour">
+      <% if number != 1  %>
+        <tr class="match_hour">
+      <% else %>
+        <tr class="">
+      <% end %>
         <td></td>
         <td>
           <%= label_tag(:"time#{(number-1)*4+time}", "Hora #{(number-1)*4+time}") %>
