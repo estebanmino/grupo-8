@@ -9,7 +9,9 @@ module Api::V1
     end
 
     def create
+       user = User.find_by_token(params[:token])
        @post = @current_user.posts.build(post_params)
+       @post.user_id = user.id
        return if @post.save
        render json: { errors: @post.errors }, status: :unprocessable_entity
     end
@@ -30,7 +32,7 @@ module Api::V1
     private
 
     def post_params
-       params.require(:post).permit(:name, :description, :user_id)
+       params.require(:post).permit(:name, :description)
     end
 
     def set_post

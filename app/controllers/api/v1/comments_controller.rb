@@ -12,8 +12,11 @@ module Api::V1
 
     def create
 
+       user = User.find_by_token(params[:token])
+
        @post = Post.find(params[:post_id])
        @comment = @post.comments.build(comment_params)
+       @comment.user_id = user.id
        return if @comment.save
        render json: { errors: @comment.errors }, status: :unprocessable_entity
     end
