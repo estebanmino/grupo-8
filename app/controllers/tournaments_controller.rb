@@ -60,34 +60,37 @@ class TournamentsController < ApplicationController
     @tournament = division.tournaments.find(params[:id])
     teams = @tournament.teams.pluck(:id)
 
-    addresses = [params[:address1],params[:address2],params[:address3],params[:address4],
-                params[:address5], params[:address6],params[:address7]]
-
-    communes = [params[:commune1],params[:commune2],params[:commune3],params[:commune4],
-                params[:commune5], params[:commune6],params[:commune7]]
-
-    places = [params[:place1],params[:place2],params[:place3],params[:place4],
-                params[:place5], params[:place6],params[:place7]]
-
+    addresses = (1..7).each.map{|i| params[:"address#{i}"]}
+    communes = (1..7).each.map{|i| params[:"commune#{i}"]}
+    places = (1..7).each.map{|i| params[:"place#{i}"]}
+    dates = (1..7).each.map{|i| params[:"date#{i}"]}
     times = (1..7).each.map{|i| (1..4).map{|j| params[:"time#{(i-1)*4+j}"]}}
-    #times = [params[:time1],params[:time2],params[:time3],params[:time4]]
-
-    dates = [params[:date1],params[:date2],params[:date3],params[:date4],
-             params[:date5],params[:date6],params[:date7]]
 
     failed = false
     hours = [0,0,0,0,0,0,0]
     for i in 0...teams.length
       for j in i+1...teams.length
-        datenum = (i ^ j).to_i - 1
-        date = date_format(dates[datenum],datenum+1)
 
-        time = time_format(times[datenum][hours[datenum]], hours[datenum]+1, datenum+1)
+        datenum = (i ^ j).to_i - 1
+
+        date = date_format(dates[datenum],datenum+1)
+        if params[:check_times] == "true"
+          time = time_format(times[0][hours[datenum]], hours[datenum]+1, 1)
+        else
+          time = time_format(times[datenum][hours[datenum]], hours[datenum]+1, datenum+1)
+        end
 
         hours[datenum] += 1
-        address = addresses[datenum]
-        commune = communes[datenum]
-        place = places[datenum]
+
+        if params[:check_locations] == "true"
+          address = addresses[datenum]
+          commune = communes[datenum]
+          place = places[datenum]
+        else
+          address = addresses[0]
+          commune = communes[0]
+          place = places[0]
+        end
 
         if j%2 != 0
           home_team = teams[i]
@@ -117,9 +120,6 @@ class TournamentsController < ApplicationController
       end
     end
   end
-
-
-
 
   # GET /divisions/:division_id/tournaments/:id/edit
   def edit
@@ -183,4 +183,5 @@ class TournamentsController < ApplicationController
     def tournament_params
       params.require(:tournament).permit(:name, :description, :season)
     end
+
 end

@@ -17,6 +17,7 @@
     <h4>Partido Jugado</h4>
   <% else %>
     <h4>Aún no se juega este partido</h4>
+    <h4><%= @match.place %>, <%= @match.address %>, <%= @match.commune %></h4>
     <% end %>
 
     <div class="result">
