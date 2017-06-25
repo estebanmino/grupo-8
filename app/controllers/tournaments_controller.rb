@@ -104,6 +104,8 @@ class TournamentsController < ApplicationController
           played: false, visit_team_id: away_team, home_team_id: home_team, tournament_id: @tournament.id,
           Datenum: datenum+1, address: address, commune: commune,place: place)
 
+        p time
+        p 'timetimetime'
         if !match.save
           failed = true
           break

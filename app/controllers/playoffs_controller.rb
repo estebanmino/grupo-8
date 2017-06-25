@@ -19,18 +19,54 @@ class PlayoffsController < ApplicationController
 
     if @division.tournaments.length == 2
 
-      times = (0..7).map{|i| params[:"time#{i}"]}
-      dates = (0..7).map{|i| params[:"date#{i}"]}
+      times = (1..7).map{|i| params[:"time#{i}"]}
+      dates = (1..7).map{|i| params[:"date#{i}"]}
+      places = (1..7).map{|i| params[:"place#{i}"]}
+      addresses = (1..7).map{|i| params[:"address#{i}"]}
+      communes = (1..7).map{|i| params[:"commune#{i}"]}
 
-      tournament_1 = @division.tournaments.first() 
-      p  times
-      p dates
-      p division
-      redirect_to playoffs_path, flash: {notice: "Playoff creado exitosamente!"}
+      teams_tournament_1 = @division.tournaments.first.teams.sort_by{|x| [-x.points, -(x.gf - x.ga)]}[0...4]
+      teams_tournament_2 = @division.tournaments.second.teams.sort_by{|x| [-x.points, -(x.gf - x.ga)]}[0...4]
 
-    else
-      redirect_to playoffs_path, flash: {notice: "No se pudo crear playoff, no existe numero de torneos adecuado!"}
+      playoff = Tournament.create(name: "Playoff de #{@division.name}", description:
+                "Playoffs finales, que decidirán al campeón", season: "#{ @division.tournaments.first.season}",
+                division_id: @division.id, playoff: true)
 
+      failed = false
+      for i in [0,1,2,3,4,5,6]
+        time = playoff_time_format(times[i])
+        date = playoff_date_format(dates[i])
+        location = i
+        if params[:check_locations] == "true"
+          location = 0
+        end
+        address = addresses[location]
+        commune = communes[location]
+        place = places[location]
+
+        datenum = i+1
+        if i > 3
+          datenum = -1
+          i = 0
+        end
+
+        match = Match.new(date: date, time: time, visitor_goals: 0, local_goals: 0,
+          played: false, visit_team_id: teams_tournament_2[i].id, home_team_id: teams_tournament_1[3-i].id,
+          tournament_id: playoff.id, Datenum: datenum, address: address, commune: commune,place: place)
+
+        if !match.save
+          failed = true
+          break
+        end
+      end
+
+      respond_to do |format|
+        if !failed
+          format.html { redirect_to playoffs_path, notice: 'Playoff creado exitosamente' }
+        else
+          format.html { redirect_to home_path }
+        end
+      end
     end
   end
 end

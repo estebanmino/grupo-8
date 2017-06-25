@@ -1,242 +1,104 @@
 <%playoffs = Tournament.all.where(playoff: true )%>
 
+<% playoffs.each do |playoff| %>
 
-<div class="tab">
-<%default = true%>
-<%clase = "tablinks defaultOpen"%>
-<%for i in playoffs%>
-<%a = "playoff"+ i.id.to_s + " tabcontent"%>
+<h2><%= playoff.name %></h2>
 
-<button class="<%=clase%>" data-tab=<%=a%> ><%=i.name%></button>
-<%if default%>
-<%default = false%>
-<%clase = "tablinks"%>
+<% matches = playoff.matches %>
 
-<%end%>
-<%end%>
+<div class="col-2 filled">
+  <h3>Cuartos de final #1</h3>
+	<h3><%= matches[0].home_team.name%>  v/s <%=matches[0].visit_team.name %></h3>
+	<h3><%= matches[0].local_goals%> - <%=matches[0].visitor_goals %></h3>
+	<%= link_to 'Ir al partido',matches[0] %>
 </div>
 
-<%for i in playoffs%>
-<%@teams = i.teams%>
-<%a = "playoff"+ i.id.to_s + " tabcontent"%>
-<main class= "<%=a%>" id="tournament">
-	<ul class="round round-1">
-		<li class="spacer">&nbsp;</li>
-		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).first%>
-		<%if partido1.played%>
-		<%gol1 = partido1.local_goals%>
-		<%gol2 = partido1.visitor_goals%>
-		<%else%>
-		<%gol1 = "-"%>
-		<%gol2 = "-"%>
-		<%end%>
+<div class="col-2"></div>
 
-		<%team1 = Team.find(partido1.home_team_id).name%>
-		<%team2 = Team.find(partido1.visit_team_id).name%>
+<div class="col-2"></div>
 
-		<li class="game game-top winner"><%=team1%> <span><%=gol1%></span></li>
-		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=team2%> <span><%=gol2%></span></li>
+<div class="col-2"></div>
 
-		<li class="spacer">&nbsp;</li>
+<div class="col-2 filled">
+  <h3>Cuartos de final #2</h3>
+	<h3><%= matches[1].home_team.name%>  v/s <%=matches[1].visit_team.name %></h3>
+	<h3><%= matches[1].local_goals%> - <%=matches[1].visitor_goals %></h3>
+	<%= link_to 'Ir al partido',matches[1] %>
+</div>
 
-		<%partido2 = Match.all.where(playoff: true).where(tournament_id: i.id).second%>
-		<%if partido2.played%>
-		<%gol1 = partido2.local_goals%>
-		<%gol2 = partido2.visitor_goals%>
-		<%else%>
-		<%gol1 = "-"%>
-		<%gol2 = "-"%>
-		<%end%>
+<div class="col-2"></div>
 
-		<%team1 = Team.find(partido2.home_team_id).name%>
-		<%team2 = Team.find(partido2.visit_team_id).name%>
+<div class="col-2 filled">
+	<h3>Semifinal #1</h3>
+	<% if matches[4].Datenum != -1 %>
+		<h3><%= matches[4].home_team.name%>  v/s <%=matches[4].visit_team.name %></h3>
+		<h3><%= matches[4].local_goals%> - <%=matches[4].visitor_goals %></h3>
+		<%= link_to 'Ir al partido',matches[4] %>
 
-		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
-		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=team2%><span><%=gol2%></span></li>
+	<% elsif matches[2].winner && matches[0].winner %>
+	<h3><%= matches[2].winner.name %> v/s <%= matches[0].winner.name %> </h3>
 
-		<li class="spacer">&nbsp;</li>
+	<% elsif matches[0].winner %>
+		<h3><%= matches[0].winner.name %>ll</h3>
+		<h3>Esperando rival</h3></h3>
 
-		<%partido3 = Match.all.where(playoff: true).where(tournament_id: i.id).third%>
-		<%if partido3.played%>
-		<%gol1 = partido3.local_goals%>
-		<%gol2 = partido3.visitor_goals%>
-		<%else%>
-		<%gol1 = "-"%>
-		<%gol2 = "-"%>
-		<%end%>
-
-		<%team1 = Team.find(partido3.home_team_id).name%>
-		<%team2 = Team.find(partido3.visit_team_id).name%>
-
-		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
-		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=team2%><span><%=gol2%></span></li>
-
-		<li class="spacer">&nbsp;</li>
-
-		<%partido4 = Match.all.where(playoff: true).where(tournament_id: i.id).third%>
-		<%if partido4.played%>
-		<%gol1 = partido4.local_goals%>
-		<%gol2 = partido4.visitor_goals%>
-		<%else%>
-		<%gol1 = "-"%>
-		<%gol2 = "-"%>
-		<%end%>
-
-		<%team1 = Team.find(partido4.home_team_id).name%>
-		<%team2 = Team.find(partido4.visit_team_id).name%>
-
-		<li class="game game-top winner"><%=team1%> <span><%=gol1%></span></li>
-		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=team2%> <span><%=gol2%></span></li>
-
-		<li class="spacer">&nbsp;</li>
+	<% elsif matches[2].winner %>
+		<h3><%= matches[2].winner.name %>ll</h3>
+		<h3>Esperando rival</h3></h3>
 
 
-		<li class="spacer">&nbsp;</li>
+	<% end %>
+</div>
 
+<div class="col-2 filled">
+	<h3>Final</h3>
+	<% if matches[6].Datenum != -1 %>
+		<h3><%= matches[6].home_team.name%>  v/s <%=matches[6].visit_team.name %></h3>
+		<h3><%= matches[6].local_goals%> - <%=matches[6].visitor_goals %></h3>
+		<%= link_to 'Ir al partido',matches[6] %>
+	<% else %>
+		<h3>Partido por definir</h3>
+	<% end %>
 
-		<li id="Sep-cuartos" class="game game-spacer">&nbsp;</li>
+</div>
 
+<div class="col-2 filled">
+	<h3>Semifinal #2</h3>
+	<% if matches[5].Datenum != -1 %>
+		<h3><%= matches[5].home_team.name%>  v/s <%=matches[5].visit_team.name %></h3>
+		<h3><%= matches[5].local_goals%> - <%=matches[5].visitor_goals %></h3>
 
-		<li class="spacer">&nbsp;</li>
+		<%= link_to 'Ir al partido',matches[5] %>
+	<% else %>
+		<h3>Partido por definir</h3>
+	<% end %>
+</div>
 
+<div class="col-2"></div>
 
-		<li class="spacer">&nbsp;</li>
+<div class="col-2 filled">
+  <h3>Cuartos de final #3</h3>
+	<h3><%= matches[2].home_team.name%>  v/s <%=matches[2].visit_team.name %></h3>
+	<h3><%= matches[2].local_goals%> - <%=matches[2].visitor_goals %></h3>
+	<%= link_to 'Ir al partido',matches[2] %>
 
-	</ul>
-	<ul class="round round-2">
-		<li class="spacer">&nbsp;</li>
+</div>
 
-		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 2).first%>
-		<%if partido1 != nil%>
-		<%gol1 = partido1.local_goals%>
-		<%gol2 = partido1.visitor_goals%>
-		<%team1 = Team.find(partido1.home_team_id).name%>
-		<%team2 = Team.find(partido1.visit_team_id).name%>
-		<%else%>
-		<%gol1 = "-"%>
-		<%gol2 = "-"%>
-		<%team1 = "Semifinalista 1"%>
-		<%team2 = "Semifinalista 2"%>
-		<%end%>
-
-		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
-		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"> <%=team2%><span><%=gol2%></span></li>
-
-		<li class="spacer">&nbsp;</li>
-
-		<%partido1 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 2).second%>
-		<%if partido1 != nil%>
-		<%gol1 = partido1.local_goals%>
-		<%gol2 = partido1.visitor_goals%>
-		<%team1 = Team.find(partido1.home_team_id).name%>
-		<%team2 = Team.find(partido1.visit_team_id).name%>
-		<%else%>
-		<%gol1 = "-"%>
-		<%gol2 = "-"%>
-		<%team1 = "Semifinalista 3"%>
-		<%team2 = "Semifinalista 4"%>
-		<%end%>
-
-
-		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
-		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=team2%><span><%=gol2%></span></li>
-
-
-		<li id="Sep-semis" class="game game-spacer">&nbsp;</li>
-
-
-		<li class="spacer">&nbsp;</li>
-	</ul>
-	<ul class="round round-3">
-		<li class="spacer">&nbsp;</li>
-
-		<%partido7 = Match.all.where(playoff: true).where(tournament_id: i.id).where(Datenum: 3).first%>
-		<%if partido7 != nil%>
-		<%gol1 = partido7.local_goals%>
-		<%gol2 = partido7.visitor_goals%>
-		<%team1 = Team.find(partido7.home_team_id).name%>
-		<%team2 = Team.find(partido7.visit_team_id).name%>
-		<%else%>
-		<%gol1 = "-"%>
-		<%gol2 = "-"%>
-		<%team1 = "Finalista 1"%>
-		<%team2 = "Finalista 2"%>
-		<%end%>
-
-
-		<li class="game game-top winner"><%=team1%><span><%=gol1%></span></li>
-		<li class="game game-spacer">&nbsp;</li>
-		<li class="game game-bottom winner"><%=team2%><span><%=gol2%></span></li>
-
-		<li id="Sep-final" class="game game-spacer">&nbsp;</li>
-
-	</ul>
-	<ul class="round round-4">
-		<li class="spacer">&nbsp;</li>
-		<%if partido7 != nil && partido7.played%>
-		<%if gol1 > gol2%>
-		<%campeon = team1%>
-		<%else%>
-		<%campeon = team2%>
-		<%end%>
-		<%else%>
-		<%campeon = "Campeón"%>
-		<%end%>
-
-		<li class="game game-top winner"><%=campeon%> <span></span></li>
-		<li id="Sep-winner" class="game game-spacer">&nbsp;</li>
+<div class="col-2"></div>
 
 
 
-	</ul>
+<div class="col-2"></div>
+<div class="col-2"></div>
 
-	<% if is_admin_logged_in? %>
+<div class="col-2 filled">
+  <h3>Cuartos de final #4</h3>
+	<h3><%= matches[3].home_team.name%>  v/s <%=matches[3].visit_team.name %></h3>
+	<h3><%= matches[3].local_goals%> - <%=matches[3].visitor_goals %></h3>
+	<%= link_to 'Ir al partido',matches[3] %>
 
-	<%= link_to 'Borrar Playoff', [i.division, i], :confirm => 'Are you sure?', :method => :delete %>
-	<% end  %>
+</div>
 
+  <%= submit_tag("Crear", class: 'btn-primary btn-playoffs') %>
 
-</main>
-
-<%fase = {"1"=>"Cuartos de final", "2"=>"Semifinal", "3"=>"Final"}%>
-<%for match in i.matches%>
-<div  data-match-id="<%= match.id %>">
-<div class= "<%=a%>" >
-    <div class="panel-match">
-      <div class="date">
-        <%= fase[match.Datenum.to_s] %>
-        <%= match.date.day %>/<%= match.date.month %>/<%= match.date.year %>
-        <%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs
-      </div>
-
-      <div class="result">
-        <%= Team.find_by_id(match.home_team_id).name %>
-        <%= match.local_goals %>:<%= match.visitor_goals %>
-        <%= Team.find_by_id(match.visit_team_id).name %>
-
-        <div class="btns">
-          <%= link_to 'Ir al partido', match, class: 'btn btn-primary' %>
-          <% if is_admin_logged_in? %>
-            <%= link_to 'Editar', edit_match_path(match), class: 'btn btn-primary' %>
-            <%= link_to 'Eliminar', match, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %>
-          <% end  %>
-        </div>
-      </div>
-
-
-  </div>
-	  </div>
-		</div>
-<%end%>
-
-<%end%>
-
-<% if is_admin_logged_in? %>
-	<%= link_to 'Crear partido de Playoff', playoffs_new_match_path %> |
-<%end%>
+	<% end %>

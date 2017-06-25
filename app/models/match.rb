@@ -35,6 +35,14 @@ class Match < ApplicationRecord
   has_many :performances
   has_many :users, through: :performances
 
+  def winner
+    if visitor_goals > local_goals
+      return visit_team
+    elsif local_goals > visitor_goals
+      return home_team
+    end
+    nil
+  end
 
 
 end
