@@ -3,32 +3,21 @@ class PlayoffsController < ApplicationController
   include PlayoffsHelper
 
   def new
-
-
-
   end
+
   def index
-
   end
-
   def create
-
   end
-
   def new_match
-
   end
-
 
   def new_create
-
 
     division = params[:division]
     @division = Division.find(division)
 
     if @division.tournaments.length == 2
-
-
 
     fecha1 = params[:date1]["Ronda1(1i)"]+"-"+params[:date1]["Ronda1(2i)"].rjust(2, '0')+
     "-"+params[:date1]["Ronda1(3i)"].rjust(2, '0')

@@ -1,56 +1,122 @@
 <h1>Nuevo Playoff </h1>
 
-<%= form_tag(method: "post") do %>
+<%= form_tag({method: "post"}, {class: 'editmatch'}) do %>
 
+<table>
+  <tbody>
 
-<div class="field", class="playoff-form">
-  <%= label_tag :division, "Division del playoff" %>
-  <%= select_tag :division, options_for_select(Division.all.map{ |c| [c.name, c.id] })  %>
+    <tr class="checkers">
+      <td class="half">
+        <p>Setear todos los lugares en datos de Cuartos de final #1</p>
+      </td>
+      <td class="half">
+        <%= hidden_field_tag :check_locations , false %>
+
+        <%= check_box_tag(:check_locations, true, false,
+            :onclick=>
+            "if (checked){
+              $('.place').val($('.place_1').val());
+              $('.address').val($('.address_1').val());
+              $('.commune').val($('.commune_1').val());
+            } else {
+              $('.place').val('');
+              $('.address').val('');
+              $('.commune').val('');
+            }")%>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= label_tag :division, "Division del playoff" %>
+      </td>
+      <td>
+        <%= select_tag :division, options_for_select(Division.all.map{ |c| [c.name, c.id] })  %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br />
+
+<div class="col-2 filled">
+  <h3>Cuartos de final #1</h3>
+  <%= date_select(:date1, '', selected: Date.today) %>
+  <%= time_select(:time1,'') %>
+  <%= text_field_tag(:place1,'', placeholder: 'Lugar', class: 'place_1', required: true) %>
+  <%= text_field_tag(:address1,'', placeholder: 'Dirección', class: 'address_1', required: true) %>
+  <%= text_field_tag(:commune1,'', placeholder: 'Comuna', class: 'commune_1', required: true) %>
 </div>
 
+<div class="col-2"></div>
 
-<div class="field", class="playoff-form">
-  <%= label_tag(:date1, "Fecha de cuartos de final") %>
-  <%= date_select(:date1,"Ronda1", selected: Date.today) %>
+<div class="col-2"></div>
+
+<div class="col-2"></div>
+
+<div class="col-2 filled">
+  <h3>Cuartos de final #2</h3>
+  <%= date_select(:date2,'', selected: Date.today) %>
+  <%= time_select(:time2,'') %>
+  <%= text_field_tag(:place2,'', placeholder: 'Lugar', class: 'place', required: true) %>
+  <%= text_field_tag(:address2,'', placeholder: 'Dirección', class: 'address', required: true) %>
+  <%= text_field_tag(:commune2,'', placeholder: 'Comuna', class: 'commune', required: true) %>
 </div>
 
+<div class="col-2"></div>
 
-<div class="field", class="playoff-form">
-  <%= label_tag(:time1, "Hora primeras llaves") %>
-  <%= time_select(:time1,"Hora1") %>
+<div class="col-2 filled">
+  <h3>Semifinal #1</h3>
+  <%= date_select(:date5,'', selected: Date.today) %>
+  <%= time_select(:time5,'') %>
+  <%= text_field_tag(:place5,'', placeholder: 'Lugar', class: 'place', required: true) %>
+  <%= text_field_tag(:address5,'', placeholder: 'Dirección', class: 'address', required: true) %>
+  <%= text_field_tag(:commune5,'', placeholder: 'Comuna', class: 'commune', required: true) %>
 </div>
 
-
-<div class="field", class="playoff-form">
-  <%= label_tag(:time2, "Hora segundas llaves") %>
-  <%= time_select(:time2,"Hora2") %>
+<div class="col-2 filled">
+  <h3>Final</h3>
+  <%= date_select(:date7,'', selected: Date.today) %>
+  <%= time_select(:time7,'') %>
+  <%= text_field_tag(:place7,'', placeholder: 'Lugar', class: 'place', required: true) %>
+  <%= text_field_tag(:address7,'', placeholder: 'Dirección', class: 'address', required: true) %>
+  <%= text_field_tag(:commune7,'', placeholder: 'Comuna', class: 'commune', required: true) %>
 </div>
 
-<div class="field">
-  <%= label_tag(:date2, "Fecha de Semifinal") %>
-  <%= date_select(:date2,"Ronda2", selected: Date.today) %>
+<div class="col-2 filled">
+  <h3>Semifinal #2</h3>
+  <%= date_select(:date6,'', selected: Date.today) %>
+  <%= time_select(:time6,'') %>
+  <%= text_field_tag(:place6,'', placeholder: 'Lugar', class: 'place', required: true) %>
+  <%= text_field_tag(:address6,'', placeholder: 'Dirección', class: 'address', required: true) %>
+  <%= text_field_tag(:commune6,'', placeholder: 'Comuna', class: 'commune', required: true) %>
 </div>
 
+<div class="col-2"></div>
 
-
-<div class="field">
-    <%= label_tag(:time3, "Hora de semifinales") %>
-    <%= time_select(:time3,"Hora3") %>
+<div class="col-2 filled">
+  <h3>Cuartos de final #3</h3>
+  <%= date_select(:date3,'', selected: Date.today) %>
+  <%= time_select(:time3,'') %>
+  <%= text_field_tag(:place3,'', placeholder: 'Lugar', class: 'place', required: true) %>
+  <%= text_field_tag(:address3,'', placeholder: 'Dirección', class: 'address', required: true) %>
+  <%= text_field_tag(:commune3,'', placeholder: 'Comuna', class: 'commune', required: true) %>
 </div>
 
-<div class="field">
-  <%= label_tag(:date3, "Fecha de la final") %>
-  <%= date_select(:date3,"Final", selected: Date.today) %>
+<div class="col-2"></div>
+
+
+
+<div class="col-2"></div>
+<div class="col-2"></div>
+
+<div class="col-2 filled">
+  <h3>Cuartos de final #4</h3>
+  <%= date_select(:date4,'', selected: Date.today) %>
+  <%= time_select(:time4,'') %>
+  <%= text_field_tag(:place4,'', placeholder: 'Lugar', class: 'place', required: true) %>
+  <%= text_field_tag(:address4,'', placeholder: 'Dirección', class: 'address', required: true) %>
+  <%= text_field_tag(:commune4,'', placeholder: 'Comuna', class: 'commune', required: true) %>
 </div>
 
+  <%= submit_tag("Crear", class: 'btn-primary btn-playoffs') %>
 
-
-<div class="field">
-  <%= label_tag(:time4, "Hora de la final") %>
-  <%= time_select(:time4,"Hora4") %>
-  </div>
-
-<div class="field">
-  <%= submit_tag("Crear") %>
-  </div>
 <% end %>

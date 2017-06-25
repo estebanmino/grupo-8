@@ -53,7 +53,16 @@ input {
   width: 70%;
   border: 1px solid #bbb;
   border-radius: 4px;
-  margin: 0
+  margin: 0;
+
+
+}
+.btn-playoffs {
+  margin-top: 10px;
+  margin-left: 15%;
+  background: #C80A00;
+  color: white;
+
 }
 
 .invitation-form {
@@ -83,7 +92,7 @@ input {
     margin: 0;
   }
   .btn {
-    margin-left: 25%;
+    margin-left: 15%;
     width: 70%;
   }
   .field_with_errors, &.error {
