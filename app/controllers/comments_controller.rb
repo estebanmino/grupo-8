@@ -32,7 +32,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        #Mailer.comment_mail(@comment.user, @comment.post.user, @comment.content, @comment.post).deliver_later
+        Mailer.comment_mail(@comment.user, @comment.post.user, @comment.content, @comment.post).deliver_later
         format.html { redirect_to @comment.post, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
         format.js

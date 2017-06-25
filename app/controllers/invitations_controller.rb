@@ -50,6 +50,10 @@ class InvitationsController < ApplicationController
                 (current_user.team.id == Integer(invitation_params[:team_id]) && current_user.is_captain?) || is_admin_logged_in? )
    end
 
+   def validate_email(value)
+     value =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+   end
+
 end
 
 #http://localhost:3000/signup?invitation_token=7f3603fe4f9cef8cde1572eb3a04d52b0485743e

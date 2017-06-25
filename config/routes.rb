@@ -41,4 +41,15 @@ Rails.application.routes.draw do
 
   get 'comments/:id', to: 'comments#update', as: 'comment_update'
 
+  namespace :api do
+    namespace :v1 do
+      resources :comments, only: [:index, :create, :show, :destroy]
+      resources :posts, only: [:index, :create, :show, :destroy]
+      resources :users, only: [:show, :index, :destroy]
+      resources :matches, only: [:show, :index, :create, :destroy]
+      resources :teams, only: [:show, :index, :create, :destroy]
+      resources :tournaments, only: [:show, :index, :create, :destroy]
+    end
+  end
+
 end
