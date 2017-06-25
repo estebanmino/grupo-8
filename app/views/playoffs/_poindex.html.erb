@@ -1,7 +1,9 @@
 <%playoffs = Tournament.all.where(playoff: true )%>
 
 <% playoffs.each do |playoff| %>
+<hr />
 
+<div class="playoff-wrapper">
 
 <h2><%= playoff.name %></h2>
 
@@ -9,13 +11,16 @@
 
 <div class="col-2 filled playoff">
   <h3>Cuartos de final #1</h3>
-	<h4><%= matches[0].home_team.name%> </h4>
+  <h4><%= matches[0].home_team.name%>
+  </h4>
   <h4>v/s</h4>
   <h4><%=matches[0].visit_team.name %></h4>
   <% if matches[0].played %>
-	 <h3><%= matches[0].local_goals%> - <%=matches[0].visitor_goals %></h3>
-  <% else %>
-    <h3>No jugado</h3>
+  <h3><%= matches[0].local_goals%>
+    -
+    <%=matches[0].visitor_goals %></h3>
+<% else %>
+  <h3>No jugado</h3>
   <% end %>
 
   <%= link_to 'Ir al partido',matches[0] %>
@@ -29,101 +34,133 @@
 
 <div class="col-2 filled playoff">
   <h3>Cuartos de final #2</h3>
-  <h4><%= matches[1].home_team.name%> </h4>
+  <h4><%= matches[1].home_team.name%>
+  </h4>
   <h4>v/s</h4>
   <h4><%=matches[1].visit_team.name %></h4>
   <% if matches[1].played %>
-	 <h3><%= matches[1].local_goals%> - <%=matches[1].visitor_goals %></h3>
-  <% else %>
-    <h3>No jugado</h3>
+  <h3><%= matches[1].local_goals%>
+    -
+    <%=matches[1].visitor_goals %></h3>
+<% else %>
+  <h3>No jugado</h3>
   <% end %>
-	<%= link_to 'Ir al partido',matches[1] %>
+  <%= link_to 'Ir al partido',matches[1] %>
 </div>
 
 <div class="col-2 playoff"></div>
 
-
 <div class="col-2 filled playoff">
   <h3>Semifinal #1</h3>
 
-	<% if matches[4].datenum != -1 %>
-    <h4><%= matches[4].home_team.name%> </h4>
-    <h4>v/s</h4>
-    <h4><%=matches[4].visit_team.name %></h4>
-    <% if matches[4].played %>
-  	 <h3><%= matches[4].local_goals%> - <%=matches[4].visitor_goals %></h3>
-    <% else %>
-      <h3>No jugado</h3>
-    <% end %>
-		<%= link_to 'Ir al partido',matches[4] %>
-  <% else %>
-    <% if matches[0].winner && matches[2].winner %>
-      <% match_update_visitor_team(matches[4], matches[0].winner) %>
-      <% match_update_visitor_team(matches[4], matches[2].winner) %>
-      <% match_update_datenum(matches[4], 4) %>
-      <h3><%= matches[2].winner.name %> v/s <%= matches[0].winner.name %></h3>
-    <% elsif matches[0].winner %>
-      <h3><%= matches[0].winner.name %> esperando rival</h3>
-    <% elsif matches[2].winner %>
-      <h3><%= matches[2].winner.name %> esperando rival</h3>
+  <% if matches[4].datenum != -1 %>
+  <h4><%= matches[4].home_team.name%>
+  </h4>
+  <h4>v/s</h4>
+  <h4><%=matches[4].visit_team.name %></h4>
+  <% if matches[4].played %>
+  <h3><%= matches[4].local_goals%>
+    -
+    <%=matches[4].visitor_goals %></h3>
+<% else %>
+  <h3>No jugado</h3>
+  <% end %>
+  <%= link_to 'Ir al partido',matches[4] %>
+<% else %>
+  <% if matches[0].winner && matches[2].winner %>
+  <% match_update_visitor_team(matches[4], matches[0].winner) %>
+  <% match_update_visitor_team(matches[4], matches[2].winner) %>
+  <% match_update_datenum(matches[4], 4) %>
+  <h4><%= matches[2].winner.name%>
+  </h4>
+  <h4>v/s</h4>
+  <h4><%=matches[0].winner.name %></h4>
+  <h3>No jugado</h3>
+  <%= link_to 'Ir al partido',matches[4] %>
+  <% elsif matches[0].winner %>
+  <h3><%= matches[0].winner.name %>
+    esperando rival</h3>
+  <% elsif matches[2].winner %>
+  <h3><%= matches[2].winner.name %>
+    esperando rival</h3>
 
-    <% end %>
+  <% end %>
   <% end %>
 
 </div>
 
 <div class="col-2 filled playoff">
-	<h3>Final</h3>
+  <h3>Final</h3>
   <% if matches[6].datenum != -1 %>
-    <h4><%= matches[6].home_team.name%> </h4>
-    <h4>v/s</h4>
-    <h4><%=matches[6].visit_team.name %></h4>
-    <% if matches[6].played %>
-  	 <h3><%= matches[6].local_goals%> - <%=matches[6].visitor_goals %></h3>
-    <% else %>
-      <h3>No jugado</h3>
-    <% end %>
-		<%= link_to 'Ir al partido',matches[6] %>
-  <% else %>
-    <% if matches[4].winner && matches[5].winner %>
-      <% match_update_visitor_team(matches[6], matches[4].winner) %>
-      <% match_update_visitor_team(matches[6], matches[5].winner) %>
-      <% match_update_datenum(matches[6], 6) %>
-      <h3><%= matches[4].winner.name %> v/s <%= matches[5].winner.name %></h3>
-    <% elsif matches[4].winner %>
-      <h3><%= matches[4].winner.name %> esperando rival</h3>
-    <% elsif matches[5].winner %>
-      <h3><%= matches[5].winner.name %> esperando rival</h3>
+  <h4><%= matches[6].home_team.name%>
+  </h4>
+  <h4>v/s</h4>
+  <h4><%=matches[6].visit_team.name %></h4>
+  <% if matches[6].played %>
+  <h3><%= matches[6].local_goals%>
+    -
+    <%=matches[6].visitor_goals %></h3>
+<% else %>
+  <h3>No jugado</h3>
+  <% end %>
+  <%= link_to 'Ir al partido',matches[6] %>
+<% else %>
+  <% if matches[4].winner && matches[5].winner %>
+  <% match_update_visitor_team(matches[6], matches[4].winner) %>
+  <% match_update_visitor_team(matches[6], matches[5].winner) %>
+  <% match_update_datenum(matches[6], 6) %>
+  <h4><%= matches[4].winner.name%>
+  </h4>
+  <h4>v/s</h4>
+  <h4><%=matches[5].winner.name %></h4>
+  <h3>No jugado</h3>
+  <%= link_to 'Ir al partido',matches[6] %>
+  <% elsif matches[4].winner %>
+  <h3><%= matches[4].winner.name %>
+    esperando rival</h3>
+  <% elsif matches[5].winner %>
+  <h3><%= matches[5].winner.name %>
+    esperando rival</h3>
 
-    <% end %>
+  <% end %>
   <% end %>
 
 </div>
 
 <div class="col-2 filled playoff">
-	<h3>Semifinal #2</h3>
+  <h3>Semifinal #2</h3>
   <% if matches[5].datenum != -1 %>
-    <h4><%= matches[5].home_team.name%> </h4>
-    <h4>v/s</h4>
-    <h4><%=matches[5].visit_team.name %></h4>
-    <% if matches[5].played %>
-  	 <h3><%= matches[5].local_goals%> - <%=matches[5].visitor_goals %></h3>
-    <% else %>
-      <h3>No jugado</h3>
-    <% end %>
-		<%= link_to 'Ir al partido',matches[5] %>
-  <% else %>
-    <% if matches[1].winner && matches[3].winner %>
-      <% match_update_visitor_team(matches[5], matches[1].winner) %>
-      <% match_update_visitor_team(matches[5], matches[3].winner) %>
-      <% match_update_datenum(matches[5], 5) %>
-      <h3><%= matches[3].winner.name %> v/s <%= matches[1].winner.name %></h3>
-    <% elsif matches[1].winner %>
-      <h3><%= matches[1].winner.name %> esperando rival</h3>
-    <% elsif matches[3].winner %>
-      <h3><%= matches[3].winner.name %> esperando rival</h3>
+  <h4><%= matches[5].home_team.name%>
+  </h4>
+  <h4>v/s</h4>
+  <h4><%=matches[5].visit_team.name %></h4>
+  <% if matches[5].played %>
+  <h3><%= matches[5].local_goals%>
+    -
+    <%=matches[5].visitor_goals %></h3>
+<% else %>
+  <h3>No jugado</h3>
+  <% end %>
+  <%= link_to 'Ir al partido',matches[5] %>
+<% else %>
+  <% if matches[1].winner && matches[3].winner %>
+  <% match_update_visitor_team(matches[5], matches[1].winner) %>
+  <% match_update_visitor_team(matches[5], matches[3].winner) %>
+  <% match_update_datenum(matches[5], 5) %>
+  <h4><%= matches[3].winner.name%>
+  </h4>
+  <h4>v/s</h4>
+  <h4><%=matches[1].winner.name %></h4>
+  <h3>No jugado</h3>``
+  <%= link_to 'Ir al partido',matches[5] %>
+  <% elsif matches[1].winner %>
+  <h3><%= matches[1].winner.name %>
+    esperando rival</h3>
+  <% elsif matches[3].winner %>
+  <h3><%= matches[3].winner.name %>
+    esperando rival</h3>
 
-    <% end %>
+  <% end %>
   <% end %>
 </div>
 
@@ -131,26 +168,29 @@
 
 <div class="col-2 filled playoff">
   <h3>Cuartos de final #3</h3>
-  <h4><%= matches[2].home_team.name%> </h4>
+  <h4><%= matches[2].home_team.name%>
+  </h4>
   <h4>v/s</h4>
   <h4><%=matches[2].visit_team.name %></h4>
   <% if matches[2].played %>
-	 <h3><%= matches[2].local_goals%> - <%=matches[2].visitor_goals %></h3>
-  <% else %>
-    <h3>No jugado</h3>
+  <h3><%= matches[2].local_goals%>
+    -
+    <%=matches[2].visitor_goals %></h3>
+<% else %>
+  <h3>No jugado</h3>
   <% end %>
-	<%= link_to 'Ir al partido',matches[2] %>
+  <%= link_to 'Ir al partido',matches[2] %>
 
 </div>
 
 <div class="col-2 playoff"></div>
 
-
-
 <div class="col-2 playoff">
-  <% if matches[6] %>
-    <h3>Ganadores: </h3>
-    <h2><%= matches[6].winner.name %> </h2>
+  <% if matches[6].played %>
+  <h3>Ganadores:
+  </h3>
+  <h2><%= matches[6].winner.name %>
+  </h2>
   <% end %>
 </div>
 
@@ -158,18 +198,21 @@
 
 <div class="col-2 filled playoff">
   <h3>Cuartos de final #4</h3>
-  <h4><%= matches[3].home_team.name%> </h4>
+  <h4><%= matches[3].home_team.name%>
+  </h4>
   <h4>v/s</h4>
   <h4><%=matches[3].visit_team.name %></h4>
   <% if matches[3].played %>
-	 <h3><%= matches[3].local_goals%> - <%=matches[3].visitor_goals %></h3>
-  <% else %>
-    <h3>No jugado</h3>
+  <h3><%= matches[3].local_goals%>
+    -
+    <%=matches[3].visitor_goals %></h3>
+<% else %>
+  <h3>No jugado</h3>
   <% end %>
-	<%= link_to 'Ir al partido',matches[3] %>
+  <%= link_to 'Ir al partido',matches[3] %>
 
 </div>
 
-  <%= submit_tag("Crear", class: 'btn-primary btn-playoffs') %>
-
-	<% end %>
+</div>
+<% end %>
+<hr />

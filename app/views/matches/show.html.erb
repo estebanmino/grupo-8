@@ -15,6 +15,8 @@
       hrs</h4>
     <% if  @match.played  %>
     <h4>Partido Jugado</h4>
+    <h4><%= @match.place %>, <%= @match.address %>, <%= @match.commune %></h4>
+    
   <% else %>
     <h4>Aún no se juega este partido</h4>
     <h4><%= @match.place %>, <%= @match.address %>, <%= @match.commune %></h4>

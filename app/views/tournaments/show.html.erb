@@ -35,9 +35,9 @@
     </tr>
   </thead>
   <tbody>
-  <% @tournament.matches.order(:Datenum).order(:time).each do |match| %>
+  <% @tournament.matches.order(:datenum).order(:time).each do |match| %>
   <tr>
-    <td><%= match.Datenum %></td>
+    <td><%= match.datenum %></td>
     <td><%= match.date %></td>
     <td><%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs</td>
     <td><%= Team.find_by_id(match.home_team_id).name %></td>
