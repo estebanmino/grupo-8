@@ -36,10 +36,12 @@ class Match < ApplicationRecord
   has_many :users, through: :performances
 
   def winner
-    if visitor_goals > local_goals
-      return visit_team
-    elsif local_goals > visitor_goals
-      return home_team
+    if played
+      if visitor_goals > local_goals
+        return visit_team
+      elsif local_goals > visitor_goals
+        return home_team
+      end
     end
     nil
   end

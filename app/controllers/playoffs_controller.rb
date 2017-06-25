@@ -52,7 +52,7 @@ class PlayoffsController < ApplicationController
 
         match = Match.new(date: date, time: time, visitor_goals: 0, local_goals: 0,
           played: false, visit_team_id: teams_tournament_2[i].id, home_team_id: teams_tournament_1[3-i].id,
-          tournament_id: playoff.id, Datenum: datenum, address: address, commune: commune,place: place)
+          tournament_id: playoff.id, datenum: datenum, address: address, commune: commune,place: place)
 
         if !match.save
           failed = true

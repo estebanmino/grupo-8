@@ -34,16 +34,16 @@
 <%division.tournaments.where(playoff: false).each do |tournament|%>
 <h3><%=tournament.name%></h3>
 <% matchday1 = 0 %>
-<%tournament.matches.order(:Datenum).each do |match|%>
+<%tournament.matches.order(:datenum).each do |match|%>
 
-<% if matchday1 != match.Datenum %>
-  <% matchday1 = match.Datenum %>
-  <h2>Jornada <%= match.Datenum %></h2>
+<% if matchday1 != match.datenum %>
+  <% matchday1 = match.datenum %>
+  <h2>Jornada <%= match.datenum %></h2>
 <% end %>
 <div  data-match-id="<%= match.id %>">
 <div class="panel-match">
   <div class="date">
-    <%= match.Datenum %>
+    <%= match.datenum %>
     <%= match.date.day %>/<%= match.date.month %>/<%= match.date.year %>
     <%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs
   </div>

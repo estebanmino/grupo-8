@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(version: 20170625005147) do
     t.integer  "visit_team_id"
     t.integer  "home_team_id"
     t.integer  "tournament_id"
-    t.integer  "Datenum"
+    t.integer  "datenum"
     t.boolean  "playoff",       default: false
     t.index ["home_team_id"], name: "index_matches_on_home_team_id", using: :btree
     t.index ["tournament_id"], name: "index_matches_on_tournament_id", using: :btree

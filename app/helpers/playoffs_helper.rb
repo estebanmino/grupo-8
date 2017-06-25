@@ -12,12 +12,16 @@ module PlayoffsHelper
     ":" + time["(5i)"].rjust(2, '0') + ":00"
   end
 
-  def match_winner(match)
-    if match.visitor_goals > match.local_goals
-      match.visit_team
-    elsif match.visitor_goals < match.local_goals
-      match.home_team
-    end
+  def match_update_local_team(match, team)
+    match.update_attribute(:home_team_id, team.id)
+  end
+
+  def match_update_visitor_team(match, team)
+    match.update_attribute(:visit_team_id, team.id)
+  end
+
+  def match_update_datenum(match,n)
+    match.update_attribute(:datenum, n+1)
   end
 
 end
