@@ -1,6 +1,8 @@
 if (<%= @match.played  %> == false ){
   $("#match_local_goals").val(0);
   $("# match_visitor_goals").val(0);
+  $("#performances-wrapper").hide();
 } else {
-
+  $("#performances-wrapper").fadeOut(500);
+  $("#performances-wrapper").fadeIn(1000);
 }

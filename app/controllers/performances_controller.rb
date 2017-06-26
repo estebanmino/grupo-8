@@ -44,10 +44,10 @@ class PerformancesController < ApplicationController
     else
       visitor_goals+= @performance.goals;
     end
-    save = !(local_goals > @performance.match.local_goals || visitor_goals > @performance.match.visitor_goals)
+    @save = !(local_goals > @performance.match.local_goals || visitor_goals > @performance.match.visitor_goals)
 
     respond_to do |format|
-      if @performance.match.played && save && @performance.save
+      if @performance.match.played && @save && @performance.save
         @performance.user.update_attribute(:goals, @performance.user.goals + @performance.goals)
         format.html { redirect_to :back, notice: 'Performance was successfully created.' }
         format.json { head :no_content }
@@ -75,9 +75,9 @@ class PerformancesController < ApplicationController
       end
     end
     if ( @performance.user.team.id  ==  @performance.match.home_team.id )
-      local_goals +=  params[:performance][:goals].to_i
+      local_goals +=  params[:performance][:goals].to_i -  last_goals
     else
-      visitor_goals += params[:performance][:goals].to_i
+      visitor_goals += params[:performance][:goals].to_i - last_goals
     end
 
 
