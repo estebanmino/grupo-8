@@ -22,6 +22,7 @@
 <table class="tabla_pos">
   <thead>
     <tr>
+      <th>Jornada</th>
       <th>Fecha</th>
       <th>Hora</th>
       <th>Local</th>
@@ -34,8 +35,9 @@
     </tr>
   </thead>
   <tbody>
-  <% @tournament.matches.each do |match| %>
+  <% @tournament.matches.order(:datenum).order(:time).each do |match| %>
   <tr>
+    <td><%= match.datenum %></td>
     <td><%= match.date %></td>
     <td><%= match.time.hour%>:<%= match.time.min.to_s.rjust(2, '0')%> hrs</td>
     <td><%= Team.find_by_id(match.home_team_id).name %></td>

@@ -75,9 +75,9 @@ class PerformancesController < ApplicationController
       end
     end
     if ( @performance.user.team.id  ==  @performance.match.home_team.id )
-      local_goals +=  params[:performance][:goals].to_i
+      local_goals +=  params[:performance][:goals].to_i -  last_goals
     else
-      visitor_goals += params[:performance][:goals].to_i
+      visitor_goals += params[:performance][:goals].to_i - last_goals
     end
 
 

@@ -89,7 +89,11 @@
 </div>
 <% end %>
 
+<% if !@match.played %>
+<div id="performances-wrapper"  style="display: none;">
+  <% else %>
   <div id="performances-wrapper">
+    <% end %>
 
 <h1>Rendimientos individuales</h1>
 

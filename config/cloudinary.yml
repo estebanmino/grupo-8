@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: cristianicn
+  api_key: '866614133713642'
+  api_secret: 6l_fzTcULOXZJLjle-jeI1cdvyo
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: cristianicn
+  api_key: '866614133713642'
+  api_secret: 6l_fzTcULOXZJLjle-jeI1cdvyo
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: cristianicn
+  api_key: '866614133713642'
+  api_secret: 6l_fzTcULOXZJLjle-jeI1cdvyo
+  enhance_image_tag: true
+  static_image_support: false

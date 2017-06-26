@@ -5,7 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'httparty'
+gem 'geocoder'
 #env
+gem 'paperclip-cloudinary'
+
 gem "figaro"
 #Encriptacion clave
 gem 'bcrypt',         '3.1.11'

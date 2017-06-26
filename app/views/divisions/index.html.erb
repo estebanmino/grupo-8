@@ -9,7 +9,7 @@
 
         <h3><%= division.name %></h3>
       </div>
-      <h4><%= division.description %></h4>
+      <h4 class="div-description"><%= division.description %></h4>
       <%= render 'team_list', division: division %>
       <div class="links">
         <%= link_to 'Torneos',division_tournaments_path(division), class: 'btn btn-primary' %>
@@ -23,6 +23,8 @@
 <% end %>
 
 <br>
-<% if is_admin_logged_in? %>
-  <%= link_to 'Crear división', new_division_path %>
-<% end %>
+<div class="field">
+  <% if is_admin_logged_in? %>
+    <%= link_to 'Crear división', new_division_path %>
+  <% end %>
+</div>

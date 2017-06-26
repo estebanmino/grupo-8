@@ -24,7 +24,10 @@ class Team < ApplicationRecord
   validates :gf, :numericality => { :greater_than_or_equal_to => 0 }
   validates :ga, :numericality => { :greater_than_or_equal_to => 0 }
 
-  has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :logo,
+  styles: { medium: "300x300>", thumb: "100x100>" },
+  :storage => :cloudinary,
+  path: "uploaded/:class/:attachment/:id/:style_:filename"
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
   has_many :visit_matches, :class_name => 'Match', :foreign_key => 'visit_team_id'
@@ -41,54 +44,58 @@ class Team < ApplicationRecord
 
   def update_stats
     stats = {points: 0, gc: 0, gf: 0, pj: 0, pe: 0, pg: 0}
-    stats[:pj] = self.home_matches.where(played: true).length +
-                self.visit_matches.where(played: true).length
+    home_tournament_matches = self.home_matches.collect{|match| match if match!= nil  && !match.tournament.playoff && match.played}.compact
+    visit_tournament_matches = self.visit_matches.collect{|match| match if match!= nil  && !match.tournament.playoff && match.played}.compact
 
-    for i in self.home_matches.where(played: true)
-      if i.local_goals > i.visitor_goals
-        stats[:points] += 3
-        stats[:gc] += i.visitor_goals
-        stats[:gf] += i.local_goals
-        stats[:pg] += 1
+    p home_tournament_matches
+    p visit_tournament_matches
 
+    stats[:pj] = home_tournament_matches.size +
+                visit_tournament_matches.size
 
-      elsif i.local_goals == i.visitor_goals
-        stats[:points] += 1
-        stats[:pe] += 1
-        stats[:gc] += i.visitor_goals
-        stats[:gf] += i.local_goals
-      else
-        stats[:gc] += i.visitor_goals
-        stats[:gf] += i.local_goals
-
+    if (stats[:pj] != 0)
+      for match in home_tournament_matches
+        if match.local_goals > match.visitor_goals
+          stats[:points] += 3
+          stats[:gc] += match.visitor_goals
+          stats[:gf] += match.local_goals
+          stats[:pg] += 1
+        elsif match.local_goals == match.visitor_goals
+          stats[:points] += 1
+          stats[:pe] += 1
+          stats[:gc] += match.visitor_goals
+          stats[:gf] += match.local_goals
+        else
+          stats[:gc] += match.visitor_goals
+          stats[:gf] += match.local_goals
+        end
       end
-  end
 
-  for i in self.visit_matches.where(played: true)
-    if i.local_goals < i.visitor_goals
-      stats[:points] += 3
-      stats[:gf] += i.visitor_goals
-      stats[:gc] += i.local_goals
-      stats[:pg] += 1
-    elsif i.local_goals == i.visitor_goals
-      stats[:points] += 1
-      stats[:pe] += 1
-      stats[:gf] += i.visitor_goals
-      stats[:gc] += i.local_goals
-    else
-      stats[:gf] += i.visitor_goals
-      stats[:gc] += i.local_goals
+      for match in visit_tournament_matches
+        if match.local_goals < match.visitor_goals
+          stats[:points] += 3
+          stats[:gf] += match.visitor_goals
+          stats[:gc] += match.local_goals
+          stats[:pg] += 1
+        elsif match.local_goals == match.visitor_goals
+          stats[:points] += 1
+          stats[:pe] += 1
+          stats[:gf] += match.visitor_goals
+          stats[:gc] += match.local_goals
+        else
+          stats[:gf] += match.visitor_goals
+          stats[:gc] += match.local_goals
 
+        end
+      end
     end
-end
-  self.gf = stats[:gf]
-  self.ga = stats[:gc]
-  self.won = stats[:pg]
-  self.lost = stats[:pj] - stats[:pg] - stats[:pe]
-  self.tie = stats[:pe]
-  self.points = stats[:points]
-  self.save
-  stats
-
-end
+    self.gf = stats[:gf]
+    self.ga = stats[:gc]
+    self.won = stats[:pg]
+    self.lost = stats[:pj] - stats[:pg] - stats[:pe]
+    self.tie = stats[:pe]
+    self.points = stats[:points]
+    self.save
+    stats
+  end
 end

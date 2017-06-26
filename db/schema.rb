@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170623195235) do
+ActiveRecord::Schema.define(version: 20170625005147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,10 +26,12 @@ ActiveRecord::Schema.define(version: 20170623195235) do
   end
 
   create_table "divisions", force: :cascade do |t|
-    t.string   "name",        null: false
-    t.text     "description", null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "name",          null: false
+    t.text     "description",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.integer  "tournament_id"
+    t.index ["tournament_id"], name: "index_divisions_on_tournament_id", using: :btree
   end
 
   create_table "invitations", force: :cascade do |t|
@@ -45,6 +47,11 @@ ActiveRecord::Schema.define(version: 20170623195235) do
   create_table "matches", force: :cascade do |t|
     t.date     "date"
     t.time     "time"
+    t.text     "place"
+    t.text     "address"
+    t.text     "commune"
+    t.float    "latitude"
+    t.float    "longitude"
     t.integer  "visitor_goals"
     t.integer  "local_goals"
     t.boolean  "played"
@@ -53,7 +60,7 @@ ActiveRecord::Schema.define(version: 20170623195235) do
     t.integer  "visit_team_id"
     t.integer  "home_team_id"
     t.integer  "tournament_id"
-    t.integer  "Datenum"
+    t.integer  "datenum"
     t.boolean  "playoff",       default: false
     t.index ["home_team_id"], name: "index_matches_on_home_team_id", using: :btree
     t.index ["tournament_id"], name: "index_matches_on_tournament_id", using: :btree
@@ -151,6 +158,7 @@ ActiveRecord::Schema.define(version: 20170623195235) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "divisions", "tournaments"
   add_foreign_key "matches", "teams", column: "home_team_id"
   add_foreign_key "matches", "teams", column: "visit_team_id"
   add_foreign_key "matches", "tournaments"
