@@ -1,6 +1,5 @@
 module MatchesHelper
 
-  require 'open_weather'
 
 
   def get_weather(match)
