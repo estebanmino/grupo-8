@@ -6,8 +6,8 @@ class CreateMatches < ActiveRecord::Migration[5.0]
       t.text :place
       t.text :address
       t.text :commune
-      t.float :lat
-      t.float :long
+      t.float :latitude
+      t.float :longitude
       t.integer :visitor_goals
       t.integer :local_goals
       t.boolean :played

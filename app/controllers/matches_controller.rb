@@ -22,7 +22,6 @@ class MatchesController < ApplicationController
 
 
 
-
   # GET /matches/1/edit
   def edit
   end
@@ -31,6 +30,7 @@ class MatchesController < ApplicationController
   # POST /matches.json
   def create
     @match = Match.new(match_params)
+
 
     respond_to do |format|
       if @match.home_team_id == @match.visit_team_id
