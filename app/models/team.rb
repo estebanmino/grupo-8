@@ -24,7 +24,10 @@ class Team < ApplicationRecord
   validates :gf, :numericality => { :greater_than_or_equal_to => 0 }
   validates :ga, :numericality => { :greater_than_or_equal_to => 0 }
 
-  has_attached_file :logo, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :logo,
+  styles: { medium: "300x300>", thumb: "100x100>" },
+  :storage => :cloudinary,
+  path: "uploaded/:class/:attachment/:id/:style_:filename"
   validates_attachment_content_type :logo, content_type: /\Aimage\/.*\z/
 
   has_many :visit_matches, :class_name => 'Match', :foreign_key => 'visit_team_id'

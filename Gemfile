@@ -8,6 +8,8 @@ end
 gem 'httparty'
 gem 'geocoder'
 #env
+gem 'paperclip-cloudinary'
+
 gem "figaro"
 #Encriptacion clave
 gem 'bcrypt',         '3.1.11'
