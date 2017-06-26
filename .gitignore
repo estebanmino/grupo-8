@@ -22,6 +22,7 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+/config/cloudinary.yml
 
 public/assets
 
