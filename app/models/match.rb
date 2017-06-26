@@ -35,7 +35,7 @@ class Match < ApplicationRecord
   has_many :performances
   has_many :users, through: :performances
 
-  geocoded_by :address
+  geocoded_by :location
   after_validation :geocode
 
   def winner
@@ -51,6 +51,10 @@ class Match < ApplicationRecord
 
   def complete_date
     "#{date.to_s} #{time.to_s[11,8]}"
+  end
+
+  def location
+    "#{address}, #{commune}, Chile"
   end
 
 
