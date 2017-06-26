@@ -83,6 +83,9 @@
   <% elsif matches[2].winner %>
   <h3><%= matches[2].winner.name %>
     esperando rival</h3>
+  <% else %>
+    <h3> Esperando rivales</h3>
+
 
   <% end %>
   <% end %>
@@ -122,6 +125,9 @@
   <h3><%= matches[5].winner.name %>
     esperando rival</h3>
 
+  <% else %>
+    <h3> Esperando rivales</h3>
+
   <% end %>
   <% end %>
 
@@ -151,7 +157,7 @@
   </h4>
   <h4>v/s</h4>
   <h4><%=matches[1].winner.name %></h4>
-  <h3>No jugado</h3>``
+  <h3>No jugado</h3>
   <%= link_to 'Ir al partido',matches[5] %>
   <% elsif matches[1].winner %>
   <h3><%= matches[1].winner.name %>
@@ -159,6 +165,10 @@
   <% elsif matches[3].winner %>
   <h3><%= matches[3].winner.name %>
     esperando rival</h3>
+
+  <% else %>
+    <h3> Esperando rivales</h3>
+
 
   <% end %>
   <% end %>
