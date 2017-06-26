@@ -8,10 +8,12 @@
     <%= link_to 'Editar', edit_match_path(@match), class: 'btn btn-primary' %>
     <% end %>
   </div>
+  <%= get_weather(@match)%>
+
   <div class="space"></div>
 
   <div class="basic">
-    <% weath =get_weather(@match) %>
+    <% weath =get_weather_api(@match) %>
     <% if weath %>
       <% if weath[0] == 'Clouds' %>
         <div class="weather" style="background-image: url(<%= asset_path 'cloudy_day.png'%>);" >
