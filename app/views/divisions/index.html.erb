@@ -23,6 +23,8 @@
 <% end %>
 
 <br>
-<% if is_admin_logged_in? %>
-  <%= link_to 'Crear división', new_division_path %>
-<% end %>
+<div class="field">
+  <% if is_admin_logged_in? %>
+    <%= link_to 'Crear división', new_division_path %>
+  <% end %>
+</div>

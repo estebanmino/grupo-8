@@ -1,13 +1,31 @@
 <%playoffs = Tournament.all.where(playoff: true )%>
 
-<% playoffs.each do |playoff| %>
-<hr />
+<div class="tab">
+<%default = true%>
+<%clase = "tablinks defaultOpen"%>
+<%for i in playoffs%>
+<%a = "playoff"+ i.id.to_s + " tabcontent"%>
 
-<div class="playoff-wrapper">
+<button class="<%=clase%>" data-tab=<%=a%> ><%=i.name%></button>
+<%if default%>
+<%default = false%>
+<%clase = "tablinks"%>
 
-<h2><%= playoff.name %></h2>
+<%end%>
+<%end%>
+</div>
 
-<% matches = playoff.matches.order('id ASC') %>
+
+<% for i in playoffs %>
+
+<%a = "playoff"+ i.id.to_s + " tabcontent"%>
+
+
+<div class="playoff-wrapper <%=a%>">
+
+<h2><%= i.name %></h2>
+
+<% matches = i.matches.order('id ASC') %>
 
 <div class="col-2 filled playoff">
   <h3>Cuartos de final #1</h3>
@@ -223,6 +241,9 @@
 
 </div>
 
+
+
 </div>
+
+
 <% end %>
-<hr />

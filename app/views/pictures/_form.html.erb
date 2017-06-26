@@ -18,7 +18,9 @@
 
   <div class="field">
     <%= f.label :match_id %>
-    <%= f.select :match_id, options_for_select(Match.all.map{ |c| [c.id, c.id] })  %>
+    <%= f.select :match_id, options_for_select(Match.all.map{ |c|
+      [Team.find(c.home_team_id).name + " v/s " +
+       Team.find(c.visit_team_id).name, c.id] })  %>
   </div>
 
   <div class="field">

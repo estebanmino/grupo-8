@@ -68,5 +68,9 @@ class PlayoffsController < ApplicationController
         end
       end
     end
+
+    respond_to do |format|
+      format.html { redirect_to playoffs_path, notice: 'No se puede crear el playoff, ya existe uno creado' }
+    end
   end
 end

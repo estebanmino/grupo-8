@@ -5,7 +5,7 @@
 $("#Comments-holder").append("<div class= comments data-comment-id= <%= @comment.id%>></div>");
 
 var comment = $('[data-comment-id="<%= last_comment.id %>"]');
-comment.append("<%= last_comment.content %>");
+comment.append("<%= last_comment.content %>").hide();
 
 comment.append("<div class = btns btn-comment-id= <%= @comment.id%>></div>");
 
@@ -16,5 +16,6 @@ btn.append('<%= link_to 'Eliminar', @comment, method: :delete, data: { confirm: 
 
 comment.append("<h6>Por: <%= last_comment.user.full_name %><h6>");
 
+comment.fadeIn(700);
 
 $('#comment_content').val('');
