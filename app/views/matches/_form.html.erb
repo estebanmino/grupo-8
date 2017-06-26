@@ -37,6 +37,21 @@
   </div>
 
   <div class="field">
+    <%= f.label :place, "Lugar" %>
+    <%= f.text_field :place %>
+  </div>
+
+  <div class="field">
+    <%= f.label :address, "Dirección" %>
+    <%= f.text_field :address %>
+  </div>
+
+  <div class="field">
+    <%= f.label :commune, "Comuna" %>
+    <%= f.text_field :commune %>
+  </div>
+
+  <div class="field">
     <%= f.label :local_goals, "Goles local" %>
     <%= f.number_field :local_goals, value: 0 %>
 

@@ -3,64 +3,70 @@ class PlayoffsController < ApplicationController
   include PlayoffsHelper
 
   def new
-
-
-
   end
+
   def index
-
   end
-
   def create
-
   end
-
   def new_match
-
   end
-
 
   def new_create
-
 
     division = params[:division]
     @division = Division.find(division)
 
     if @division.tournaments.length == 2
 
+      times = (1..7).map{|i| params[:"time#{i}"]}
+      dates = (1..7).map{|i| params[:"date#{i}"]}
+      places = (1..7).map{|i| params[:"place#{i}"]}
+      addresses = (1..7).map{|i| params[:"address#{i}"]}
+      communes = (1..7).map{|i| params[:"commune#{i}"]}
 
+      teams_tournament_1 = @division.tournaments.first.teams.sort_by{|x| [-x.points, -(x.gf - x.ga)]}[0...4]
+      teams_tournament_2 = @division.tournaments.second.teams.sort_by{|x| [-x.points, -(x.gf - x.ga)]}[0...4]
 
-    fecha1 = params[:date1]["Ronda1(1i)"]+"-"+params[:date1]["Ronda1(2i)"].rjust(2, '0')+
-    "-"+params[:date1]["Ronda1(3i)"].rjust(2, '0')
+      playoff = Tournament.create(name: "Playoff de #{@division.name}", description:
+                "Playoffs finales, que decidirán al campeón", season: "#{ @division.tournaments.first.season}",
+                division_id: @division.id, playoff: true)
 
-    time1 = params[:time1]["Hora1(1i)"] + "-" + params[:time1]["Hora1(2i)"].rjust(2, '0') +
-    "-" + params[:time1]["Hora1(3i)"].rjust(2, '0') + " " + params[:time1]["Hora1(4i)"].rjust(2, '0') +
-    ":" + params[:time1]["Hora1(5i)"].rjust(2, '0') + ":00"
+      failed = false
+      for i in [0,1,2,3,4,5,6]
+        time = playoff_time_format(times[i])
+        date = playoff_date_format(dates[i])
+        location = i
+        if params[:check_locations] == "true"
+          location = 0
+        end
+        address = addresses[location]
+        commune = communes[location]
+        place = places[location]
 
-    time2 = params[:time2]["Hora2(1i)"] + "-" + params[:time2]["Hora2(2i)"].rjust(2, '0') +
-    "-" + params[:time2]["Hora2(3i)"].rjust(2, '0') + " " + params[:time2]["Hora2(4i)"].rjust(2, '0') +
-    ":" + params[:time2]["Hora2(5i)"].rjust(2, '0') + ":00"
+        datenum = i+1
+        if i > 3
+          datenum = -1
+          i = 0
+        end
 
-    fecha2 = params[:date2]["Ronda2(1i)"]+"-"+params[:date2]["Ronda2(2i)"].rjust(2, '0')+
-    "-"+params[:date2]["Ronda2(3i)"].rjust(2, '0')
+        match = Match.new(date: date, time: time, visitor_goals: 0, local_goals: 0,
+          played: false, visit_team_id: teams_tournament_2[i].id, home_team_id: teams_tournament_1[3-i].id,
+          tournament_id: playoff.id, datenum: datenum, address: address, commune: commune,place: place)
 
-    time3 = params[:time3]["Hora3(1i)"] + "-" + params[:time3]["Hora3(2i)"].rjust(2, '0') +
-    "-" + params[:time3]["Hora3(3i)"].rjust(2, '0') + " " + params[:time3]["Hora3(4i)"].rjust(2, '0') +
-    ":" + params[:time3]["Hora3(5i)"].rjust(2, '0') + ":00"
+        if !match.save
+          failed = true
+          break
+        end
+      end
 
-    fecha_final = params[:date3]["Final(1i)"]+"-"+params[:date3]["Final(2i)"].rjust(2, '0')+
-    "-"+params[:date3]["Final(3i)"].rjust(2, '0')
-
-
-    time4 = params[:time4]["Hora4(1i)"] + "-" + params[:time4]["Hora4(2i)"].rjust(2, '0') +
-    "-" + params[:time4]["Hora4(3i)"].rjust(2, '0') + " " + params[:time4]["Hora4(4i)"].rjust(2, '0') +
-    ":" + params[:time4]["Hora4(5i)"].rjust(2, '0') + ":00"
-
-    create_playoff(@division, fecha1, time1, time2, fecha2, time3, fecha_final, time4)
-    redirect_to playoffs_path, flash: {notice: "Playoff creado exitosamente!"}
-    else
-      redirect_to playoffs_path, flash: {notice: "No se pudo crear playoff, no existe numero de torneos adecuado!"}
-
+      respond_to do |format|
+        if !failed
+          format.html { redirect_to playoffs_path, notice: 'Playoff creado exitosamente' }
+        else
+          format.html { redirect_to home_path }
+        end
+      end
     end
   end
 end

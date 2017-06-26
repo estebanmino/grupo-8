@@ -9,14 +9,36 @@
     <% end %>
   </div>
   <div class="space"></div>
+
   <div class="basic">
+    <% weath =get_weather(@match) %>
+    <% if weath %>
+      <% if weath[0] == 'Clouds' %>
+        <div class="weather" style="background-image: url(<%= asset_path 'cloudy_day.png'%>);" >
+          <h4><%= weath[1] %>°C</h4>
+        </div>
+      <% elsif weath[0] == 'Clear' %>
+        <div class="weather" style="background-image: url(<%= asset_path 'sunny_day.png'%>);" >
+          <h4><%= weath[1] %>°C</h4>
+        </div>
+      <% elsif weath[0] == 'Rain' %>
+        <div class="weather" style="background-image: url(<%= asset_path 'rainy_day.png'%>);" >
+          <h4><%= weath[1] %>°C</h4>
+        </div>
+      <% end %>
+    <% end %>
+
+
     <h4><%= @match.date.day %>/<%= @match.date.month %>/<%= @match.date.year %>
       <%= @match.time.hour%>:<%= @match.time.min.to_s.rjust(2, '0')%>
       hrs</h4>
     <% if  @match.played  %>
     <h4>Partido Jugado</h4>
+    <h4><%= @match.place %>, <%= @match.address %>, <%= @match.commune %></h4>
+
   <% else %>
     <h4>Aún no se juega este partido</h4>
+    <h4><%= @match.place %>, <%= @match.address %>, <%= @match.commune %></h4>
     <% end %>
 
     <div class="result">
@@ -27,6 +49,7 @@
   </div>
 
 </div>
+
 
 <div id="performances-wrapper">
 
