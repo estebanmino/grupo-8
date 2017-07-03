@@ -38,9 +38,12 @@ class UsersController < ApplicationController
     @user.goals = 0
     @user.yellow_cards = 0
     @user.red_cards = 0
+
     respond_to do |format|
       if @user.save
+        @user.generate_token_and_save
         log_in @user
+
         invitation.destroy
         format.html { redirect_to home_path, notice: 'Te damos la bienvenida a LaLiga.' }
           # format.json { render :show, status: :created, location: @user }
