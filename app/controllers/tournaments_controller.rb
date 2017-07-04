@@ -52,6 +52,8 @@ class TournamentsController < ApplicationController
     matches = @tournament.matches
     if matches.length > 0
       redirect_to([@tournament.division, @tournament], :notice => 'No se pudo crear el fixture inicial, ya existen partidos creados!')
+    elsif @tournament.teams.length != 8
+      redirect_to([@tournament.division, @tournament], :notice => 'No se puede crear fixture, número de equipos incompatible!')
     end
   end
 
@@ -104,7 +106,7 @@ class TournamentsController < ApplicationController
           played: false, visit_team_id: away_team, home_team_id: home_team, tournament_id: @tournament.id,
           datenum: datenum+1, address: address, commune: commune,place: place)
 
-        
+
         if !match.save
           failed = true
           break

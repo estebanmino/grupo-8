@@ -17,6 +17,11 @@ class PlayoffsController < ApplicationController
     division = params[:division]
     @division = Division.find(division)
 
+    if @division.tournaments.length != 2
+      flash[:notice] = 'No se pudo crear el fixture no existe el numero adecuado de torneos'
+      redirect_to playoffs_path and return
+    end
+
     if @division.tournaments.length == 2
 
       times = (1..7).map{|i| params[:"time#{i}"]}
@@ -69,8 +74,6 @@ class PlayoffsController < ApplicationController
       end
     end
 
-    respond_to do |format|
-      format.html { redirect_to playoffs_path, notice: 'No se puede crear el playoff, ya existe uno creado' }
-    end
+
   end
 end

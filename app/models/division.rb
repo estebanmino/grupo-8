@@ -13,7 +13,7 @@ class Division < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :description, presence: true
 
-  has_many :tournaments
+  has_many :tournaments, dependent: :destroy
   has_many :teams
 
 end
