@@ -40,6 +40,7 @@
 
       <tbody>
         <% division.teams.each do |team| %>
+          <%if team.id != 0%>
           <tr>
             <td><%= link_to team.name, team %></td>
             <td><%= image_tag team.logo.url(:thumb) %></td>
@@ -51,6 +52,7 @@
               <% end %>
             </td>
           </tr>
+          <% end %>
         <% end %>
       </tbody>
     </table>
