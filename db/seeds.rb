@@ -149,25 +149,3 @@ yellow_cards: 0,
 red_cards: 0)
 
 adm.generate_token_and_save
-
-
-user_ids = User.pluck(:id)
-
-10.times do
-  Post.create(
-    name: Faker::Lorem.word,
-    description: Faker::Lorem.sentence,
-    user_id: user_ids.sample
-  )
-
-end
-posts_id = Post.pluck(:id)
-
-50.times do
-  Comment.create(
-  content: Faker::Lorem.sentence,
-  user_id: user_ids.sample,
-  post_id: posts_id.sample
-
-  )
-end
