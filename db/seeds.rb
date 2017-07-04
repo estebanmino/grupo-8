@@ -40,7 +40,7 @@ for i in divs_ids
   for j in 1..2
     Tournament.create(
     name: "Torneo Div:#{i}-Numero:#{j}",
-    description: "Grupo #{j} de la división, los primeros cuatro lugares 
+    description: "Grupo #{j} de la división, los primeros cuatro lugares
 podrían acceder a playoffs, prepárate!",
     season: "Otoño/invierno",
     division_id: i)
@@ -64,6 +64,8 @@ for i in divs
     end
   end
 end
+
+
 
 teams = Team.all
 posiciones = ["medio", "defensa", "delantero"]
@@ -90,6 +92,19 @@ for team in teams
   end
 end
 
+adm_team = Team.create(
+    id: 0,
+    name: "Administradores FC",
+    points: 0,
+    won: 0,
+    lost: 0,
+    tie: 0,
+    division_id: Division.first.id
+
+)
+
+
+
 c = User.create(
 name: "Cristian",
 last_name: "Carreño",
@@ -97,7 +112,7 @@ email: "cristian@gmail.com",
 position: "medio",
 password: "123456",
 is_admin: true,
-team_id: Team.last.id,
+team_id: 0,
 is_captain: false,
 goals: 0,
 yellow_cards: 0,
@@ -112,7 +127,7 @@ email: "efmino@uc.cl",
 position: "atacante",
 password: "123456",
 is_admin: true,
-team_id: Team.last.id,
+team_id: 0,
 is_captain: false,
 goals: 0,
 yellow_cards: 0,
@@ -127,7 +142,7 @@ email: "admin@gmail.com",
 position: "medio",
 password: "admin1234",
 is_admin: true,
-team_id: Team.last.id,
+team_id: 0,
 is_captain: false,
 goals: 0,
 yellow_cards: 0,
