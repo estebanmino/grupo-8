@@ -23,8 +23,9 @@
 
   <div class="field">
     <%= label_tag :tournament_id, "Torneo a jugar" %>
-    <%= select_tag :tournament_id, options_for_select(Tournament.all.where(playoff: false).map{ |c| [c.name, c.id] })  %>
+    <%= grouped_collection_select(:tournament, :tournament_id, Division.all, :tournaments, :name, :id, :name)%>
   </div>
+
 
   <div class="field">
     <%= f.label :logo %>

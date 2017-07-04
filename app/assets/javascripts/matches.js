@@ -3,7 +3,7 @@
 $(document).on('turbolinks:load', function(){
 
   var teams = $('#match_home_team_id').html();
-  console.log(teams);
+
   var tournaments = $('#match_tournament_id');
 
   tournaments.on('change', function(){
@@ -11,7 +11,7 @@ $(document).on('turbolinks:load', function(){
     tournament = $('#match_tournament_id').find(':selected').text();
 
     var options = $(teams).filter('optgroup[label="' +tournament+'"]').html();
-    console.log(options);
+    
     if (options) {
       $('#match_home_team_id').html(options);
       $('#match_visit_team_id').html(options);
