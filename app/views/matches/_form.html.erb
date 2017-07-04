@@ -12,18 +12,21 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :tournament_id, "Torneo" %>
+    <%= f.collection_select :tournament_id, Tournament.order(:name), :id, :name%>
+  </div>
+
+  <div class="field">
     <%= f.label :home_team_id, "Equipo Local" %>
-    <%= f.select :home_team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
+
+    <%= f.grouped_collection_select :home_team_id, Tournament.order(:name) , :teams,
+     :name,:id, :name, include_blank: true%>
   </div>
 
   <div class="field">
     <%= f.label :visit_team_id, "Equipo visitante" %>
-    <%= f.select :visit_team_id, options_for_select(Team.all.map{ |c| [c.name, c.id] })  %>
-  </div>
-
-  <div class="field">
-    <%= f.label :tournament_id, "Torneo" %>
-    <%= f.select :tournament_id, options_for_select(Tournament.all.map{ |c| [c.name, c.id] })  %>
+    <%= f.grouped_collection_select :visit_team_id, Tournament.order(:name) , :teams,
+     :name,:id, :name, include_blank: true%>
   </div>
 
   <div class="field">

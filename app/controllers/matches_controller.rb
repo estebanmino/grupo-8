@@ -83,7 +83,7 @@ class MatchesController < ApplicationController
     def match_params
       params.require(:match).permit(:date, :time, :home_team_id, :visit_team_id, :tournament_id,
                                     :visitor_goals, :local_goals, :played, :Datenum, :playoff,
-                                    :address, :commune)
+                                    :place, :address, :commune)
     end
 
 

@@ -15,6 +15,7 @@ class Tournament < ApplicationRecord
   validates :name, presence: true, length: { minimum: 5 }, uniqueness: true
   validates :description, presence: true
   validates :season, presence: true
+  validates :season, presence: true
 
   has_many :matches, dependent: :destroy
   belongs_to :division
