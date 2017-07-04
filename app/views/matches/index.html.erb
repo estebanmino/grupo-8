@@ -29,10 +29,20 @@
 
 <%a = "division"+ division.id.to_s + " tabcontent"%>
 <div class= "<%=a%>">
+<%if division.tournaments.length == 0 %>
 
-<h2><%=division.name%></h2>
+<h3>No hay torneos creados para esta división aún</h3>
+
+<%end%>
+
 <%division.tournaments.where(playoff: false).each do |tournament|%>
+
 <h3><%=tournament.name%></h3>
+<%if tournament.matches.length == 0 %>
+<p>No se han creado partidos para este torneo</p>
+
+<%end%>
+
 <% matchday1 = 0 %>
 <%tournament.matches.order(:datenum).each do |match|%>
 
