@@ -40,7 +40,8 @@ for i in divs_ids
   for j in 1..2
     Tournament.create(
     name: "Torneo Div:#{i}-Numero:#{j}",
-    description: Faker::Lorem.sentence,
+    description: "Grupo #{j} de la división, los primeros cuatro lugares 
+podrían acceder a playoffs, prepárate!",
     season: "Otoño/invierno",
     division_id: i)
 
